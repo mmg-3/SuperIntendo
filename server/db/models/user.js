@@ -26,29 +26,6 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
-  },
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  },
-  isResident: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  },
-  firstName: {
-    type: Sequelize.STRING
-  },
-  lastName: {
-    type: Sequelize.STRING
-  },
-  phoneNumber: {
-    type: Sequelize.STRING
-  },
-  imageUrl: {
-    type: Sequelize.STRING
-  },
-  mailingAddress: {
-    type: Sequelize.STRING
   }
 })
 
