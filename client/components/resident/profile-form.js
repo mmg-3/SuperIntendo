@@ -1,10 +1,8 @@
 import React, {useState} from 'react'
-import {TextField} from './utils'
+import {makeOnChange, TextField} from './utils'
 /**
  * COMPONENT
  */
-
-const makeOnChange = setter => event => setter(event.target.value)
 
 export const ProfileForm = props => {
   const [firstName, setFirstName] = useState(props.firstName)

@@ -1,9 +1,11 @@
 import React from 'react'
 
+export const makeOnChange = setter => event => setter(event.target.value)
+
 export const TextField = props => {
   const disabled = props.disabled === undefined ? false : props.disabled
   return (
-    <span>
+    <div>
       <label htmlFor={props.name}>{props.label}:</label>
       <input
         {...props}
@@ -14,6 +16,6 @@ export const TextField = props => {
         onChange={props.onChange}
         placeholder={props.value}
       />
-    </span>
+    </div>
   )
 }
