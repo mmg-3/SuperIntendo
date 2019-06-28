@@ -17,9 +17,6 @@ const Ticket = db.define('ticket', {
   photoUrl: {
     type: Sequelize.STRING
   },
-  timestamp: {
-    type: Sequelize.DATE
-  },
   status: {
     type: Sequelize.ENUM(
       'pending',
@@ -28,7 +25,8 @@ const Ticket = db.define('ticket', {
       'finished',
       'confirmed',
       'closed'
-    )
+    ),
+    defaultValue: 'pending'
   },
   assignment: {
     type: Sequelize.STRING
