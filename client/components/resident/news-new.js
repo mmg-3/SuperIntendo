@@ -4,7 +4,7 @@ import {makeOnChange, TextField} from './utils'
 export const NewsNew = props => {
   const [title, setTitle] = useState(props.title)
   const [body, setBody] = useState(props.body)
-  const [photo, setPhoto] = useState(props.photoUrl)
+  const [photoUrl, setPhoto] = useState(props.photoUrl)
   const [expDay, setExpDay] = useState(props.expDay)
 
   return (
