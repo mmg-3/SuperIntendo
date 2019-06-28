@@ -1,7 +1,16 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {
+  User,
+  Resident,
+  Apartment,
+  Owner,
+  Worker,
+  Building,
+  News,
+  Ticket
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -9,9 +18,51 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'murphy@email.com', password: '123'}),
+    User.create({email: 'coinstance@coins.com', password: '$$$$'}),
+    User.create({email: 'batmanuel@sadpanda.moe', password: '>:{0'})
   ])
 
+  const resident = await Promise.all([
+    Resident.create({
+      firstName: 'Cody',
+      lastName: 'DaPug',
+      userId: users[0].id
+    }),
+    Resident.create({
+      firstName: 'Coinstance',
+      lastName: 'Coin',
+      userId: users[2].id
+    })
+  ])
+
+  const owner = await Owner.create({userId: users[1].id})
+
+  const building = await Building.create({
+    address: '5 Hangover Square',
+    ownerId: owner.id
+  })
+
+  const apartment = await Apartment.create({
+    unitNumber: '11A',
+    occupied: true,
+    buildingId: building.id
+  })
+  await resident[1].setApartment(apartment)
+  const news = await News.create({
+    title: `Manny just falls`,
+    body: 'Manny loves huge backends',
+    buildingId: building.id
+  })
+
+  const ticket = await Ticket.create({
+    location: 'kitchen',
+    issue: 'Flood',
+    neighbor: true,
+    apartmentId: apartment.id
+  })
+
+  // const worker = await Worker.create({})
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
 }

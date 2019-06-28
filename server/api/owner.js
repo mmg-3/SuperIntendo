@@ -71,8 +71,8 @@ router.post('/buildings', async (req, res, next) => {
 router.get('/buildings/:buildingId', async (req, res, next) => {
   try {
     res.json(
-      await Building.findById(req.params.buildingId, {
-        include: [Apartment, Resident, News]
+      await Building.findByPk(req.params.buildingId, {
+        include: [News, {model: Apartment, include: {model: Resident}}]
       })
     )
   } catch (err) {
@@ -119,14 +119,14 @@ router.put('/tickets/:ticketId', async (req, res, next) => {
 //get a ticket
 router.get('/tickets/:ticketId', async (req, res, next) => {
   try {
-    res.json(await Ticket.findById(req.params.ticketId))
+    res.json(await Ticket.findByPk(req.params.ticketId))
   } catch (err) {
     next(err)
   }
 })
 
 //create a news
-router.post('/news', async (req, res, next) => {
+router.post('/buildings/:buildingId/news', async (req, res, next) => {
   try {
     res.status(201).json(
       await News.create(
@@ -136,7 +136,8 @@ router.post('/news', async (req, res, next) => {
           photoUrl: req.body.photoUrl,
           expDay: req.body.expDay,
           ownerId: req.user.ownerId,
-          status: req.body.status
+          status: req.body.status,
+          buildingId: req.params.buildingId
         },
         {
           include: [Owner]
@@ -149,17 +150,20 @@ router.post('/news', async (req, res, next) => {
 })
 
 //update status of a pending news
-router.put('/news/:newsId', async (req, res, next) => {
+router.put('/buildings/:buildingId/news/:newsId', async (req, res, next) => {
   try {
-    res.status(204)
     await News.update(
       {
         status: req.body.status
       },
       {
-        where: {id: req.params.newsId}
+        where: {
+          ownerId: req.user.ownerId,
+          id: req.params.newsId
+        }
       }
     )
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

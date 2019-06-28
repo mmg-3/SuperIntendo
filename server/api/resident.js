@@ -13,7 +13,7 @@ const isResident = async (req, res, next) => {
   try {
     const resident = await Resident.findOne({
       where: {
-        residentId: req.user.id
+        userId: req.user.id
       }
     })
     if (resident) {
@@ -51,7 +51,7 @@ router.use(getBuilding)
 //profile
 router.get('/', async (req, res, next) => {
   try {
-    res.json(await Resident.findById(req.user.residentId))
+    res.json(await Resident.findByPk(req.user.residentId))
   } catch (err) {
     next(err)
   }
@@ -120,7 +120,7 @@ router.get('/news', async (req, res, next) => {
       await News.findAll({
         include: [Resident],
         where: {
-          buildingId: req.apartment.buildingId
+          buildingId: req.user.buildingId
         }
       })
     )
@@ -139,6 +139,7 @@ router.post('/news', async (req, res, next) => {
           body: req.body.body,
           photoUrl: req.body.photoUrl,
           expDay: req.body.expDay,
+          buildingId: req.user.buildingId,
           residentId: req.user.residentId
         },
         {
