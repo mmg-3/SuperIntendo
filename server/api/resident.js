@@ -1,11 +1,57 @@
 const router = require('express').Router()
-const {Resident, Ticket, News, Building} = require('../db/models')
+const {Resident, Ticket, News, Apartment} = require('../db/models')
 module.exports = router
 
+const isLoggedIn = (req, res, next) => {
+  if (req.user && req.user.id) {
+    next()
+  } else {
+    res.sendStatus(401)
+  }
+}
+const isResident = async (req, res, next) => {
+  try {
+    const resident = await Resident.findOne({
+      where: {
+        residentId: req.user.id
+      }
+    })
+    if (resident) {
+      req.user.residentId = resident.id
+      req.user.apartmentId = resident.apartmentId
+      next()
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+const getBuilding = async (req, res, next) => {
+  try {
+    const apartment = await Apartment.findOne({
+      where: {
+        id: req.user.apartmentId
+      }
+    })
+    if (apartment) {
+      req.user.buildingId = apartment.buildingId
+      next()
+    } else {
+      res.status(401).send('YOU ARE HOMELESS, GET OUT')
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+router.use(isLoggedIn)
+router.use(isResident)
+router.use(getBuilding)
 //profile
 router.get('/', async (req, res, next) => {
   try {
-    res.json(await Resident.findById(req.user.id))
+    res.json(await Resident.findById(req.user.residentId))
   } catch (err) {
     next(err)
   }
@@ -24,7 +70,7 @@ router.put('/', async (req, res, next) => {
       },
       {
         where: {
-          id: req.user.id
+          id: req.user.residentId
         }
       }
     )
@@ -40,7 +86,7 @@ router.get('/tickets', async (req, res, next) => {
       await Ticket.findAll({
         include: [Resident],
         where: {
-          residentId: req.user.id
+          residentId: req.user.residentId
         }
       })
     )
@@ -50,7 +96,6 @@ router.get('/tickets', async (req, res, next) => {
 })
 
 //create new ticket
-//TODO remember to make the middleware
 router.post('/tickets', async (req, res, next) => {
   try {
     res.status(201).json(
@@ -69,14 +114,13 @@ router.post('/tickets', async (req, res, next) => {
 })
 
 //get all news
-//TODO middleware req.user.buildingId
 router.get('/news', async (req, res, next) => {
   try {
     res.json(
       await News.findAll({
         include: [Resident],
         where: {
-          buildingId: req.building.id
+          buildingId: req.apartment.buildingId
         }
       })
     )

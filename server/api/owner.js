@@ -7,9 +7,38 @@ const {
   Apartment,
   Owner
 } = require('../db/models')
+
+const isLoggedIn = (req, res, next) => {
+  if (req.user && req.user.id) {
+    next()
+  } else {
+    res.sendStatus(401)
+  }
+}
+
+const isOwner = async (req, res, next) => {
+  try {
+    const owner = await Owner.findOne({
+      where: {
+        userId: req.user.id
+      }
+    })
+    if (owner) {
+      req.user.ownerId = owner.id
+      next()
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+}
 module.exports = router
+
+router.use(isLoggedIn)
+router.use(isOwner)
+
 //get buildings
-//TODO: need middleware
 router.get('/buildings', async (req, res, next) => {
   try {
     res.json(
