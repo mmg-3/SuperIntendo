@@ -14,11 +14,9 @@ const News = db.define('news', {
   expDay: {
     type: Sequelize.DATE
   },
-  author: {
-    type: Sequelize.STRING
-  },
   status: {
-    type: Sequelize.ENUM('approved', 'pending', 'denied', 'deleted')
+    type: Sequelize.ENUM('approved', 'pending', 'denied', 'deleted'),
+    defaultValue: 'pending'
   }
 })
 
