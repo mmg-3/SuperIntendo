@@ -54,19 +54,14 @@ router.get('/tickets', async (req, res, next) => {
 router.post('/tickets', async (req, res, next) => {
   try {
     res.status(201).json(
-      await Ticket.create(
-        {
-          location: req.body.location,
-          formDate: req.body.formDate,
-          issue: req.body.issue,
-          neighbor: req.body.neighbor,
-          photoUrl: req.body.photoUrl,
-          residentId: req.user.residentId
-        },
-        {
-          include: [Resident]
-        }
-      )
+      await Ticket.create({
+        location: req.body.location,
+        formDate: req.body.formDate,
+        issue: req.body.issue,
+        neighbor: req.body.neighbor,
+        photoUrl: req.body.photoUrl,
+        residentId: req.user.residentId
+      })
     )
   } catch (err) {
     next(err)
