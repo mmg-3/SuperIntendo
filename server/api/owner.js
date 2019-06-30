@@ -110,7 +110,7 @@ router.put('/tickets/:ticketId', async (req, res, next) => {
       },
       {where: {id: req.params.ticketId}}
     )
-    res.status(204)
+    res.sendStatus(204)
   } catch (err) {
     next(err)
   }

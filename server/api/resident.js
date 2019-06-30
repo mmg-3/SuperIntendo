@@ -60,7 +60,7 @@ router.get('/', async (req, res, next) => {
 //update profile
 router.put('/', async (req, res, next) => {
   try {
-    res.status(204)
+    res.sendStatus(204)
     await Resident.update(
       {
         firstName: req.body.firstName,
