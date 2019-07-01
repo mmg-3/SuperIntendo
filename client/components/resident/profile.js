@@ -2,6 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {connect} from 'react-redux'
 import {ProfileForm} from './profile-form'
+import {
+  getResidentProfileThunk,
+  updateResidentProfileThunk
+} from '../store/residentReducer'
 /**
  * COMPONENT
  */
@@ -22,7 +26,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    getProfileData: () => dispatch(getResidentProfileThunk()),
+    updateProfileData: () => dispatch(updateResidentProfileThunk(updateProfile))
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 

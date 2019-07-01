@@ -10,7 +10,7 @@ export const ProfileForm = props => {
   const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber)
   const [email, setEmail] = useState(props.email)
   const [address, setAddress] = useState(props.address)
-  const [photoUrl, _] = useState(props.photoUrl)
+  // const [photoUrl, _] = useState(props.photoUrl)
 
   return (
     <form onSubmit={props.handleSubmit}>
