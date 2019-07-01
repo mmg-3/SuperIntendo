@@ -250,7 +250,6 @@ describe('Owner routes', () => {
             const newsUrl = `/api/owner/buildings/${building.id}/news/${
               fakeNews.id
             }`
-            console.log('WHATS THE ISSUE', newsUrl)
             const agent = await login(ownerData)
             await agent
               .put(newsUrl)
