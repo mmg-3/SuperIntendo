@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getABuilding} from '../../store/owner'
 
 export const SingleBuilding = props => {
@@ -11,24 +12,33 @@ export const SingleBuilding = props => {
   if (!props.id) {
     return <div>Loading...</div>
   }
-  const tickets = props.apartments.flatMap(apartment => apartment.tickets)
+  const tickets = props.apartments
+    .flatMap(apartment => apartment.tickets)
+    .filter(ticket => ['pending', 'confirmed'].includes(ticket.status))
   const residents = props.apartments.flatMap(apartment => apartment.residents)
-  console.log(props)
+  const numVacant = props.apartments.filter(apt => !apt.occupied).length
+
   return (
     <div>
-      <div>{props.address}</div>
+      <div>
+        {props.address} - {numVacant} vacant apartment(s)
+      </div>
       <div className="ticket-container">
-        <div>Tickets:</div>
+        <div>
+          <Link to={`/buildings/${props.id}/tickets`}>Tickets</Link>:
+        </div>
         <div>
           <ul>
             {tickets.map(ticket => (
               <li key={ticket.id}>
-                {ticket.issue}@{ticket.location} - {ticket.status}
+                {ticket.status} - #{ticket.id} {ticket.issue}@{ticket.location}
               </li>
             ))}
           </ul>
         </div>
-        <div>News:</div>
+        <div>
+          <Link to={`/buildings/${props.id}/news`}>News</Link>:
+        </div>
         <div>
           <ul>
             {props.news.map(news => (
@@ -38,7 +48,9 @@ export const SingleBuilding = props => {
             ))}
           </ul>
         </div>
-        <div>Residents:</div>
+        <div>
+          <Link to={`/buildings/${props.id}/residents`}>Residents</Link>:
+        </div>
         <div>
           <ul>
             {residents.map(resident => (

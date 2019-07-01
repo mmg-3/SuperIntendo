@@ -5,6 +5,7 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
+import Tickets from './components/owner/tickets'
 import {me} from './store'
 
 /**
@@ -31,6 +32,11 @@ class Routes extends Component {
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/buildings/:id" exact component={SingleBuilding} />
+                <Route
+                  path="/buildings/:id/tickets"
+                  exact
+                  component={Tickets}
+                />
               </Switch>
             )}
           </Switch>
