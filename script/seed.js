@@ -23,7 +23,7 @@ async function seed() {
     User.create({email: 'batmanuel@sadpanda.moe', password: '>:{0'})
   ])
 
-  const resident = await Promise.all([
+  const residents = await Promise.all([
     Resident.create({
       firstName: 'Cody',
       lastName: 'DaPug',
@@ -43,24 +43,55 @@ async function seed() {
     ownerId: owner.id
   })
 
-  const apartment = await Apartment.create({
-    unitNumber: '11A',
-    occupied: true,
-    buildingId: building.id
-  })
-  await resident[1].setApartment(apartment)
+  const apartments = await Promise.all([
+    Apartment.create({
+      unitNumber: '11A',
+      occupied: true,
+      buildingId: building.id
+    }),
+    Apartment.create({
+      unitNumber: '25A',
+      occupied: true,
+      buildingId: building.id
+    }),
+    Apartment.create({
+      unitNumber: '1A',
+      occupied: false,
+      buildingId: building.id
+    })
+  ])
+  await Promise.all(
+    residents.map((resident, idx) => resident.setApartment(apartments[idx]))
+  )
+
   const news = await News.create({
     title: `Manny just falls`,
     body: 'Manny loves huge backends',
     buildingId: building.id
   })
 
-  const ticket = await Ticket.create({
-    location: 'kitchen',
-    issue: 'Flood',
-    neighbor: true,
-    apartmentId: apartment.id
-  })
+  const tickets = await Promise.all([
+    Ticket.create({
+      location: 'kitchen',
+      issue: 'Flood',
+      neighbor: true,
+      apartmentId: apartments[0].id
+    }),
+    Ticket.create({
+      location: 'bathroom',
+      issue: 'Toilet clogged',
+      neighbor: false,
+      apartmentId: apartments[1].id,
+      status: 'finished'
+    }),
+    Ticket.create({
+      location: 'living room',
+      issue: 'murder scene',
+      neighbor: true,
+      apartmentId: apartments[1].id,
+      status: 'closed'
+    })
+  ])
 
   // const worker = await Worker.create({})
   console.log(`seeded ${users.length} users`)

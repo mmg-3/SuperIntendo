@@ -90,7 +90,13 @@ router.get(
     try {
       res.json(
         await Building.findByPk(req.params.buildingId, {
-          include: [News, {model: Apartment, include: {model: Resident}}]
+          include: [
+            News,
+            {
+              model: Apartment,
+              include: [{model: Resident}, {model: Ticket}]
+            }
+          ]
         })
       )
     } catch (err) {
