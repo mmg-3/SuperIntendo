@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {TicketForm} from './resident/ticket-form'
-const Navbar = ({handleClick, isLoggedIn, isResident, isAdmin, isWorker}) => {
+const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
   const navbar = (
     <div>
       <Link to="/" />
@@ -22,6 +22,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isAdmin, isWorker}) => {
             <a href="#" onClick={handleClick}>
               Logout
             </a>
+            {isOwner && <Link to="/buildings">Buildings</Link>}
           </div>
         ) : (
           <div>
@@ -43,7 +44,7 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     isResident: state.user.isResident,
-    isAdmin: state.user.isAdmin,
+    isOwner: state.user.isOwner,
     isWorker: state.user.isWorker
   }
 }
