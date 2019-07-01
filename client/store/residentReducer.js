@@ -21,7 +21,7 @@ export const updateProfileData = updatedProfile => ({
 //thunk
 export const getResidentProfileThunk = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/resident')
+    const {data} = await axios.get('/api/resident/profile')
     dispatch(getProfileData(data))
   } catch (err) {
     console.log(err)
@@ -30,7 +30,7 @@ export const getResidentProfileThunk = () => async dispatch => {
 
 export const updateResidentProfileThunk = updatedProfile => async dispatch => {
   try {
-    const {data} = await axios.put('/api/resident', updatedProfile)
+    const {data} = await axios.put('/api/resident/profile', updatedProfile)
     dispatch(updateProfileData(data))
   } catch (err) {
     console.log(err)

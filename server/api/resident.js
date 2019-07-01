@@ -48,6 +48,7 @@ const getBuilding = async (req, res, next) => {
 router.use(isLoggedIn)
 router.use(isResident)
 router.use(getBuilding)
+
 //profile
 router.get('/', async (req, res, next) => {
   try {
