@@ -13,6 +13,7 @@ export const Tickets = props => {
   const tickets = props.apartments.flatMap(apartment => apartment.tickets)
   return (
     <div>
+      <div>{props.address} Tickets</div>
       <ul>{tickets.map(ticket => <li key={ticket.id}>{ticket.issue}</li>)}</ul>
     </div>
   )
