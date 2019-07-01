@@ -5,15 +5,19 @@ import {ProfileForm} from './profile-form'
 import {
   getResidentProfileThunk,
   updateResidentProfileThunk
-} from '../store/residentReducer'
+} from '../../store/residentReducer'
+
 /**
  * COMPONENT
  */
 const Profile = props => {
-  return console.log(props)
-  // <div>
-  //   <ProfileForm />
-  // </div>
+  console.log('this is the props', props)
+  return (
+    <div>
+      <h1>hello</h1>
+      <ProfileForm />
+    </div>
+  )
 }
 
 const mapStateToProps = state => {
