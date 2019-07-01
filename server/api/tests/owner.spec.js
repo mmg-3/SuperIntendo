@@ -217,7 +217,7 @@ describe('Owner routes', () => {
             expect(await News.findAll()).to.have.lengthOf(4)
           })
           it('should not allow you to write to another building', async () => {
-            const newsUrl = `/api/owner/buildings/${building.id}/news`
+            const newsUrl = `/api/owner/buildings/${fakeBuilding.id}/news`
             const agent = await login(ownerData)
             const newsData = {
               title: 'bad post',
@@ -250,7 +250,7 @@ describe('Owner routes', () => {
             const newsUrl = `/api/owner/buildings/${building.id}/news/${
               fakeNews.id
             }`
-
+            console.log('WHATS THE ISSUE', newsUrl)
             const agent = await login(ownerData)
             await agent
               .put(newsUrl)

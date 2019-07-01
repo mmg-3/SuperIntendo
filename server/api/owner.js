@@ -21,10 +21,25 @@ const isOwner = async (req, res, next) => {
     const owner = await Owner.findOne({
       where: {
         userId: req.user.id
-      }
+      },
+      include: [Building]
     })
     if (owner) {
       req.user.ownerId = owner.id
+      req.user.buildingIds = owner.buildings.map(building => building.id)
+      next()
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+const buildingBelongsTo = (req, res, next) => {
+  try {
+    const buildingId = req.params.buildingId
+    if (req.user.buildingIds.includes(+buildingId)) {
       next()
     } else {
       res.sendStatus(401)
@@ -68,17 +83,21 @@ router.post('/buildings', async (req, res, next) => {
 })
 
 //get all apartments && news in building
-router.get('/buildings/:buildingId', async (req, res, next) => {
-  try {
-    res.json(
-      await Building.findByPk(req.params.buildingId, {
-        include: [News, {model: Apartment, include: {model: Resident}}]
-      })
-    )
-  } catch (err) {
-    next(err)
+router.get(
+  '/buildings/:buildingId',
+  buildingBelongsTo,
+  async (req, res, next) => {
+    try {
+      res.json(
+        await Building.findByPk(req.params.buildingId, {
+          include: [News, {model: Apartment, include: {model: Resident}}]
+        })
+      )
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 //get all tickets for building
 router.get('/tickets', async (req, res, next) => {
@@ -126,48 +145,61 @@ router.get('/tickets/:ticketId', async (req, res, next) => {
 })
 
 //create a news
-router.post('/buildings/:buildingId/news', async (req, res, next) => {
-  try {
-    res.status(201).json(
-      await News.create(
-        {
-          title: req.body.title,
-          body: req.body.body,
-          photoUrl: req.body.photoUrl,
-          expDay: req.body.expDay,
-          ownerId: req.user.ownerId,
-          status: req.body.status,
-          buildingId: req.params.buildingId
-        },
-        {
-          include: [Owner]
-        }
+router.post(
+  '/buildings/:buildingId/news',
+  buildingBelongsTo,
+  async (req, res, next) => {
+    try {
+      res.status(201).json(
+        await News.create(
+          {
+            title: req.body.title,
+            body: req.body.body,
+            photoUrl: req.body.photoUrl,
+            expDay: req.body.expDay,
+            ownerId: req.user.ownerId,
+            status: req.body.status,
+            buildingId: req.params.buildingId
+          },
+          {
+            include: [Owner]
+          }
+        )
       )
-    )
-  } catch (err) {
-    next(err)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 //update status of a pending news
-router.put('/buildings/:buildingId/news/:newsId', async (req, res, next) => {
-  try {
-    await News.update(
-      {
-        status: req.body.status
-      },
-      {
-        where: {
-          ownerId: req.user.ownerId,
-          id: req.params.newsId
+router.put(
+  '/buildings/:buildingId/news/:newsId',
+  buildingBelongsTo,
+  async (req, res, next) => {
+    try {
+      const updateNews = await News.update(
+        {
+          status: req.body.status
+        },
+        {
+          where: {
+            ownerId: req.user.ownerId,
+            id: req.params.newsId,
+            buildingId: req.params.buildingId
+          }
         }
+      )
+      if (updateNews[0] >= 1) {
+        res.sendStatus(204)
+      } else {
+        res.sendStatus(401)
       }
-    )
-    res.sendStatus(204)
-  } catch (err) {
-    next(err)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 //TODO: profiles
 // //get resident profile
