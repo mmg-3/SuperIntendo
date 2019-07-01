@@ -10,15 +10,15 @@ import {
  * COMPONENT
  */
 const Profile = props => {
-  return (
-    <div>
-      <ProfileForm />
-    </div>
-  )
+  return console.log(props)
+  // <div>
+  //   <ProfileForm />
+  // </div>
 }
 
 const mapStateToProps = state => {
   return {
+    resident: state.resident,
     name: 'login',
     displayName: 'Login',
     error: state.user.error

@@ -50,7 +50,7 @@ router.use(isResident)
 router.use(getBuilding)
 
 //profile
-router.get('/', async (req, res, next) => {
+router.get('/profile', async (req, res, next) => {
   try {
     res.json(await Resident.findByPk(req.user.residentId))
   } catch (err) {
@@ -59,7 +59,7 @@ router.get('/', async (req, res, next) => {
 })
 
 //update profile
-router.put('/', async (req, res, next) => {
+router.put('/profile', async (req, res, next) => {
   try {
     res.sendStatus(204)
     await Resident.update(
