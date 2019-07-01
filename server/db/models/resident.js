@@ -14,7 +14,19 @@ const Resident = db.define('resident', {
   imageUrl: {
     type: Sequelize.STRING
   },
-  mailingAddress: {
+  mailingAddressAddress1: {
+    type: Sequelize.STRING
+  },
+  mailingAddressAddress2: {
+    type: Sequelize.STRING
+  },
+  mailingAddressCity: {
+    type: Sequelize.STRING
+  },
+  mailingAddressState: {
+    type: Sequelize.STRING
+  },
+  mailingAddressZipcode: {
     type: Sequelize.STRING
   }
 })

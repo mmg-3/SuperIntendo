@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {ProfileForm} from './profile-form'
 import {
@@ -11,17 +11,28 @@ import {
  * COMPONENT
  */
 const Profile = props => {
-  console.log('this is the props', props)
+  useEffect(() => {
+    props.getProfileData()
+    props.updateProfileData()
+  }, [])
+
+  if (!props.resident.id) {
+    return <div />
+  }
   return (
     <div>
-      <h1>hello</h1>
-      <ProfileForm />
+      <ProfileForm
+        getProfileData={props.getProfileData}
+        handleSubmit={props.updateProfileData}
+        resident={props.resident}
+      />
     </div>
   )
 }
 
 const mapStateToProps = state => {
   return {
+    user: state.user,
     resident: state.resident,
     name: 'login',
     displayName: 'Login',
@@ -32,7 +43,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProfileData: () => dispatch(getResidentProfileThunk()),
-    updateProfileData: () => dispatch(updateResidentProfileThunk(updateProfile))
+    updateProfileData: updatedResident =>
+      dispatch(updateResidentProfileThunk(updatedResident))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
@@ -43,6 +55,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 Profile.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  // handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }

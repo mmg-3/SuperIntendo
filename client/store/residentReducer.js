@@ -13,9 +13,9 @@ export const getProfileData = resident => ({
   resident
 })
 
-export const updateProfileData = updatedProfile => ({
+export const updateProfileData = updatedResident => ({
   type: UPDATE_PROFILE_DATA,
-  updatedProfile
+  updatedResident
 })
 
 //thunk
@@ -28,9 +28,9 @@ export const getResidentProfileThunk = () => async dispatch => {
   }
 }
 
-export const updateResidentProfileThunk = updatedProfile => async dispatch => {
+export const updateResidentProfileThunk = updatedResident => async dispatch => {
   try {
-    const {data} = await axios.put('/api/resident/profile', updatedProfile)
+    const {data} = await axios.put('/api/resident/profile', updatedResident)
     dispatch(updateProfileData(data))
   } catch (err) {
     console.log(err)
@@ -42,6 +42,8 @@ export const residentReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PROFILE_DATA:
       return action.resident
+    case UPDATE_PROFILE_DATA:
+      return action.updatedResident
     default:
       return state
   }
