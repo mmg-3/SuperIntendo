@@ -13,15 +13,19 @@ export const AllBuildings = props => {
     <div>
       <BuildingForm handleSubmit={props.createBuilding} />
       <ul>
-        {props.buildings.map(building => {
-          return (
-            <li key={building.id}>
-              <Link to={`/buildings/${building.id}`}>{building.address}</Link>
-            </li>
-          )
-        })}
+        {props.buildings.map(building => (
+          <BuildingListItem key={building.id} {...building} />
+        ))}
       </ul>
     </div>
+  )
+}
+
+const BuildingListItem = props => {
+  return (
+    <li>
+      <Link to={`/buildings/${props.id}`}>{props.address}</Link>
+    </li>
   )
 }
 
