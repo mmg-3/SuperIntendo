@@ -3,7 +3,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {TicketForm} from './resident/ticket-form'
 const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
   const navbar = (
     <div>
@@ -14,7 +13,6 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
     <div>
       <h1>BOILERMAKER</h1>
       <nav>
-        <TicketForm />
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}

@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {createBuilding, getBuildings} from '../../store/owner'
 import {BuildingForm} from './building-form'
 
 export const AllBuildings = props => {
   useEffect(() => {
-    ;(function() {
-      props.getBuildings()
-    })()
+    props.getBuildings()
   }, [])
 
   return (
@@ -15,7 +14,11 @@ export const AllBuildings = props => {
       <BuildingForm handleSubmit={props.createBuilding} />
       <ul>
         {props.buildings.map(building => {
-          return <li key={building.id}>{building.address}</li>
+          return (
+            <li key={building.id}>
+              <Link to={`/buildings/${building.id}`}>{building.address}</Link>
+            </li>
+          )
         })}
       </ul>
     </div>

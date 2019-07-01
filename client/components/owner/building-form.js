@@ -2,11 +2,13 @@ import React, {useState} from 'react'
 import {makeOnChange, TextField} from '../resident/utils'
 export const BuildingForm = props => {
   const [address, setAddress] = useState(props.address)
+
   const onSubmit = event => {
     event.preventDefault()
     props.handleSubmit({
       address
     })
+    setAddress('')
   }
   return (
     <div>

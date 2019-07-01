@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
+import SingleBuilding from './components/owner/single-building'
 import {me} from './store'
 
 /**
@@ -27,7 +28,10 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             {isOwner && (
-              <Route path="/buildings" exact component={AllBuildings} />
+              <Switch>
+                <Route path="/buildings" exact component={AllBuildings} />
+                <Route path="/buildings/:id" exact component={SingleBuilding} />
+              </Switch>
             )}
           </Switch>
         )}
