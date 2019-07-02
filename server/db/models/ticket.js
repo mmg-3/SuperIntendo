@@ -3,16 +3,20 @@ const db = require('../db')
 
 const Ticket = db.define('ticket', {
   location: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   formDate: {
     type: Sequelize.DATE
   },
   issue: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
+    allowNull: false
   },
   neighbor: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   },
   photoUrl: {
     type: Sequelize.STRING
@@ -26,7 +30,8 @@ const Ticket = db.define('ticket', {
       'confirmed',
       'closed'
     ),
-    defaultValue: 'pending'
+    defaultValue: 'pending',
+    allowNull: false
   },
   assignment: {
     type: Sequelize.STRING
