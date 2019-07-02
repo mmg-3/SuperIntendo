@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getABuilding, verifyUser} from '../../store/owner'
+import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
 export const SingleBuilding = props => {
   useEffect(() => {
     // console.log(props)
@@ -68,7 +68,13 @@ export const SingleBuilding = props => {
                     type="button"
                     onClick={() => props.verifyUser(props.id, resident.id)}
                   >
-                    Verify
+                    Approve
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => props.rejectUser(props.id, resident.id)}
+                  >
+                    Reject
                   </button>
                 </li>
               ))}
@@ -104,7 +110,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getABuilding: id => dispatch(getABuilding(id)),
-  verifyUser: (bId, rId) => dispatch(verifyUser(bId, rId))
+  verifyUser: (bId, rId) => dispatch(verifyUser(bId, rId)),
+  rejectUser: (bId, rId) => dispatch(rejectUser(bId, rId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleBuilding)

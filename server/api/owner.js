@@ -83,7 +83,7 @@ router.post('/buildings', async (req, res, next) => {
 })
 
 // changes a resident to verified
-router.put('/verify/:residentId', async (req, res, next) => {
+router.put('/:residentId/approve', async (req, res, next) => {
   try {
     const building = await Building.findOne({
       include: {
@@ -101,6 +101,30 @@ router.put('/verify/:residentId', async (req, res, next) => {
         {isVerified: true},
         {where: {id: req.params.residentId}}
       )
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(401)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:residentId/reject', async (req, res, next) => {
+  try {
+    const building = await Building.findOne({
+      include: {
+        model: Apartment,
+        include: {
+          model: Resident,
+          where: {
+            id: req.params.residentId
+          }
+        }
+      }
+    })
+    if (req.user.buildingIds.includes(building.id)) {
+      await Resident.destroy({where: {id: req.params.residentId}})
       res.sendStatus(204)
     } else {
       res.sendStatus(401)
