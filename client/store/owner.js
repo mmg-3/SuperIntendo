@@ -43,6 +43,17 @@ export const getABuilding = id => async dispatch => {
   }
 }
 
+export const verifyUser = (buildingId, residentId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/verify/${residentId}`)
+    // TODO smart reload it
+    // don't need to refresh whole thing, but simple for now
+    dispatch(getABuilding(buildingId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const createBuilding = data => async dispatch => {
   try {
     const res = await axios.post(BASE_BUILDINGS_URL, data)
