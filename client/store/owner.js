@@ -8,6 +8,7 @@ const GOT_NEWS = 'GOT_NEWS'
 const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
+const GOT_WORKERS = 'GOT_WORKERS'
 /**
  * INITIAL STATE
  */
@@ -15,7 +16,8 @@ const initialState = {
   buildings: [],
   news: [],
   tickets: [],
-  selectedBuilding: {}
+  selectedBuilding: {},
+  workers: []
 }
 
 const BASE_BUILDINGS_URL = '/api/owner/buildings/'
@@ -29,6 +31,7 @@ const appendBuilding = building => ({type: APPEND_BUILDING, building})
 const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
+const gotWorkers = workers => ({type: GOT_WORKERS, workers})
 
 /**
  * THUNK CREATORS
@@ -90,6 +93,15 @@ export const getTickets = () => async dispatch => {
   }
 }
 
+export const getWorkers = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/owner/workers')
+    console.log('THE DATA FROM GET WORKERS THUNK', data)
+    dispatch(gotWorkers(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 /**
  * REDUCER
  */
@@ -105,6 +117,8 @@ export default function(state = initialState, action) {
       return {...state, buildings: action.buildings}
     case GOT_A_BUILDING:
       return {...state, selectedBuilding: action.building}
+    case GOT_WORKERS:
+      return {...state, workers: action.workers}
     default:
       return state
   }
