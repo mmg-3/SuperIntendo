@@ -51,22 +51,6 @@ router.get('/:workerId/tickets', async (req, res, next) => {
   }
 })
 
-//get all assigned tickets
-router.get('/:workerId/tickets/assigned', async (req, res, next) => {
-  if (req.user.id === +req.params.workerId) {
-    try {
-      const assignedTix = await Ticket.findAll({
-        where: {
-          workerId: req.user.id,
-          status: 'assigned'
-        }
-      })
-    } catch (err) {
-      next(err)
-    }
-  }
-})
-
 //get all assigned tickets assigned to worker
 router.get('/:workerId/tickets/assigned', async (req, res, next) => {
   if (req.user.id === +req.params.workerId) {
@@ -88,7 +72,7 @@ router.get('/:workerId/tickets/assigned', async (req, res, next) => {
 
 //get all assigned in-progress tickets assigned to worker
 router.get('/:workerId/tickets/in-progress', async (req, res, next) => {
-  if (res.user.id === +req.params.workerId) {
+  if (req.user.id === +req.params.workerId) {
     const iPTicket = await Ticket.findAll({
       where: {
         workerId: req.user.id,
@@ -170,22 +154,3 @@ router.put('/:workerId/assigned/:ticketId', async (req, res, next) => {
     res.sendStatus(401)
   }
 })
-
-// router.get('/:workerId', isWorker, async (req, res, next) => {
-//   console.log(req.user.id, req.params.workerId)
-//   if (req.user.id === +req.params.workerId) {
-//     try {
-//       const workerId = req.params.workerId
-//       const worker = await Worker.findOne({
-//         where: {
-//           userId: workerId
-//         }
-//       })
-//       res.json(worker)
-//     } catch (err) {
-//       next(err)
-//     }
-//   } else {
-//     res.sendStatus(401)
-//   }
-// })
