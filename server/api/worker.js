@@ -51,11 +51,11 @@ router.get('/:workerId/tickets', async (req, res, next) => {
   }
 })
 
-//get all assigned tickets assigned to worker
+//get all tickets assigned to worker
 router.get('/:workerId/tickets/assigned', async (req, res, next) => {
   if (req.user.id === +req.params.workerId) {
     try {
-      const ticket = Ticket.findOne({
+      const ticket = await Ticket.findAll({
         where: {
           workerId: req.user.id,
           status: 'assigned'
