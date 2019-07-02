@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
-  console.log(isOwner, isResident)
   const navbar = (
     <div>
       <Link to="/" />
@@ -12,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
   )
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>SuperIntendo</h1>
       <nav>
         {isLoggedIn ? (
           <div>
