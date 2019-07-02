@@ -12,7 +12,7 @@ export const TextField = props => {
         disabled={disabled}
         name={props.name}
         type={props.type}
-        value={props.value}
+        value={props.value || ''}
         onChange={props.onChange}
         placeholder={props.value}
       />
