@@ -16,6 +16,10 @@ const Resident = db.define('resident', {
   },
   mailingAddress: {
     type: Sequelize.STRING
+  },
+  isVerified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
