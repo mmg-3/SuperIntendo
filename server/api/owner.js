@@ -5,7 +5,8 @@ const {
   News,
   Building,
   Apartment,
-  Owner
+  Owner,
+  Worker
 } = require('../db/models')
 
 const isLoggedIn = (req, res, next) => {
@@ -235,36 +236,28 @@ router.put(
   }
 )
 
-//TODO: profiles
-// //get resident profile
-// router.get('/residents', async (req, res, next) => {
-//   try {
-//     res.json(await Resident.findAll(
+//get all workers
+router.get('/workers', async (req, res, next) => {
+  try {
+    const workers = await Worker.findAll()
+    res.json(workers)
+    console.log(workers)
+  } catch (err) {
+    next(err)
+  }
+})
 
-//     ))
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// //update resident profile
-// router.put('/residents', async (req, res, next) => {
-//   try {
-//     res.status(204)
-//     await Resident.update(
-//       {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         phoneNumber: req.body.phoneNumber,
-//         mailingAddress: req.body.mailingAddress
-//       },
-//       {
-//         where: {
-//           id: req.user.id
-//         }
-//       }
-//     )
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+//get single worker
+router.get('/workers/:workerId', async (req, res, next) => {
+  try {
+    const workerId = req.params.workerId
+    const worker = await Worker.findOne({
+      where: {
+        userId: workerId
+      }
+    })
+    res.json(worker)
+  } catch (err) {
+    next(err)
+  }
+})
