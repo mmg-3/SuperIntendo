@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Resident, Ticket, News, Apartment} = require('../db/models')
+const {Resident, Ticket, News, Apartment, Building} = require('../db/models')
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
@@ -45,6 +45,43 @@ const getBuilding = async (req, res, next) => {
     next(err)
   }
 }
+// associate a user with a residency
+// they only need to be logged in
+// they must NOT have another residence somewhere
+router.post('/', isLoggedIn, async (req, res, next) => {
+  try {
+    let resident = await Resident.findOne({
+      where: {userId: req.user.id}
+    })
+    // if the resident exists, just stop
+    if (resident && resident.id) {
+      return res.sendStatus(409)
+    }
+    const {
+      firstName,
+      lastName,
+      phoneNumber,
+      imageUrl,
+      mailingAddress,
+      apartmentId
+    } = req.body
+
+    resident = await Resident.create({
+      firstName,
+      lastName,
+      phoneNumber,
+      imageUrl,
+      mailingAddress,
+      apartmentId,
+      userId: req.user.id
+    })
+
+    res.status(201).json(resident)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.use(isLoggedIn)
 router.use(isResident)
 router.use(getBuilding)

@@ -45,6 +45,7 @@ User.prototype.withPerms = async function() {
   return {
     ...this.dataValues,
     isResident: !!resident.id,
+    isResidentVerified: resident === null ? false : resident.isVerified,
     isOwner: !!owner.id
   }
 }

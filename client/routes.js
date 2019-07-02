@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
 import Tickets from './components/owner/tickets'
+import NewResident from './components/resident/new-resident'
 import {me} from './store'
 
 /**
@@ -17,8 +18,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isOwner} = this.props
-
+    const {isLoggedIn, isOwner, isResident} = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -39,6 +39,7 @@ class Routes extends Component {
                 />
               </Switch>
             )}
+            <Route path="/new-resident" exact component={NewResident} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
@@ -52,6 +53,7 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
+  console.log(state.user)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
