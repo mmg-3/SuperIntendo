@@ -24,7 +24,8 @@ export const SingleBuilding = props => {
     .flat()
   const verifiedResidents = residents.filter(res => res.isVerified).sort()
   const unverifiedResidents = residents.filter(res => !res.isVerified).sort()
-  const numVacant = props.apartments.filter(apt => !apt.occupied).length
+  const numVacant = props.apartments.filter(apt => apt.residents.length > 0)
+    .length
   console.log(residents)
   return (
     <div>

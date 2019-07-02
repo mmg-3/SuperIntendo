@@ -5,11 +5,6 @@ const Apartment = db.define('apartment', {
   unitNumber: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  occupied: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-    allowNull: false
   }
 })
 

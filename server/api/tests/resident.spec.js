@@ -64,7 +64,6 @@ describe('Resident routes', () => {
       })
       apartment = await Apartment.create({
         unitNumber: '11A',
-        occupied: true,
         buildingId: building.id
       })
 
