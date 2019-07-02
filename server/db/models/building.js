@@ -7,16 +7,16 @@ const Building = db.define('building', {
     allowNull: false
   },
   city: {
-    type: Sequelize.STRING
-    // allowNull: false
+    type: Sequelize.STRING,
+    allowNull: false
   },
   state: {
-    type: Sequelize.STRING
-    // allowNull: false
+    type: Sequelize.STRING,
+    allowNull: false
   },
   zipcode: {
-    type: Sequelize.STRING
-    // allowNull: false
+    type: Sequelize.STRING,
+    allowNull: false
   }
 })
 
