@@ -43,15 +43,24 @@ describe('Resident routes', () => {
       resident = await Resident.create({
         firstName: 'Cody',
         lastName: 'daPug',
-        userId: user.id
+        userId: user.id,
+        phoneNumber: '111-111-1111',
+        imageUrl:
+          'https://user-images.githubusercontent.com/12876798/38030875-d3166276-3267-11e8-96d9-309aa8cf008b.png'
       })
       resident2 = await Resident.create({
         firstName: 'user',
         lastName: 'coinstance',
-        userId: user2.id
+        userId: user2.id,
+        phoneNumber: '222-222-2222',
+        imageUrl:
+          'https://globalcoinreport.com/wp-content/uploads/2018/03/cropped-favicon.png'
       })
       building = await Building.create({
-        address: '5 Hangover Square'
+        address: '5 Hangover Square',
+        city: 'New York',
+        state: 'NY',
+        zipcode: '10004'
       })
       apartment = await Apartment.create({
         unitNumber: '11A',
