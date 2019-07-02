@@ -14,7 +14,6 @@ export const TextField = props => {
         type={props.type}
         value={props.value || ''}
         onChange={props.onChange}
-        placeholder={props.value}
       />
     </div>
   )
