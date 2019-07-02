@@ -9,6 +9,8 @@ const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const GOT_WORKERS = 'GOT_WORKERS'
+const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
+const CLOSED_TICKET = 'CLOSED_TICKET'
 /**
  * INITIAL STATE
  */
@@ -32,6 +34,8 @@ const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
+const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
+const closedTicket = ticket => ({type: CLOSED_TICKET, ticket})
 
 /**
  * THUNK CREATORS
@@ -102,6 +106,15 @@ export const getWorkers = () => async dispatch => {
     console.error(err)
   }
 }
+
+// export const assignWorker = id => async dispatch => {
+//   try {
+
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
 /**
  * REDUCER
  */
