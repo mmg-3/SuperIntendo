@@ -3,10 +3,12 @@ const db = require('../db')
 
 const News = db.define('news', {
   title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   body: {
     type: Sequelize.TEXT
+    // allowNull: false
   },
   photoUrl: {
     type: Sequelize.STRING
