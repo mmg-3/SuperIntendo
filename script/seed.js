@@ -27,12 +27,18 @@ async function seed() {
     Resident.create({
       firstName: 'Cody',
       lastName: 'DaPug',
-      userId: users[0].id
+      userId: users[0].id,
+      phoneNumber: '111-111-1111',
+      imageUrl:
+        'https://user-images.githubusercontent.com/12876798/38030875-d3166276-3267-11e8-96d9-309aa8cf008b.png'
     }),
     Resident.create({
       firstName: 'Coinstance',
       lastName: 'Coin',
-      userId: users[2].id
+      userId: users[2].id,
+      phoneNumber: '222-222-2222',
+      imageUrl:
+        'https://globalcoinreport.com/wp-content/uploads/2018/03/cropped-favicon.png'
     })
   ])
 

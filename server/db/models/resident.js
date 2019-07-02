@@ -11,10 +11,12 @@ const Resident = db.define('resident', {
     allowNull: false
   },
   phoneNumber: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   imageUrl: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   mailingAddress: {
     type: Sequelize.STRING
