@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {getBuildings} from '../../store/resident'
+import {createResident, getBuildings} from '../../store/resident'
 import {makeOnChange, TextField} from './utils'
 
 const NewResident = props => {
@@ -30,11 +30,31 @@ const NewResident = props => {
 
   const onSubmit = event => {
     event.preventDefault()
+    if (buildingIdx === -1 || buildingIdx >= props.buildings.length) {
+      console.error('bad index: ', {buildingIdx, buildings: props.buildings})
+      return
+    }
+
+    const building = props.buildings[buildingIdx]
+    if (aptIdx >= building.apartments.length) {
+      console.error('bad index: ', {aptIdx, building})
+      return
+    }
+
+    const apt = building.apartments[aptIdx]
+    props.createResident({
+      firstName,
+      lastName,
+      phoneNumber,
+      imageUrl,
+      mailingAddress,
+      apartmentId: apt.id
+    })
   }
 
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         <TextField
           required={true}
           name="firstName"
@@ -88,7 +108,7 @@ const NewResident = props => {
               {props.buildings[buildingIdx].apartments
                 .sort()
                 .map((apt, idx) => (
-                  <option key={apt.id} value={apt.idx}>
+                  <option key={apt.id} value={idx}>
                     {apt.unitNumber}
                   </option>
                 ))}
@@ -113,7 +133,8 @@ const mapStateToProps = state => ({
   buildings: state.resident.buildings
 })
 const mapDispatchToProps = dispatch => ({
-  getBuildings: () => dispatch(getBuildings())
+  getBuildings: () => dispatch(getBuildings()),
+  createResident: data => dispatch(createResident(data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewResident)
