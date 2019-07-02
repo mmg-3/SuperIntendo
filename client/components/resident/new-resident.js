@@ -16,6 +16,15 @@ const NewResident = props => {
   const [buildingIdx, setBuildingIdx] = useState(-1)
   const [aptIdx, setAptIdx] = useState(0)
 
+  //if they are a resident, then let's change our display
+  if (props.user.isResident) {
+    if (props.user.isResidentVerified) {
+      return <div>Your application has already been approved</div>
+    } else {
+      return <div>Your application is under review</div>
+    }
+  }
+
   if (!props.buildings.length) {
     return <div>Loading buildings...</div>
   }
@@ -130,7 +139,8 @@ const NewResident = props => {
 }
 
 const mapStateToProps = state => ({
-  buildings: state.resident.buildings
+  buildings: state.resident.buildings,
+  user: state.user
 })
 const mapDispatchToProps = dispatch => ({
   getBuildings: () => dispatch(getBuildings()),

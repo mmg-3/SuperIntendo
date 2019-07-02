@@ -1,4 +1,6 @@
 import axios from 'axios'
+import history from '../history'
+import {me} from './user'
 
 /**
  * ACTION TYPES
@@ -34,6 +36,8 @@ export const createResident = data => async dispatch => {
   try {
     const res = await axios.post('/api/resident', data)
     dispatch(gotSelf(res.data || {}))
+    dispatch(me())
+    history.push('/home')
   } catch (err) {
     console.error(err)
   }

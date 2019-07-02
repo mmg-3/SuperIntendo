@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, isResident, isOwner, isWorker} = props
+  const {email, isResident, isResidentVerified, isOwner, isWorker} = props
 
   return (
     <div>
@@ -17,6 +17,10 @@ export const UserHome = props => {
           <Link to="/new-resident/">Become a resident</Link>
         </div>
       )}
+      {isResident &&
+        !isResidentVerified && (
+          <div>Your residence application is under review</div>
+        )}
       {!isWorker && (
         <div>
           <Link to="/new-worker/">Become a worker</Link>
