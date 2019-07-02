@@ -46,7 +46,7 @@ async function seed() {
   const workers = await Promise.all([
     Worker.create({
       firstName: 'Manny',
-      lastName: 'Backend',
+      lastName: 'McBackend',
       userId: users[3].id,
       phoneNumber: '333-333-3333',
       imageUrl: 'https://sadpanda.moe/sadpanda.png',
