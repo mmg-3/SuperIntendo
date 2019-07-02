@@ -52,7 +52,18 @@ export const getABuilding = id => async dispatch => {
 
 export const verifyUser = (buildingId, residentId) => async dispatch => {
   try {
-    await axios.put(`/api/owner/verify/${residentId}`)
+    await axios.put(`/api/owner/${residentId}/approve`)
+    // TODO smart reload it
+    // don't need to refresh whole thing, but simple for now
+    dispatch(getABuilding(buildingId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectUser = (buildingId, residentId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/${residentId}/reject`)
     // TODO smart reload it
     // don't need to refresh whole thing, but simple for now
     dispatch(getABuilding(buildingId))

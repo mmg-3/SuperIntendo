@@ -9,6 +9,10 @@ export const AllBuildings = props => {
     props.getBuildings()
   }, [])
 
+  if (!props.buildings.length) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
       <BuildingForm handleSubmit={props.createBuilding} />
