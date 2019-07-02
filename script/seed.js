@@ -51,7 +51,7 @@ async function seed() {
       phoneNumber: '333-333-3333',
       imageUrl: 'https://sadpanda.moe/sadpanda.png',
       mailingAddress: '5 Hangover Square',
-      skills: 'Maintain huge back-ends'
+      skills: ['Maintain huge back-ends']
     }),
     Worker.create({
       firstName: 'Daniel',
@@ -61,7 +61,7 @@ async function seed() {
       imageUrl:
         'https://is5-ssl.mzstatic.com/image/thumb/Purple123/v4/fa/10/7c/fa107c00-d330-ce43-f581-74a8fc4a18be/AppIcon-0-1x_U007emarketing-0-85-220-7.png/246x0w.jpg',
       mailingAddress: '123 Nintendo Way',
-      skills: 'Plumbing, Heroku, Travis'
+      skills: ['Plumbing, Heroku, Travis']
     })
   ])
 
