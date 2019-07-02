@@ -3,10 +3,13 @@ const db = require('../db')
 
 const Apartment = db.define('apartment', {
   unitNumber: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false
   },
   occupied: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 })
 
