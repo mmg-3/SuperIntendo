@@ -122,6 +122,13 @@ async function seed() {
       neighbor: true,
       apartmentId: apartments[1].id,
       status: 'closed'
+    }),
+    Ticket.create({
+      location: 'living room',
+      issue: 'murder scene',
+      neighbor: true,
+      apartmentId: apartments[0].id,
+      status: 'confirmed'
     })
   ])
 
