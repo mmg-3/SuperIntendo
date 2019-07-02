@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
-  console.log(isOwner, isResident)
   const navbar = (
     <div>
       <Link to="/" />

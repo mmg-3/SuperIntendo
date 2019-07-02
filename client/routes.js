@@ -6,6 +6,7 @@ import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
 import Tickets from './components/owner/tickets'
+import NewResident from './components/resident/new-resident'
 import {me} from './store'
 
 /**
@@ -17,7 +18,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isOwner} = this.props
+    const {isLoggedIn, isOwner, isResident} = this.props
 
     return (
       <Switch>
@@ -28,6 +29,11 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            {!isResident && (
+              <Switch>
+                <Route path="/new-resident" exact component={NewResident} />
+              </Switch>
+            )}
             {isOwner && (
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
