@@ -1,6 +1,8 @@
 const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Resident = require('./resident')
+const Owner = require('./owner')
 
 const User = db.define('user', {
   email: {
@@ -36,6 +38,15 @@ module.exports = User
  */
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
+}
+User.prototype.withPerms = async function() {
+  const owner = (await this.getOwner()) || {}
+  const resident = (await this.getResident()) || {}
+  return {
+    ...this.dataValues,
+    isResident: !!resident.id,
+    isOwner: !!owner.id
+  }
 }
 
 /**
