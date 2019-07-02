@@ -63,10 +63,16 @@ describe('Owner routes', () => {
       })
       building = await Building.create({
         address: '5 Hangover Square',
+        city: 'New York',
+        state: 'NY',
+        zipcode: '10004',
         ownerId: owner.id
       })
       fakeBuilding = await Building.create({
-        address: 'fake building'
+        address: 'fake building',
+        city: 'New York',
+        state: 'NY',
+        zipcode: '10004'
       })
       apartment = await Apartment.create({
         unitNumber: '11A',
@@ -156,7 +162,10 @@ describe('Owner routes', () => {
           it('should create a building', async () => {
             const agent = await login(ownerData)
             const buildingData = {
-              address: '005 P-hub'
+              address: '005 P-hub',
+              city: 'Phoenix',
+              state: 'AZ',
+              zipcode: '85027'
             }
             const res = await agent
               .post('/api/owner/buildings')

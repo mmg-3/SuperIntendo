@@ -40,6 +40,9 @@ async function seed() {
 
   const building = await Building.create({
     address: '5 Hangover Square',
+    city: 'New York',
+    state: 'NY',
+    zipcode: '10004',
     ownerId: owner.id
   })
 

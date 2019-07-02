@@ -51,7 +51,10 @@ describe('Resident routes', () => {
         userId: user2.id
       })
       building = await Building.create({
-        address: '5 Hangover Square'
+        address: '5 Hangover Square',
+        city: 'New York',
+        state: 'NY',
+        zipcode: '10004'
       })
       apartment = await Apartment.create({
         unitNumber: '11A',
