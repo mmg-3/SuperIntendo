@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Resident, Ticket, News, Apartment} = require('../db/models')
+const {Resident, Ticket, News, Apartment, Building} = require('../db/models')
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
