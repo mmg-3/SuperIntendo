@@ -37,17 +37,41 @@ export const Tickets = props => {
         {tickets.filter(ticket => ticket.status === 'confirmed').map(tix => (
           <li key={tix.id}>
             {tix.issue}
+            <br />
+            {tix.status}
             <button
               type="submit"
               onClick={evt => {
                 evt.preventDefault()
-                props.closeTicket(tix.id)
+                props.closeTicket(tix.id, props.match.params.id)
+                console.log(props)
               }}
             >
               Close Ticket
             </button>
           </li>
         ))}
+      </ul>
+      <h3>Active Tickets Not Requiring Actions</h3>
+      <ul>
+        {tickets
+          .filter(
+            ticket =>
+              ticket.status === 'assigned' ||
+              ticket.status === 'in-progress' ||
+              ticket.status === 'finished'
+          )
+          .map(tix => (
+            <li key={tix.id}>
+              {tix.issue} <br /> {tix.status}
+            </li>
+          ))}
+      </ul>
+      <h3>Past Tickets</h3>
+      <ul>
+        {tickets
+          .filter(ticket => ticket.status === 'closed')
+          .map(tix => <li key={tix.id}>{tix.issue}</li>)}
       </ul>
     </div>
   )
@@ -60,7 +84,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getABuilding: id => dispatch(getABuilding(id)),
   getWorkers: () => dispatch(getWorkers()),
-  closeTicket: id => dispatch(closeTicket(id))
+  closeTicket: (tixId, buildId) => dispatch(closeTicket(tixId, buildId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tickets)
