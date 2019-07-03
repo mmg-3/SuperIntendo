@@ -126,9 +126,9 @@ export const closeTicket = (tixId, buildId) => async dispatch => {
   }
 }
 
-export const assignWorker = (ticketId, buildId) => async dispatch => {
+export const assignWorker = (ticketId, buildId, workerId) => async dispatch => {
   try {
-    await axios.put(`/api/owner/tickets/${ticketId}/assign`)
+    await axios.put(`/api/owner/tickets/${ticketId}/assign/${workerId}`)
     dispatch(getABuilding(buildId))
   } catch (err) {
     console.error(err)
