@@ -1,14 +1,22 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {ProfileForm} from './profile-form'
+import ProfileForm from './profile-form'
+import {getSelf} from '../../store/resident'
+
 /**
  * COMPONENT
  */
 const Profile = props => {
+  useEffect(() => {
+    props.getResident()
+  }, [])
+  if (!props.self.id) {
+    return <div>...is loading</div>
+  }
   return (
     <div>
-      <ProfileForm />
+      <ProfileForm {...props.self} />
     </div>
   )
 }
@@ -17,12 +25,17 @@ const mapStateToProps = state => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
+    error: state.user.error,
+    self: state.resident.self
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    getResident: () => {
+      dispatch(getSelf())
+    }
+  }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 
@@ -32,6 +45,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Profile)
 Profile.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  // handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }

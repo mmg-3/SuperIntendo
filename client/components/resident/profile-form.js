@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import {makeOnChange, TextField} from './utils'
-import {updateProfile} from '../store/resident'
+import {updateProfile, getSelf} from '../../store/resident'
 import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
 
 export const ProfileForm = props => {
-  const [firstName, setFirstName] = useState(props.resident.firstName)
-  const [lastName, setLastName] = useState(props.resident.lastName)
-  const [phoneNumber, setPhoneNumber] = useState(props.resident.phoneNumber)
-  const [maillingAddress, setMaillingAddress] = useState(
-    props.resident.maillingAddress
-  )
+  const [firstName, setFirstName] = useState(props.firstName)
+  const [lastName, setLastName] = useState(props.lastName)
+  const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber)
+  const [maillingAddress, setMaillingAddress] = useState(props.maillingAddress)
 
   const onSubmit = event => {
     event.preventDefault()
@@ -22,15 +20,12 @@ export const ProfileForm = props => {
       phoneNumber,
       maillingAddress
     })
-    setFirstName(props.resident.firstName)
-    setLastName(props.resident.lastName)
-    setPhoneNumber(props.resident.phoneNumber)
-    setMaillingAddress(props.resident.maillingAddress)
   }
 
+  console.log('props', props)
   return (
     <div>
-      <image src={props.resident.photoUrl} />
+      <img src={props.photoUrl} />
       <form onSubmit={onSubmit}>
         <TextField
           name="first-name"
@@ -74,7 +69,7 @@ export const ProfileForm = props => {
 
 const mapStateToProps = state => {
   return {
-    resident: state.resident
+    ...state.resident.self
   }
 }
 
