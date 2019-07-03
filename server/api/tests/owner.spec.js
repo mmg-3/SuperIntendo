@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable max-nested-callbacks */
 /* global describe beforeEach it */
 
@@ -14,6 +15,7 @@ const {
   Building,
   Owner
 } = require('../../db/models')
+const Sequelize = require('sequelize')
 
 const login = async userInfo => {
   const agent = request.agent(app)
@@ -30,7 +32,7 @@ describe('Owner routes', () => {
     let user, resident, building, apartment, news1, news2, ticket1, ticket2
     let user2, resident2
     let user3, owner
-    let fakeBuilding, fakeNews
+    let fakeBuilding, fakeNews, fakeApt, fakeUser, fakeResident
     const userData = {
       email: 'cody@email.com',
       password: '123'
@@ -43,11 +45,16 @@ describe('Owner routes', () => {
       email: 'lola@sadpanda.moe',
       password: '123'
     }
+    const fakeUserData = {
+      email: 'fake@mcfaker.org',
+      password: '123'
+    }
 
     beforeEach(async () => {
       user = await User.create(userData)
       user2 = await User.create(otherData)
       user3 = await User.create(ownerData)
+      fakeUser = await User.create(fakeUserData)
       resident = await Resident.create({
         firstName: 'Cody',
         lastName: 'daPug',
@@ -63,6 +70,12 @@ describe('Owner routes', () => {
         phoneNumber: '222-222-2222',
         imageUrl:
           'https://globalcoinreport.com/wp-content/uploads/2018/03/cropped-favicon.png'
+      })
+      fakeResident = await Resident.create({
+        firstName: 'faker',
+        lastName: 'mcFaker',
+        userId: fakeUser.id,
+        phoneNumber: '555-555-5555'
       })
       owner = await Owner.create({
         userId: user3.id
@@ -84,8 +97,13 @@ describe('Owner routes', () => {
         unitNumber: '11A',
         buildingId: building.id
       })
+      fakeApt = await Apartment.create({
+        unitNumber: 'F1',
+        buildingId: fakeBuilding.id
+      })
       resident.setApartment(apartment)
       resident2.setApartment(apartment)
+      fakeResident.setApartment(fakeApt)
 
       ticket1 = await Ticket.create({
         location: 'somewhere over the rainbow',
@@ -182,9 +200,40 @@ describe('Owner routes', () => {
           })
         })
       })
+      describe('/api/owner/:residentId', () => {
+        describe('PUT /api/owner/:residentId/approve', () => {
+          it('should send 401 if resident does not live in owned building', async () => {
+            const agent = await login(ownerData)
+            await agent.put(`/api/owner/${fakeResident.id}/approve`).expect(401)
+          })
+          it('should set the resident to verified', async () => {
+            expect(resident.isVerified).to.be.false
+
+            const agent = await login(ownerData)
+            await agent.put(`/api/owner/${resident.id}/approve`)
+
+            await resident.reload()
+            expect(resident.isVerified).to.be.true
+          })
+        })
+        describe('PUT /api/owner/:residentId/reject', () => {
+          it('should send 401 if resident does not live in owned building', async () => {
+            const agent = await login(ownerData)
+            await agent.put(`/api/owner/${fakeResident.id}/reject`).expect(401)
+          })
+          it('should set the resident to verified', async () => {
+            expect(resident.isVerified).to.be.false
+            const id = resident.id
+            const agent = await login(ownerData)
+            await agent.put(`/api/owner/${resident.id}/reject`)
+            const queryRes = await Resident.findByPk(id)
+            expect(queryRes).to.be.null
+          })
+        })
+      })
       describe('/api/owner/tickets', () => {
-        describe('GET /api/owner/tickets', () => {
-          it('should get all the tickets for owned buildings', async () => {
+        describe('GET /api/owner/tickets/:ticketId/assign', () => {
+          it('should get available workers for an assignment', async () => {
             const agent = await login(ownerData)
             const res = await agent.get('/api/owner/tickets').expect(200)
 
@@ -195,19 +244,6 @@ describe('Owner routes', () => {
               ticket1.issue,
               ticket2.issue
             ])
-          })
-        })
-        describe('PUT /api/owner/tickets', () => {
-          it('should be able to update a ticket status', async () => {
-            expect(ticket1.status).to.equal('pending') // sanity check
-            const agent = await login(ownerData)
-            await agent
-              .put('/api/owner/tickets/' + ticket1.id)
-              .send({status: 'closed'})
-              .expect(204)
-
-            await ticket1.reload()
-            expect(ticket1.status).to.equal('closed')
           })
         })
       })
