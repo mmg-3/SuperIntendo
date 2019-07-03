@@ -107,13 +107,17 @@ async function seed() {
       location: 'kitchen',
       issue: 'Flood',
       neighbor: true,
-      apartmentId: apartments[0].id
+      apartmentId: apartments[0].id,
+      residentId: residents[0].id,
+      ownerId: owner.id
     }),
     Ticket.create({
       location: 'bathroom',
       issue: 'Toilet clogged',
       neighbor: false,
       apartmentId: apartments[1].id,
+      residentId: residents[0].id,
+      ownerId: owner.id,
       status: 'finished'
     }),
     Ticket.create({
@@ -121,6 +125,8 @@ async function seed() {
       issue: 'murder scene',
       neighbor: true,
       apartmentId: apartments[1].id,
+      residentId: residents[1].id,
+      ownerId: owner.id,
       status: 'closed'
     }),
     Ticket.create({
@@ -128,6 +134,8 @@ async function seed() {
       issue: 'murder scene',
       neighbor: true,
       apartmentId: apartments[0].id,
+      residentId: residents[1].id,
+      ownerId: owner.id,
       status: 'confirmed'
     })
   ])
