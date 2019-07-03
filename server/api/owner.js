@@ -319,7 +319,6 @@ router.get('/workers', async (req, res, next) => {
   try {
     const workers = await Worker.findAll()
     res.json(workers)
-    console.log(workers)
   } catch (err) {
     next(err)
   }
