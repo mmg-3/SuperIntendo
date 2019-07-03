@@ -22,8 +22,8 @@
     "start-prod": "NODE_ENV='production' npm run build-client-watch & NODE_ENV='production' npm run start-server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
-    "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test",
-    "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
+    "coverage": "nyc --reporter=lcov npm run test",
+    "test": "NODE_ENV='test' nyc --reporter=text-summary mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" \"./script/**/*.spec.js\" --require @babel/polyfill --require @babel/register"
   },
   "husky": {
     "hooks": {
