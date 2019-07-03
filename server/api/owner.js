@@ -180,7 +180,7 @@ router.get('/tickets', async (req, res, next) => {
 })
 
 //update tickets - assign workers for pending tickets - status change from pending to assigned
-router.put('/tickets', async (req, res, next) => {
+router.put('/tickets/:ticketId/assign', async (req, res, next) => {
   try {
     await Ticket.update(
       {
@@ -189,7 +189,7 @@ router.put('/tickets', async (req, res, next) => {
       },
       {
         where: {
-          id: req.user.ticketId,
+          id: req.params.ticketId,
           ownerId: req.user.ownerId,
           status: 'pending'
         }
@@ -201,15 +201,20 @@ router.put('/tickets', async (req, res, next) => {
   }
 })
 
-//update a ticket
-router.put('/tickets/:ticketId', async (req, res, next) => {
+//user can close confirmed tickets
+router.put('/tickets/:ticketId/close', async (req, res, next) => {
   try {
     await Ticket.update(
       {
-        status: req.body.status,
-        assignment: req.body.assignment
+        status: 'closed'
       },
-      {where: {id: req.params.ticketId}}
+      {
+        where: {
+          id: req.params.ticketId,
+          ownerId: req.user.ownerId,
+          status: 'confirmed'
+        }
+      }
     )
     res.sendStatus(204)
   } catch (err) {
