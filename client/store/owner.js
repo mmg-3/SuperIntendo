@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Tickets} from '../components/owner/tickets'
 
 /**
  * ACTION TYPES
@@ -9,8 +10,8 @@ const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const GOT_WORKERS = 'GOT_WORKERS'
-const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
-const CLOSED_TICKET = 'CLOSED_TICKET'
+// const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
+// const CLOSED_TICKET = 'CLOSED_TICKET'
 /**
  * INITIAL STATE
  */
@@ -34,8 +35,7 @@ const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
-const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
-const closedTicket = ticket => ({type: CLOSED_TICKET, ticket})
+// const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
 /**
  * THUNK CREATORS
@@ -111,8 +111,15 @@ export const getTickets = () => async dispatch => {
 export const getWorkers = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/owner/workers')
-    console.log('THE DATA FROM GET WORKERS THUNK', data)
     dispatch(gotWorkers(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const closeTicket = id => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${id}/close`)
   } catch (err) {
     console.error(err)
   }
