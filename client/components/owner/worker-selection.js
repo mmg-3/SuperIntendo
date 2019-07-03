@@ -1,12 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {getWorkers} from '../../store/owner'
 import {connect} from 'react-redux'
 
 export const WorkerSelection = props => {
+  const [workerId, setWorkerId] = useState(props.workers.id)
+  const selectWorker = e => {
+    console.log('SELECT WORKER VALUE: ', e.target.value)
+    setWorkerId(e.target.value)
+  }
   return (
-    <select>
+    <select onChange={selectWorker} value={workerId}>
       {props.workers.map(worker => (
-        <option key={worker.id}>
+        <option key={worker.id} value={worker.userId}>
           {worker.firstName} {worker.lastName}
         </option>
       ))}
