@@ -11,7 +11,7 @@ const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const GOT_WORKERS = 'GOT_WORKERS'
 // const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
-// const CLOSED_TICKET = 'CLOSED_TICKET'
+
 /**
  * INITIAL STATE
  */
@@ -117,9 +117,11 @@ export const getWorkers = () => async dispatch => {
   }
 }
 
-export const closeTicket = id => async dispatch => {
+export const closeTicket = (tixId, buildId) => async dispatch => {
   try {
-    await axios.put(`/api/owner/tickets/${id}/close`)
+    await axios.put(`/api/owner/tickets/${tixId}/close`)
+    // dispatch(closedTicket(id))
+    dispatch(getABuilding(buildId))
   } catch (err) {
     console.error(err)
   }
