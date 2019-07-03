@@ -13,14 +13,14 @@ export const Tickets = props => {
     props.getWorkers()
     props.getABuilding(props.match.params.id)
   }, [])
-
-  console.log(props)
   if (!props.id) {
     return <div>Loading...</div>
   }
-  const handleClose = id => {
-    props.closeTicket(id)
-  }
+  // const handleClose = evt => {
+  //   evt.preventDefault()
+  //   console.log('THE PROPS IN HANDLECLOSE', props)
+  //   props.closeTicket(id)
+  // }
   const tickets = props.apartments.flatMap(apartment => apartment.tickets)
   return (
     <div>
@@ -49,7 +49,7 @@ export const Tickets = props => {
         {tickets.filter(ticket => ticket.status === 'confirmed').map(tix => (
           <li key={tix.id}>
             {tix.issue}
-            <button type="submit" onClick={props.handleClose}>
+            <button type="submit" onClick={() => props.closeTicket(tix.id)}>
               Close Ticket
             </button>
           </li>
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getABuilding: id => dispatch(getABuilding(id)),
   getWorkers: () => dispatch(getWorkers()),
-  closeTicket: id => duspatch(closeTicket(id))
+  closeTicket: id => dispatch(closeTicket(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tickets)
