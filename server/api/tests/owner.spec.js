@@ -13,7 +13,8 @@ const {
   News,
   Apartment,
   Building,
-  Owner
+  Owner,
+  Worker
 } = require('../../db/models')
 const Sequelize = require('sequelize')
 
@@ -33,27 +34,40 @@ describe('Owner routes', () => {
     let user2, resident2
     let user3, owner
     let fakeBuilding, fakeNews, fakeApt, fakeUser, fakeResident
+    let user4, worker1
+    let user5, worker2
+    const password = '123'
     const userData = {
       email: 'cody@email.com',
-      password: '123'
+      password
     }
     const otherData = {
       email: 'user@example.org',
-      password: '123'
+      password
     }
     const ownerData = {
       email: 'lola@sadpanda.moe',
-      password: '123'
+      password
     }
     const fakeUserData = {
       email: 'fake@mcfaker.org',
-      password: '123'
+      password
+    }
+    const user4Data = {
+      email: 'mario@email.com',
+      password
+    }
+    const user5Data = {
+      email: 'luigi@email.com',
+      password
     }
 
     beforeEach(async () => {
       user = await User.create(userData)
       user2 = await User.create(otherData)
       user3 = await User.create(ownerData)
+      user4 = await User.create(user4Data)
+      user5 = await User.create(user5Data)
       fakeUser = await User.create(fakeUserData)
       resident = await Resident.create({
         firstName: 'Cody',
@@ -110,6 +124,7 @@ describe('Owner routes', () => {
         issue: 'it doesnt seem to exist',
         neighbor: true,
         apartmentId: apartment.id,
+        ownerId: owner.id,
         residentId: resident.id
       })
 
@@ -117,6 +132,7 @@ describe('Owner routes', () => {
         location: 'kitchen',
         issue: 'Flood',
         neighbor: true,
+        ownerId: owner.id,
         apartmentId: apartment.id,
         residentId: resident.id
       })
@@ -138,6 +154,24 @@ describe('Owner routes', () => {
       fakeNews = await News.create({
         title: 'FAKE NEWS',
         body: 'WHAT DOES THE FOX SAY?'
+      })
+      worker1 = await Worker.create({
+        userId: user4.id,
+        firstName: 'mario',
+        lastName: 'bros',
+        phoneNumber: '555-555-5555',
+        mailingAddress: '111',
+        imageUrl: 'a',
+        skills: []
+      })
+      worker2 = await Worker.create({
+        userId: user5.id,
+        firstName: 'luigi',
+        lastName: 'bros',
+        phoneNumber: '555-555-5555',
+        mailingAddress: '111',
+        imageUrl: 'a',
+        skills: []
       })
     })
 
@@ -235,15 +269,34 @@ describe('Owner routes', () => {
         describe('GET /api/owner/tickets/:ticketId/assign', () => {
           it('should get available workers for an assignment', async () => {
             const agent = await login(ownerData)
-            const res = await agent.get('/api/owner/tickets').expect(200)
+            const res = await agent
+              .get(`/api/owner/tickets/${ticket1.id}/assign`)
+              .expect(200)
 
             expect(res.body).to.be.instanceOf(Array)
             expect(res.body).to.have.lengthOf(2)
 
-            expect(res.body.map(t => t.issue)).to.have.members([
-              ticket1.issue,
-              ticket2.issue
+            expect(res.body.map(t => t.firstName)).to.have.members([
+              worker1.firstName,
+              worker2.firstName
             ])
+          })
+          describe('PUT /api/owner/tickets/:ticketId/assign/:workerId', () => {
+            it('should error if bad worker id', async () => {
+              const agent = await login(ownerData)
+              await agent
+                .put(`/api/owner/tickets/${ticket1.id}/assign/${-1}`)
+                .expect(418)
+            })
+            it('should assign a worker to the ticket and change status', async () => {
+              const agent = await login(ownerData)
+              expect(ticket1.workerId).to.be.null
+              await agent
+                .put(`/api/owner/tickets/${ticket1.id}/assign/${worker2.id}`)
+                .expect(204)
+              await ticket1.reload()
+              expect(ticket1.workerId).to.equal(worker2.id)
+            })
           })
         })
       })
