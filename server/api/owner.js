@@ -187,7 +187,20 @@ router.get('/tickets/:ticketId', async (req, res, next) => {
     next(err)
   }
 })
-
+//update a ticket
+router.put('/tickets/:ticketId', async (req, res, next) => {
+  try {
+    await Ticket.update(
+      {
+        status: req.body.status
+      },
+      {where: {id: req.params.ticketId}}
+    )
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
 //see available workers for assignment
 router.get('/tickets/:ticketId/assign', async (req, res, next) => {
   try {
