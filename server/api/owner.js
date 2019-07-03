@@ -179,25 +179,47 @@ router.get('/tickets', async (req, res, next) => {
   }
 })
 
-//update tickets - assign workers for pending tickets - status change from pending to assigned
-router.put('/tickets/:ticketId/assign', async (req, res, next) => {
+//get a ticket
+router.get('/tickets/:ticketId', async (req, res, next) => {
   try {
-    await Ticket.update(
-      {
-        workerId: req.body.workerId,
-        status: 'assigned'
-      },
-      {
-        where: {
-          id: req.params.ticketId,
-          ownerId: req.user.ownerId,
-          status: 'pending'
-        }
-      }
-    )
-    res.sendStatus(204)
+    res.json(await Ticket.findByPk(req.params.ticketId))
   } catch (err) {
     next(err)
+  }
+})
+
+//see available workers for assignment
+router.get('/tickets/:ticketId/assign', async (req, res, next) => {
+  try {
+    res.json(await Worker.findAll())
+  } catch (err) {
+    next(err)
+  }
+})
+
+//update tickets - assign workers for pending tickets - status change from pending to assigned
+router.put('/tickets/:ticketId/assign/:workerId', async (req, res, next) => {
+  if (req.params.workerId > 0) {
+    try {
+      await Ticket.update(
+        {
+          workerId: req.params.workerId,
+          status: 'assigned'
+        },
+        {
+          where: {
+            id: req.params.ticketId,
+            ownerId: req.user.ownerId,
+            status: 'pending'
+          }
+        }
+      )
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
+  } else {
+    res.sendStatus(418)
   }
 })
 
@@ -217,15 +239,6 @@ router.put('/tickets/:ticketId/close', async (req, res, next) => {
       }
     )
     res.sendStatus(204)
-  } catch (err) {
-    next(err)
-  }
-})
-
-//get a ticket
-router.get('/tickets/:ticketId', async (req, res, next) => {
-  try {
-    res.json(await Ticket.findByPk(req.params.ticketId))
   } catch (err) {
     next(err)
   }
