@@ -1,19 +1,18 @@
 import React, {useState} from 'react'
-// import {getWorkers} from '../../store/owner'
 import {connect} from 'react-redux'
 import {assignWorker} from '../../store/owner'
 
 export const WorkerSelection = props => {
-  const [workerId, setWorkerId] = useState(props.workers.userId)
+  const [workerId, setWorkerId] = useState(-1)
   const selectWorker = e => {
     setWorkerId(e.target.value)
   }
   return (
     <div>
       <select onChange={selectWorker} value={workerId}>
-        <option>Select Worker</option>
+        <option value="-1">Select Worker</option>
         {props.workers.map(worker => (
-          <option key={worker.id} value={worker.userId}>
+          <option key={worker.id} value={worker.id}>
             {worker.firstName} {worker.lastName}
           </option>
         ))}
@@ -21,9 +20,8 @@ export const WorkerSelection = props => {
       <button
         type="submit"
         onClick={evt => {
-          console.log('ONCLICK WSELECT WORKERID', workerId)
           evt.preventDefault()
-          props.assignWorker(workerId)
+          props.assignWorker(props.tixId, props.buildId, workerId)
         }}
       >
         Assign Worker
@@ -37,8 +35,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  // getWorkers: () => dispatch(getWorkers())
-  assignWorker: workerId => dispatch(assignWorker(workerId))
+  assignWorker: (tixId, buildId, workerId) =>
+    dispatch(assignWorker(tixId, buildId, workerId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WorkerSelection)
