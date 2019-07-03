@@ -28,7 +28,7 @@ export const Tickets = props => {
             {tix.issue}
             <br />
             {tix.status}
-            <WorkerSelection />
+            <WorkerSelection tixId={tix.id} buildId={props.match.params.id} />
           </li>
         ))}
       </ul>
@@ -44,7 +44,6 @@ export const Tickets = props => {
               onClick={evt => {
                 evt.preventDefault()
                 props.closeTicket(tix.id, props.match.params.id)
-                console.log(props)
               }}
             >
               Close Ticket
