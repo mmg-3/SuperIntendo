@@ -8,6 +8,7 @@ import SingleBuilding from './components/owner/single-building'
 import AdminTickets from './components/owner/tickets'
 import NewResident from './components/resident/new-resident'
 import ResidentTickets from './components/resident/tickets'
+import ResidentProfile from './components/resident/profile'
 import {me} from './store'
 
 /**
@@ -43,6 +44,7 @@ class Routes extends Component {
             {isResidentVerified && (
               <Switch>
                 <Route path="/tickets" exact component={ResidentTickets} />
+                <Route path="/profile" exact component={ResidentProfile} />
               </Switch>
             )}
             <Route path="/new-resident" exact component={NewResident} />

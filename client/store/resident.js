@@ -7,6 +7,7 @@ import {me} from './user'
  */
 const GOT_BUILDINGS = 'GOT_BUILDINGS'
 const GOT_SELF = 'GOT_SELF'
+const UPDATE_SELF = 'UPDATE_SELF'
 const GOT_TICKETS = 'GOT_TICKETS'
 const CREATE_TICKET = 'CREATE_TICKET'
 /**
@@ -23,6 +24,7 @@ const defaultResident = {
  */
 const gotBuildings = buildings => ({type: GOT_BUILDINGS, buildings})
 const gotSelf = self => ({type: GOT_SELF, self})
+const updateSelf = updatedSelf => ({type: UPDATE_SELF, updatedSelf})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const createTicket = ticket => ({type: CREATE_TICKET, ticket})
 /**
@@ -62,6 +64,24 @@ export const createResident = data => async dispatch => {
     dispatch(gotSelf(res.data || {}))
     dispatch(me())
     history.push('/home')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getSelf = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/resident')
+    dispatch(gotSelf(data || {}))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateProfile = updatedSelf => async dispatch => {
+  try {
+    await axios.put('/api/resident', updatedSelf)
+    dispatch(getSelf())
   } catch (err) {
     console.error(err)
   }

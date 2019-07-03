@@ -110,7 +110,11 @@ router.put('/', async (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
-        mailingAddress: req.body.mailingAddress
+        address1: req.body.address1,
+        address2: req.body.address2,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode
       },
       {
         where: {
