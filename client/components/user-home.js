@@ -38,7 +38,8 @@ const mapState = state => {
     email: state.user.email,
     isResident: state.user.isResident,
     isOwner: state.user.isOwner,
-    isWorker: state.user.isWorker
+    isWorker: state.user.isWorker,
+    isResidentVerified: state.user.isResidentVerified
   }
 }
 
