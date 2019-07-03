@@ -16,11 +16,7 @@ export const Tickets = props => {
   if (!props.id) {
     return <div>Loading...</div>
   }
-  // const handleClose = evt => {
-  //   evt.preventDefault()
-  //   console.log('THE PROPS IN HANDLECLOSE', props)
-  //   props.closeTicket(id)
-  // }
+
   const tickets = props.apartments.flatMap(apartment => apartment.tickets)
   return (
     <div>
@@ -29,27 +25,25 @@ export const Tickets = props => {
       <ul>
         {tickets.filter(ticket => ticket.status === 'pending').map(tix => (
           <li key={tix.id}>
-            {tix.issue} <br />
-            {tix.status} <WorkerSelection />
-            <button type="submit">Assign Worker</button>
+            {tix.issue}
+            <br />
+            {tix.status}
+            <WorkerSelection />
           </li>
         ))}
-        {/* {tickets.map(ticket => (
-            <li key={ticket.id}>
-              {ticket.issue}
-              <br></br>
-              {ticket.status}
-              <WorkerSelection />
-              <button type="submit">Assign Worker</button>
-            </li>
-          ))} */}
       </ul>
       <h3>Confirmed Tickets To Close</h3>
       <ul>
         {tickets.filter(ticket => ticket.status === 'confirmed').map(tix => (
           <li key={tix.id}>
             {tix.issue}
-            <button type="submit" onClick={() => props.closeTicket(tix.id)}>
+            <button
+              type="submit"
+              onClick={evt => {
+                evt.preventDefault()
+                props.closeTicket(tix.id)
+              }}
+            >
               Close Ticket
             </button>
           </li>
