@@ -120,6 +120,8 @@ export default function(state = defaultResident, action) {
       return {...state, self: action.self}
     case GOT_TICKETS:
       return {...state, tickets: action.tickets}
+    case GOT_NEWS:
+      return {...state, news: action.news}
     case CREATE_TICKET:
       return {...state, tickets: [action.ticket, ...state.tickets]}
     default:

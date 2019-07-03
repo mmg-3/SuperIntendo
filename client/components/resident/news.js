@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import NewsNew from './news-new'
-import NewsPost from './news-post'
+import {NewsPost} from './news-post'
 import {getNewsThunk} from '../../store/resident'
 import {connect} from 'react-redux'
 
@@ -8,7 +8,7 @@ const News = props => {
   useEffect(() => {
     props.getNews()
   }, [])
-  if (!props.news.length === 0) {
+  if (props.news.length === 0) {
     return <div>Loading...</div>
   }
   return (
