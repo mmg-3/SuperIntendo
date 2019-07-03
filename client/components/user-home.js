@@ -17,6 +17,12 @@ export const UserHome = props => {
           <Link to="/new-resident/">Become a resident</Link>
         </div>
       )}
+      {isResidentVerified && (
+        <div>
+          <Link to="/tickets">Tickets</Link>
+          <Link to="/profile">Profile</Link>
+        </div>
+      )}
       {isResident &&
         !isResidentVerified && (
           <div>Your residence application is under review</div>
@@ -38,7 +44,8 @@ const mapState = state => {
     email: state.user.email,
     isResident: state.user.isResident,
     isOwner: state.user.isOwner,
-    isWorker: state.user.isWorker
+    isWorker: state.user.isWorker,
+    isResidentVerified: state.user.isResidentVerified
   }
 }
 

@@ -5,8 +5,10 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
-import Tickets from './components/owner/tickets'
+import AdminTickets from './components/owner/tickets'
 import NewResident from './components/resident/new-resident'
+import ResidentTickets from './components/resident/tickets'
+import ResidentProfile from './components/resident/profile'
 import {me} from './store'
 
 /**
@@ -18,7 +20,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isOwner, isResident} = this.props
+    const {isLoggedIn, isOwner, isResidentVerified} = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -35,8 +37,14 @@ class Routes extends Component {
                 <Route
                   path="/buildings/:id/tickets"
                   exact
-                  component={Tickets}
+                  component={AdminTickets}
                 />
+              </Switch>
+            )}
+            {isResidentVerified && (
+              <Switch>
+                <Route path="/tickets" exact component={ResidentTickets} />
+                <Route path="/profile" exact component={ResidentProfile} />
               </Switch>
             )}
             <Route path="/new-resident" exact component={NewResident} />
@@ -58,7 +66,7 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isResident: state.user.isResident,
+    isResidentVerified: state.user.isResidentVerified,
     isOwner: state.user.isOwner,
     isWorker: state.user.isWorker
   }
