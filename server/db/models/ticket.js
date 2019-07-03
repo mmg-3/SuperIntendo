@@ -32,9 +32,6 @@ const Ticket = db.define('ticket', {
     ),
     defaultValue: 'pending',
     allowNull: false
-  },
-  assignment: {
-    type: Sequelize.STRING
   }
 })
 
