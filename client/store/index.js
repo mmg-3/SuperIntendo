@@ -5,6 +5,7 @@ import thunkMiddleware from 'redux-thunk'
 import owner from './owner'
 import resident from './resident'
 import user from './user'
+import worker from './worker'
 
 const reducer = combineReducers({user, owner, resident})
 const middleware = composeWithDevTools(

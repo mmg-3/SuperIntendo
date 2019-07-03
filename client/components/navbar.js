@@ -11,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
   )
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <h1>SuperIntendo</h1>
       <nav>
         {isLoggedIn ? (
           <div>

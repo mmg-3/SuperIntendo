@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Tickets} from '../components/owner/tickets'
 
 /**
  * ACTION TYPES
@@ -8,6 +9,9 @@ const GOT_NEWS = 'GOT_NEWS'
 const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
+const GOT_WORKERS = 'GOT_WORKERS'
+// const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
+
 /**
  * INITIAL STATE
  */
@@ -15,7 +19,8 @@ const initialState = {
   buildings: [],
   news: [],
   tickets: [],
-  selectedBuilding: {}
+  selectedBuilding: {},
+  workers: []
 }
 
 const BASE_BUILDINGS_URL = '/api/owner/buildings/'
@@ -29,6 +34,8 @@ const appendBuilding = building => ({type: APPEND_BUILDING, building})
 const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
+const gotWorkers = workers => ({type: GOT_WORKERS, workers})
+// const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
 /**
  * THUNK CREATORS
@@ -101,6 +108,33 @@ export const getTickets = () => async dispatch => {
   }
 }
 
+export const getWorkers = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/owner/workers')
+    dispatch(gotWorkers(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const closeTicket = (tixId, buildId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${tixId}/close`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const assignWorker = (ticketId, buildId, workerId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${ticketId}/assign/${workerId}`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -116,6 +150,8 @@ export default function(state = initialState, action) {
       return {...state, buildings: action.buildings}
     case GOT_A_BUILDING:
       return {...state, selectedBuilding: action.building}
+    case GOT_WORKERS:
+      return {...state, workers: action.workers}
     default:
       return state
   }
