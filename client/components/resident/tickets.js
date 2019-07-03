@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/resident'
 import {TicketItem} from './ticket-item'
-
+import TicketNew from './ticket-new'
 const Tickets = props => {
   useEffect(() => {
     props.getTickets()
@@ -14,6 +14,7 @@ const Tickets = props => {
   const openTickets = props.tickets.filter(tix => tix.status !== 'closed')
   return (
     <div>
+      <TicketNew />
       Open:
       {openTickets.map(ticket => <TicketItem key={ticket.id} {...ticket} />)}
       Closed:
