@@ -3,7 +3,6 @@ import {getWorkers} from '../../store/owner'
 import {connect} from 'react-redux'
 
 export const WorkerSelection = props => {
-  console.log(props.workers)
   return (
     <select>
       {props.workers.map(worker => (
