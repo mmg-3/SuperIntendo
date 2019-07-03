@@ -1,5 +1,12 @@
 const router = require('express').Router()
-const {Resident, Ticket, News, Apartment, Building} = require('../db/models')
+const {
+  Resident,
+  Ticket,
+  News,
+  Apartment,
+  Building,
+  Worker
+} = require('../db/models')
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
@@ -121,7 +128,7 @@ router.get('/tickets', async (req, res, next) => {
   try {
     res.json(
       await Ticket.findAll({
-        include: [Resident],
+        include: [Resident, Worker],
         where: {
           residentId: req.user.residentId
         }
