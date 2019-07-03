@@ -1,10 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {makeOnChange, TextField} from './utils'
-import {updateProfile, getSelf} from '../../store/resident'
+import {updateProfile} from '../../store/resident'
 import {connect} from 'react-redux'
-/**
- * COMPONENT
- */
 
 export const ProfileForm = props => {
   const [firstName, setFirstName] = useState(props.firstName)
