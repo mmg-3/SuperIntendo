@@ -12,11 +12,12 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      {!isResident && (
-        <div>
-          <Link to="/new-resident/">Become a resident</Link>
-        </div>
-      )}
+      {!isResident &&
+        !isWorker && (
+          <div>
+            <Link to="/new-resident/">Become a resident</Link>
+          </div>
+        )}
       {isResidentVerified && (
         <div>
           <Link to="/tickets">Tickets</Link>
@@ -30,6 +31,12 @@ export const UserHome = props => {
       {!isWorker && (
         <div>
           <Link to="/new-worker/">Become a worker</Link>
+        </div>
+      )}
+      {isWorker && (
+        <div>
+          {console.log(' IS THIS A WORKER', props.isWorker)}
+          <Link to="/tickets">Tickets</Link>
         </div>
       )}
     </div>
