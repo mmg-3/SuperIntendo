@@ -17,6 +17,12 @@ const Building = db.define('building', {
   zipcode: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  buildingUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue:
+      'https://assets.bwbx.io/images/users/iqjWHBFdfxIU/i_KrmjObiK8k/v0/1200x-1.jpg'
   }
 })
 
