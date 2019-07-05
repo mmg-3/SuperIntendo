@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {makeOnChange, TextField} from './utils'
+import {makeOnChange, TextField} from '../utils'
 import {updateProfile} from '../../store/resident'
 import {connect} from 'react-redux'
 

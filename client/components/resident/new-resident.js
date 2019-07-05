@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {createResident, getBuildings} from '../../store/resident'
-import {makeOnChange, TextField} from './utils'
+import {makeOnChange, TextField} from '../utils'
 
 const NewResident = props => {
   useEffect(() => {

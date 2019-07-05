@@ -30,6 +30,7 @@ const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const createTicket = ticket => ({type: CREATE_TICKET, ticket})
 const gotNews = news => ({type: GOT_NEWS, news})
 const createNews = news => ({type: CREATE_NEWS, news})
+
 /**
  * THUNK CREATORS
  */

@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import history from '../history'
 /**
  * ACTION TYPES
  */
@@ -8,6 +8,7 @@ const GOT_NEWS = 'GOT_NEWS'
 const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
+const CREATE_NEWS = 'CREATE_NEWS'
 /**
  * INITIAL STATE
  */
@@ -29,6 +30,7 @@ const appendBuilding = building => ({type: APPEND_BUILDING, building})
 const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
+const createNews = news => ({type: CREATE_NEWS, news})
 
 /**
  * THUNK CREATORS
@@ -87,6 +89,19 @@ export const getNews = id => async dispatch => {
   try {
     const res = await axios.get(BASE_BUILDINGS_URL + id + '/news')
     dispatch(gotNews(res.data || []))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const createNewsThunk = (buildingId, news) => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      BASE_BUILDINGS_URL + buildingId + '/news',
+      news
+    )
+    dispatch(createNews(data || {}))
+    // history.push(BASE_BUILDINGS_URL + buildingId + '/news')
   } catch (err) {
     console.error(err)
   }

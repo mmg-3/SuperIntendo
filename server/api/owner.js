@@ -215,8 +215,8 @@ router.post(
             body: req.body.body,
             photoUrl: req.body.photoUrl,
             expDay: req.body.expDay,
-            ownerId: req.user.ownerId,
-            status: req.body.status,
+            // ownerId: req.user.ownerId,
+            // status: 'approved',
             buildingId: req.params.buildingId
           },
           {
