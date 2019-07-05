@@ -24,7 +24,8 @@ const Ticket = db.define('ticket', {
   status: {
     type: Sequelize.ENUM(
       'pending',
-      'assigned',
+      'approved',
+      'rejected',
       'in-progress',
       'finished',
       'confirmed',
