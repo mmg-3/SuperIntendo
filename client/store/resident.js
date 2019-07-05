@@ -7,16 +7,19 @@ import {me} from './user'
  */
 const GOT_BUILDINGS = 'GOT_BUILDINGS'
 const GOT_SELF = 'GOT_SELF'
-const UPDATE_SELF = 'UPDATE_SELF'
 const GOT_TICKETS = 'GOT_TICKETS'
 const CREATE_TICKET = 'CREATE_TICKET'
+const GOT_NEWS = 'GOT_NEWS'
+const CREATED_NEWS = 'CREATED_NEWS'
 /**
  * INITIAL STATE
  */
 const defaultResident = {
   buildings: [],
   self: {},
-  tickets: []
+  tickets: [],
+  news: [],
+  newsMessage: ''
 }
 
 /**
@@ -24,9 +27,10 @@ const defaultResident = {
  */
 const gotBuildings = buildings => ({type: GOT_BUILDINGS, buildings})
 const gotSelf = self => ({type: GOT_SELF, self})
-const updateSelf = updatedSelf => ({type: UPDATE_SELF, updatedSelf})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const createTicket = ticket => ({type: CREATE_TICKET, ticket})
+const gotNews = news => ({type: GOT_NEWS, news})
+const createdNews = news => ({type: CREATED_NEWS, news})
 /**
  * THUNK CREATORS
  */
@@ -53,6 +57,25 @@ export const createTicketThunk = ticket => async dispatch => {
     const {data} = await axios.post('/api/resident/tickets', ticket)
     dispatch(createTicket(data || {}))
     history.push('/tickets')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getNewsThunk = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/resident/news')
+    dispatch(gotNews(res.data || []))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const createNewsThunk = news => async dispatch => {
+  try {
+    const {data} = await axios.post('/api/resident/news', news)
+    dispatch(createdNews(data || {}))
+    // history.push('/news')
   } catch (err) {
     console.error(err)
   }
@@ -98,6 +121,10 @@ export default function(state = defaultResident, action) {
       return {...state, self: action.self}
     case GOT_TICKETS:
       return {...state, tickets: action.tickets}
+    case GOT_NEWS:
+      return {...state, news: action.news}
+    case CREATED_NEWS:
+      return {...state, newsMessage: 'Your post will be reviewed by an admin.'}
     case CREATE_TICKET:
       return {...state, tickets: [action.ticket, ...state.tickets]}
     default:
