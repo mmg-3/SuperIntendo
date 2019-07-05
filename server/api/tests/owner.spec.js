@@ -134,7 +134,8 @@ describe('Owner routes', () => {
         neighbor: true,
         ownerId: owner.id,
         apartmentId: apartment.id,
-        residentId: resident.id
+        residentId: resident.id,
+        status: 'confirmed'
       })
 
       news1 = await News.create({
@@ -297,6 +298,17 @@ describe('Owner routes', () => {
               await ticket1.reload()
               expect(ticket1.workerId).to.equal(worker2.id)
             })
+          })
+        })
+        describe('PUT /tickets/:ticketId/close', () => {
+          it('should close a ticket if status is confirmed', async () => {
+            const agent = await login(ownerData)
+            expect(ticket2.status).to.equal('confirmed')
+            await agent
+              .put(`/api/owner/tickets/${ticket2.id}/close/`)
+              .expect(204)
+            await ticket2.reload()
+            expect(ticket2.status).to.equal('closed')
           })
         })
       })
