@@ -3,8 +3,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {AllTickets} from './worker/all-tickets'
-import {NewWorker} from './worker/new-worker'
 
 const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
   const navbar = (
@@ -33,8 +31,6 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           </div>
         )}
       </nav>
-      {/* <AllTickets />
-      <NewWorker /> */}
       <hr />
     </div>
   )
