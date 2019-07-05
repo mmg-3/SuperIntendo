@@ -9,7 +9,12 @@ const News = props => {
     props.getNews()
   }, [])
   if (props.news.length === 0) {
-    return <div>Loading...</div>
+    return (
+      <div>
+        <h2>No news...</h2>
+        <NewsNew />
+      </div>
+    )
   }
   return (
     <div>
