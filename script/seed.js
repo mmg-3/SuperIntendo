@@ -280,7 +280,7 @@ const seedUsers = [
 
 const seedOwner = [
   {
-    id: 2,
+    id: 1,
     userId: 41
   }
 ]
@@ -956,8 +956,8 @@ const seedNews = [
       'https://www.westelm.com/weimgs/rk/images/wcm/products/201922/0173/crosby-mid-century-sofa-80-c.jpg',
     expDay: '07/30/2019',
     status: 'approved',
-    residentId: null,
-    ownerId: null,
+    residentId: 11,
+    ownerId: 1,
     buildingId: 1
   },
   {
@@ -967,9 +967,9 @@ const seedNews = [
     photoUrl:
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBmMLtxtwajiZaz0EPSrJ1cxvI4x6iJV-0rEs-PmVrezdHZ0YS_g',
     expDay: '08/12/2021',
-    status: 'approved',
-    residentId: null,
-    ownerId: null,
+    status: 'pending',
+    residentId: 22,
+    ownerId: 1,
     buildingId: 2
   },
   {
@@ -982,7 +982,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 2
   },
   {
@@ -995,7 +995,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 3
   },
   {
@@ -1008,7 +1008,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 4
   },
   {
@@ -1021,7 +1021,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 2
   },
   {
@@ -1034,7 +1034,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 3
   },
   {
@@ -1047,7 +1047,7 @@ const seedNews = [
     expDay: '07/30/2020',
     status: 'approved',
     residentId: null,
-    ownerId: null,
+    ownerId: 1,
     buildingId: 4
   },
   {
@@ -1058,8 +1058,8 @@ const seedNews = [
     photoUrl: 'http://seniors100.com/wp-content/uploads/2016/09/download.jpg',
     expDay: '12/30/2019',
     status: 'pending',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     buildingId: 3
   }
 ]
@@ -1076,10 +1076,10 @@ const seedTickets = [
     status: 'pending',
     createdAt: '07/04/2019',
     updatedAt: '07/04/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   },
   {
     id: 2,
@@ -1093,10 +1093,10 @@ const seedTickets = [
     status: 'pending',
     createdAt: '07/05/2019',
     updatedAt: '07/05/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   },
   {
     id: 3,
@@ -1109,10 +1109,10 @@ const seedTickets = [
     status: 'pending',
     createdAt: '07/05/2019',
     updatedAt: '07/05/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 26,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 26
   },
   {
     id: 4,
@@ -1124,10 +1124,10 @@ const seedTickets = [
     status: 'closed',
     createdAt: '05/11/2019',
     updatedAt: '05/11/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 26,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 26
   },
   {
     id: 5,
@@ -1139,10 +1139,10 @@ const seedTickets = [
     status: 'closed',
     createdAt: '05/13/2019',
     updatedAt: '05/13/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   },
   {
     id: 6,
@@ -1154,10 +1154,10 @@ const seedTickets = [
     status: 'closed',
     createdAt: '03/03/2019',
     updatedAt: '03/03/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 17,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 17
   },
   {
     id: 7,
@@ -1170,10 +1170,10 @@ const seedTickets = [
     status: 'finished',
     createdAt: '06/09/2019',
     updatedAt: '07/04/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   },
   {
     id: 8,
@@ -1186,10 +1186,10 @@ const seedTickets = [
     status: 'confirmed',
     createdAt: '06/12/2019',
     updatedAt: '07/04/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 26,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 26
   },
   {
     id: 9,
@@ -1201,10 +1201,10 @@ const seedTickets = [
     status: 'in-progress',
     createdAt: '07/01/2019',
     updatedAt: '07/05/2019',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   },
   {
     id: 10,
@@ -1216,10 +1216,10 @@ const seedTickets = [
     status: 'closed',
     createdAt: '07/08/2018',
     updatedAt: '07/13/2018',
-    residentId: null,
-    ownerId: null,
+    residentId: 25,
+    ownerId: 1,
     workerId: null,
-    apartmentId: null
+    apartmentId: 25
   }
 ]
 
