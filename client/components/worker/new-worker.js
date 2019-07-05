@@ -1,19 +1,36 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {TextField, makeOnChange} from '../resident/utils'
 import {createWorker} from '../../store/worker'
+import {makeOnChange, TextField} from '../resident/utils'
 
 export const NewWorker = props => {
-  useEffect(() => {}, [])
   const [firstName, setFirstName] = useState(props.firstName)
   const [lastName, setLastName] = useState(props.lastName)
   const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber)
   const [imageUrl, setImageUrl] = useState(props.imageUrl)
   const [mailingAddress, setMailingAddress] = useState(props.mailingAddress)
-  const [skills, setSkills] = useState(props.skills)
+  const [skills, setSkills] = useState([])
+
+  const possibleSkills = [
+    'General Basics',
+    'Plumbing',
+    'HVAC & Electrical Systems',
+    'Appliances',
+    'Painting',
+    'Carpentry',
+    'Structural'
+  ]
+
+  const toggleSkill = skill => {
+    const idx = skills.indexOf(skill)
+    if (idx === -1) {
+      setSkills([...skills, skill])
+    } else {
+      setSkills([...skills.slice(0, idx), ...skills.slice(idx + 1)])
+    }
+  }
 
   const onSubmit = evt => {
-    console.log('THE PROPS ON CLICK', props)
     evt.preventDefault()
     props.createWorker({
       firstName,
@@ -72,54 +89,21 @@ export const NewWorker = props => {
         />
         {/* <br></br> */}
         <div>
-          {/* <label>Skills</label>
-        <sub>Please select applicable skills</sub>
-        <ul style={{listStyle:"none"}}>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> General Basics</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> Plumbing</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> HVAC and Electrical Systems</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> Appliances</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> Painting</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> Carpentry</li>
-          <li><input
-            type="checkbox"
-            value={skills}
-            onClick={makeOnChange(setSkills)}
-          /> Structural</li>
-        </ul> */}
+          <label>Skills</label>
+          <sub>Please select applicable skills</sub>
+          <ul style={{listStyle: 'none'}}>
+            {possibleSkills.map(skill => (
+              <li key={skill}>
+                <input
+                  type="checkbox"
+                  value={skills.includes(skill)}
+                  onClick={() => toggleSkill(skill)}
+                />
+                {skill}
+              </li>
+            ))}
+          </ul>
         </div>
-        <TextField
-          // required={true}
-          name="skills"
-          label="Skills"
-          type="text"
-          value={skills}
-          onChange={makeOnChange(setSkills)}
-        />
         <br />
         <button type="submit">Submit</button>
       </form>
