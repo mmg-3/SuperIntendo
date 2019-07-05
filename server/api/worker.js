@@ -31,7 +31,6 @@ const isWorker = async (req, res, next) => {
 
 //worker can sign up
 router.post('/', isLoggedIn, async (req, res, next) => {
-  console.log('THE REQ.body IN POST', req.body)
   try {
     let worker = Worker.findOne({
       where: {
