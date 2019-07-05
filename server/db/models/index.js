@@ -35,10 +35,10 @@ Worker.hasMany(Ticket)
 Apartment.hasMany(Ticket)
 
 News.belongsTo(Resident)
-News.belongsTo(Owner)
-News.belongsTo(Building)
 Building.hasMany(News)
+News.belongsTo(Owner)
 Owner.hasMany(News)
+News.belongsTo(Building)
 Resident.hasMany(News)
 
 /**
