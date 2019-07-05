@@ -100,7 +100,7 @@ export const createNewsThunk = (buildingId, news) => async dispatch => {
       BASE_BUILDINGS_URL + buildingId + '/news',
       news
     )
-    dispatch(createNews(data || {}))
+    dispatch(getABuilding(buildingId))
     // history.push(BASE_BUILDINGS_URL + buildingId + '/news')
   } catch (err) {
     console.error(err)
@@ -131,6 +131,8 @@ export default function(state = initialState, action) {
       return {...state, buildings: action.buildings}
     case GOT_A_BUILDING:
       return {...state, selectedBuilding: action.building}
+    case CREATE_NEWS:
+      return {...state, news: [action.news, ...state.news]}
     default:
       return state
   }
