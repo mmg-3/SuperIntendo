@@ -1,11 +1,23 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getTickets} from '../../store/worker'
+import {
+  getTickets,
+  updateAssignedTicket,
+  updateInProgTicket
+} from '../../store/worker'
 
 export const AllTickets = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
+  const updateAssigned = evt => {
+    evt.preventDefault()
+    props.updateAssignedTicket(evt.target.value)
+  }
+  const updateInProg = evt => {
+    evt.preventDefault()
+    props.updateInProgTicket(evt.target.value)
+  }
   return (
     <div>
       <h3>New Tickets</h3>
@@ -19,7 +31,13 @@ export const AllTickets = props => {
                 <br />
                 {ticket.status}
                 <br />
-                <button type="submit">Start</button>
+                <button
+                  type="submit"
+                  onClick={updateAssigned}
+                  value={ticket.id}
+                >
+                  Start
+                </button>
               </li>
             )
           })}
@@ -35,7 +53,9 @@ export const AllTickets = props => {
                 <br />
                 {ticket.status}
                 <br />
-                <button type="submit">Finish</button>
+                <button type="submit" value={ticket.id} onClick={updateInProg}>
+                  Finish
+                </button>
               </li>
             )
           })}
@@ -51,7 +71,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getTickets: () => dispatch(getTickets())
+  getTickets: () => dispatch(getTickets()),
+  updateAssignedTicket: ticketId => dispatch(updateAssignedTicket(ticketId)),
+  updateInProgTicket: ticketId => dispatch(updateInProgTicket(ticketId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllTickets)
