@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {AllTickets} from './worker/all-tickets'
 
 /**
  * COMPONENT
@@ -35,8 +36,7 @@ export const UserHome = props => {
       )}
       {isWorker && (
         <div>
-          {console.log(' IS THIS A WORKER', props.isWorker)}
-          <Link to="/tickets">Tickets</Link>
+          <AllTickets />
         </div>
       )}
     </div>
