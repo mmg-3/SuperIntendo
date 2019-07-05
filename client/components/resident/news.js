@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {getNewsThunk} from '../../store/resident'
 import NewsNew from './news-new'
 import {NewsPost} from './news-post'
-import {getNewsThunk} from '../../store/resident'
-import {connect} from 'react-redux'
 
 const News = props => {
   useEffect(() => {

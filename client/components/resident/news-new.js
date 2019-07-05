@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {TextField, makeOnChange} from './utils'
 import {connect} from 'react-redux'
 import {createNewsThunk} from '../../store/resident'
+import {makeOnChange, TextField} from './utils'
 
 export const NewsNew = props => {
   const [title, setTitle] = useState(props.title)
@@ -28,7 +28,9 @@ export const NewsNew = props => {
     setPhotoUrl('')
     setExpDay(dateString)
   }
-
+  if (props.message !== '') {
+    return <div>{props.message}</div>
+  }
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -55,7 +57,7 @@ export const NewsNew = props => {
         />
         <TextField
           name="expDay"
-          label="Expire in days"
+          label="Expires on"
           type="date"
           onChange={makeOnChange(setExpDay)}
           value={expDay}
@@ -67,7 +69,9 @@ export const NewsNew = props => {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    message: state.resident.newsMessage
+  }
 }
 
 const mapDispatchToProps = dispatch => {
