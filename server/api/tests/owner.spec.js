@@ -282,23 +282,6 @@ describe('Owner routes', () => {
               worker2.firstName
             ])
           })
-          describe('PUT /api/owner/tickets/:ticketId/assign/:workerId', () => {
-            it('should error if bad worker id', async () => {
-              const agent = await login(ownerData)
-              await agent
-                .put(`/api/owner/tickets/${ticket1.id}/assign/${-1}`)
-                .expect(418)
-            })
-            it('should assign a worker to the ticket and change status', async () => {
-              const agent = await login(ownerData)
-              expect(ticket1.workerId).to.be.null
-              await agent
-                .put(`/api/owner/tickets/${ticket1.id}/assign/${worker2.id}`)
-                .expect(204)
-              await ticket1.reload()
-              expect(ticket1.workerId).to.equal(worker2.id)
-            })
-          })
         })
         describe('PUT /tickets/:ticketId/close', () => {
           it('should close a ticket if status is confirmed', async () => {
