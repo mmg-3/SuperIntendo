@@ -4,9 +4,9 @@ import {createNewsThunk} from '../../store/resident'
 import {makeOnChange, TextField} from './utils'
 
 export const NewsNew = props => {
-  const [title, setTitle] = useState(props.title)
-  const [body, setBody] = useState(props.body)
-  const [photoUrl, setPhotoUrl] = useState(props.photoUrl)
+  const [title, setTitle] = useState()
+  const [body, setBody] = useState()
+  const [photoUrl, setPhotoUrl] = useState()
   const date = new Date()
   let month = '' + (date.getMonth() + 1)
   month = month.length === 1 ? '0' + month : month
@@ -23,9 +23,9 @@ export const NewsNew = props => {
       photoUrl,
       expDay
     })
-    setTitle('')
-    setBody('')
-    setPhotoUrl('')
+    setTitle()
+    setBody()
+    setPhotoUrl()
     setExpDay(dateString)
   }
   if (props.message !== '') {
