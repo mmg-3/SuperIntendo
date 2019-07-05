@@ -442,6 +442,7 @@ const seedApartment = [
   }
 ]
 
+
 const seedResident = [
   {
     id: 1,

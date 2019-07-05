@@ -5,7 +5,8 @@ const {
   News,
   Building,
   Apartment,
-  Owner
+  Owner,
+  Worker
 } = require('../db/models')
 
 const isLoggedIn = (req, res, next) => {
@@ -157,46 +158,57 @@ router.get(
   }
 )
 
-//get all tickets for building
-router.get('/tickets', async (req, res, next) => {
+//see available workers for assignment
+router.get('/tickets/:ticketId/assign', async (req, res, next) => {
   try {
-    res.json(
-      await Ticket.findAll({
-        include: {
-          model: Apartment,
-          include: {
-            model: Building,
-            where: {
-              ownerId: req.user.ownerId
-            }
-          }
-        }
-      })
-    )
+    res.json(await Worker.findAll())
   } catch (err) {
     next(err)
   }
 })
 
-//update a ticket
-router.put('/tickets/:ticketId', async (req, res, next) => {
+//update tickets - assign workers for pending tickets - status change from pending to assigned
+router.put('/tickets/:ticketId/assign/:workerId', async (req, res, next) => {
+  if (req.params.workerId > 0) {
+    try {
+      await Ticket.update(
+        {
+          workerId: req.params.workerId,
+          status: 'assigned'
+        },
+        {
+          where: {
+            id: req.params.ticketId,
+            ownerId: req.user.ownerId,
+            status: 'pending'
+          }
+        }
+      )
+      res.sendStatus(204)
+    } catch (err) {
+      next(err)
+    }
+  } else {
+    res.sendStatus(418)
+  }
+})
+
+//owner can close confirmed tickets
+router.put('/tickets/:ticketId/close', async (req, res, next) => {
   try {
     await Ticket.update(
       {
-        status: req.body.status
+        status: 'closed'
       },
-      {where: {id: req.params.ticketId}}
+      {
+        where: {
+          id: req.params.ticketId,
+          ownerId: req.user.ownerId,
+          status: 'confirmed'
+        }
+      }
     )
     res.sendStatus(204)
-  } catch (err) {
-    next(err)
-  }
-})
-
-//get a ticket
-router.get('/tickets/:ticketId', async (req, res, next) => {
-  try {
-    res.json(await Ticket.findByPk(req.params.ticketId))
   } catch (err) {
     next(err)
   }
@@ -259,36 +271,27 @@ router.put(
   }
 )
 
-//TODO: profiles
-// //get resident profile
-// router.get('/residents', async (req, res, next) => {
-//   try {
-//     res.json(await Resident.findAll(
+//get all workers
+router.get('/workers', async (req, res, next) => {
+  try {
+    const workers = await Worker.findAll()
+    res.json(workers)
+  } catch (err) {
+    next(err)
+  }
+})
 
-//     ))
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
-// //update resident profile
-// router.put('/residents', async (req, res, next) => {
-//   try {
-//     res.status(204)
-//     await Resident.update(
-//       {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         phoneNumber: req.body.phoneNumber,
-//         mailingAddress: req.body.mailingAddress
-//       },
-//       {
-//         where: {
-//           id: req.user.id
-//         }
-//       }
-//     )
-//   } catch (err) {
-//     next(err)
-//   }
-// })
+//get single worker
+router.get('/workers/:workerId', async (req, res, next) => {
+  try {
+    const workerId = req.params.workerId
+    const worker = await Worker.findOne({
+      where: {
+        userId: workerId
+      }
+    })
+    res.json(worker)
+  } catch (err) {
+    next(err)
+  }
+})

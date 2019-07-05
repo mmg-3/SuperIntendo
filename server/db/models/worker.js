@@ -23,8 +23,8 @@ const Worker = db.define('worker', {
     allowNull: false
   },
   skills: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    allowNull: false
+    type: Sequelize.ARRAY(Sequelize.STRING)
+    // allowNull: false
   }
 })
 

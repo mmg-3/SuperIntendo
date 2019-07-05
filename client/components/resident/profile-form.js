@@ -27,7 +27,6 @@ export const ProfileForm = props => {
     })
   }
 
-  console.log('props', props)
   return (
     <div>
       <img src={props.photoUrl} />
