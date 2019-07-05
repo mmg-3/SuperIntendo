@@ -22,7 +22,7 @@ const BASE_URL = '/api/workers/'
 /**
  * ACTION TYPES
  */
-const GOT_ALL_TICKETS = 'GOT_ALL_TICKETS'
+const GOT_TICKETS = 'GOT_ALL_TICKETS'
 const GOT_SELF = 'GOT_SELF'
 // const GOT_ASSIGNED_TICKETS = 'GOT_ASSIGNED_TICKETS'
 // const GOT_IN_PROGRESS_TICKETS = 'GOT_IN_PROGRESS_TICKETS'
@@ -32,7 +32,7 @@ const GOT_SELF = 'GOT_SELF'
 /**
  * ACTION CREATORS
  */
-const gotAllTickets = tickets => ({type: GOT_ALL_TICKETS, tickets})
+const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotSelf = self => ({type: GOT_SELF, self})
 // const gotAssignedTickets = tickets => ({type: GOT_ASSIGNED_TICKETS, tickets})
 // const gotInProgressTickets = tickets => ({
@@ -45,10 +45,10 @@ const gotSelf = self => ({type: GOT_SELF, self})
 /**
  * THUNK CREATORS
  */
-export const getAllTickets = () => async dispatch => {
+export const getTickets = () => async dispatch => {
   try {
     const {data} = await axios.get(BASE_URL + 'tickets')
-    dispatch(gotAllTickets(data || []))
+    dispatch(gotTickets(data || []))
   } catch (err) {
     console.error(err)
   }
@@ -118,7 +118,7 @@ export const getSelf = () => async dispatch => {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GOT_ALL_TICKETS:
+    case GOT_TICKETS:
       return {...state, tickets: action.tickets}
     case GOT_SELF:
       return {...state, self: action.self}

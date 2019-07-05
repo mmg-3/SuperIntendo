@@ -29,14 +29,15 @@ export const UserHome = props => {
         !isResidentVerified && (
           <div>Your residence application is under review</div>
         )}
+      {isWorker && (
+        <div>
+          {/* <AllTickets /> */}
+          <Link to="/tickets">Tickets</Link>
+        </div>
+      )}
       {!isWorker && (
         <div>
           <Link to="/new-worker/">Become a worker</Link>
-        </div>
-      )}
-      {isWorker && (
-        <div>
-          <AllTickets />
         </div>
       )}
     </div>
