@@ -11,6 +11,7 @@ import ResidentTickets from './components/resident/tickets'
 import ResidentProfile from './components/resident/profile'
 import NewWorker from './components/worker/new-worker'
 import AllTickets from './components/worker/all-tickets'
+import ResidentNews from './components/resident/news'
 import {me} from './store'
 
 /**
@@ -54,6 +55,7 @@ class Routes extends Component {
               <Switch>
                 <Route path="/tickets" exact component={ResidentTickets} />
                 <Route path="/profile" exact component={ResidentProfile} />
+                <Route path="/news" exact component={ResidentNews} />
               </Switch>
             )}
             {isWorker && (

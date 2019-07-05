@@ -23,6 +23,7 @@ export const UserHome = props => {
         <div>
           <Link to="/tickets">Tickets</Link>
           <Link to="/profile">Profile</Link>
+          <Link to="/news">News</Link>
         </div>
       )}
       {isResident &&

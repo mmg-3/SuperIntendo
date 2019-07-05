@@ -86,13 +86,17 @@ describe('Resident routes', () => {
       news1 = await News.create({
         title: 'I am a sadpanda',
         body: 'nobody understands the panda',
-        buildingId: building.id
+        buildingId: building.id,
+        status: 'approved',
+        expDay: Date.now() + 30000
       })
 
       news2 = await News.create({
         title: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
         body: 'too many projects, not enough time',
-        buildingId: building.id
+        buildingId: building.id,
+        status: 'approved',
+        expDay: Date.now() + 30000
       })
     })
 
