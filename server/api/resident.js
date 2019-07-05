@@ -7,6 +7,8 @@ const {
   Building,
   Worker
 } = require('../db/models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
@@ -168,7 +170,11 @@ router.get('/news', async (req, res, next) => {
       await News.findAll({
         include: [Resident],
         where: {
-          buildingId: req.user.buildingId
+          buildingId: req.user.buildingId,
+          status: 'approved',
+          expDay: {
+            [Op.gt]: new Date()
+          }
         }
       })
     )

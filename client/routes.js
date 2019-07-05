@@ -9,6 +9,7 @@ import AdminTickets from './components/owner/tickets'
 import NewResident from './components/resident/new-resident'
 import ResidentTickets from './components/resident/tickets'
 import ResidentProfile from './components/resident/profile'
+import ResidentNews from './components/resident/news'
 import {me} from './store'
 
 /**
@@ -45,6 +46,7 @@ class Routes extends Component {
               <Switch>
                 <Route path="/tickets" exact component={ResidentTickets} />
                 <Route path="/profile" exact component={ResidentProfile} />
+                <Route path="/news" exact component={ResidentNews} />
               </Switch>
             )}
             <Route path="/new-resident" exact component={NewResident} />
