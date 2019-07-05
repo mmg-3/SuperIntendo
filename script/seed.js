@@ -871,7 +871,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVerified: false,
+    isVerified: true,
     userId: 40,
     apartmentId: 27
   },
