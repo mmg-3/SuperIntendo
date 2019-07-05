@@ -4,14 +4,15 @@ import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
+import OwnerNews from './components/owner/news'
 import SingleBuilding from './components/owner/single-building'
 import AdminTickets from './components/owner/tickets'
 import NewResident from './components/resident/new-resident'
-import ResidentTickets from './components/resident/tickets'
-import ResidentProfile from './components/resident/profile'
-import NewWorker from './components/worker/new-worker'
-import AllTickets from './components/worker/all-tickets'
 import ResidentNews from './components/resident/news'
+import ResidentProfile from './components/resident/profile'
+import ResidentTickets from './components/resident/tickets'
+import AllTickets from './components/worker/all-tickets'
+import NewWorker from './components/worker/new-worker'
 import {me} from './store'
 
 /**
@@ -49,6 +50,7 @@ class Routes extends Component {
                   exact
                   component={AdminTickets}
                 />
+                <Route path="/buildings/:id/news" exact component={OwnerNews} />
               </Switch>
             )}
             {isResidentVerified && (
