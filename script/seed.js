@@ -20,7 +20,8 @@ const seedBuildings = [
     state: 'NY',
     zipcode: '10025',
     buildingUrl:
-      'https://cdn-img-feed.streeteasy.com/nyc/image/41/368675841.jpg'
+      'https://cdn-img-feed.streeteasy.com/nyc/image/41/368675841.jpg',
+    ownerId: 1
   },
   {
     id: 2,
@@ -29,7 +30,8 @@ const seedBuildings = [
     state: 'NY',
     zipcode: '11101',
     buildingUrl:
-      'https://newconstructionmanhattan.com/sites/default/files/images/arc-lic-02.jpg'
+      'https://newconstructionmanhattan.com/sites/default/files/images/arc-lic-02.jpg',
+    ownerId: 1
   },
   {
     id: 3,
@@ -38,7 +40,8 @@ const seedBuildings = [
     state: 'NY',
     zipcode: '11249',
     buildingUrl:
-      'https://cdn.vox-cdn.com/thumbor/JMYvte1yBjbETc92fWaAuYTyZi0=/0x0:2200x1238/1200x800/filters:focal(924x443:1276x795)/cdn.vox-cdn.com/uploads/chorus_image/image/60047829/CURBED_420_Kent___3_towers_from_East_River.0.jpg'
+      'https://cdn.vox-cdn.com/thumbor/JMYvte1yBjbETc92fWaAuYTyZi0=/0x0:2200x1238/1200x800/filters:focal(924x443:1276x795)/cdn.vox-cdn.com/uploads/chorus_image/image/60047829/CURBED_420_Kent___3_towers_from_East_River.0.jpg',
+    ownerId: 1
   },
   {
     id: 4,
@@ -46,7 +49,8 @@ const seedBuildings = [
     city: 'Flushing',
     state: 'NY',
     zipcode: '11354',
-    buildingUrl: 'https://cdn-img0.streeteasy.com/nyc/image/32/362124832.jpg'
+    buildingUrl: 'https://cdn-img0.streeteasy.com/nyc/image/32/362124832.jpg',
+    ownerId: 1
   }
 ]
 
@@ -281,7 +285,7 @@ const seedUsers = [
 const seedOwner = [
   {
     id: 1,
-    userId: 41
+    userId: 2
   }
 ]
 
@@ -451,7 +455,7 @@ const seedResident = [
     city: 'Brooklyn',
     state: 'New York',
     zipcode: '11372',
-    isVertified: true,
+    isVerified: true,
     userId: 4,
     apartmentId: 1
   },
@@ -467,7 +471,7 @@ const seedResident = [
     city: 'New York',
     state: 'NY',
     zipcode: '10016',
-    isVertified: true,
+    isVerified: true,
     userId: 5,
     apartmentId: 2
   },
@@ -483,7 +487,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 6,
     apartmentId: 3
   },
@@ -499,7 +503,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 7,
     apartmentId: 4
   },
@@ -515,7 +519,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 9,
     apartmentId: 5
   },
@@ -531,7 +535,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 10,
     apartmentId: 6
   },
@@ -547,7 +551,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 11,
     apartmentId: 7
   },
@@ -563,7 +567,7 @@ const seedResident = [
     city: 'Brooklyn',
     state: 'NY',
     zipcode: '11204',
-    isVertified: true,
+    isVerified: true,
     userId: 12,
     apartmentId: 8
   },
@@ -579,7 +583,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 13,
     apartmentId: 9
   },
@@ -595,7 +599,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 14,
     apartmentId: 10
   },
@@ -611,7 +615,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 15,
     apartmentId: 11
   },
@@ -627,7 +631,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 16,
     apartmentId: 12
   },
@@ -643,7 +647,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 17,
     apartmentId: 13
   },
@@ -659,7 +663,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 19,
     apartmentId: 14
   },
@@ -675,7 +679,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 20,
     apartmentId: 15
   },
@@ -691,7 +695,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: false,
     userId: 21,
     apartmentId: 16
   },
@@ -707,7 +711,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 22,
     apartmentId: 17
   },
@@ -723,7 +727,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: false,
     userId: 23,
     apartmentId: 18
   },
@@ -739,7 +743,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 28,
     apartmentId: 19
   },
@@ -755,7 +759,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: false,
     userId: 30,
     apartmentId: 20
   },
@@ -771,7 +775,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 31,
     apartmentId: 21
   },
@@ -787,7 +791,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 33,
     apartmentId: 22
   },
@@ -803,7 +807,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: false,
     userId: 42,
     apartmentId: 23
   },
@@ -819,7 +823,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 34,
     apartmentId: 24
   },
@@ -835,7 +839,7 @@ const seedResident = [
     city: 'Great Neck',
     state: 'NY',
     zipcode: '11020',
-    isVertified: false,
+    isVerified: true,
     userId: 38,
     apartmentId: 25
   },
@@ -851,7 +855,7 @@ const seedResident = [
     city: 'New York',
     state: 'NY',
     zipcode: '10045',
-    isVertified: true,
+    isVerified: true,
     userId: 41,
     apartmentId: 26
   },
@@ -867,7 +871,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: false,
+    isVerified: false,
     userId: 40,
     apartmentId: 27
   },
@@ -883,7 +887,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: false,
+    isVerified: false,
     userId: 43,
     apartmentId: 28
   },
@@ -899,7 +903,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 44,
     apartmentId: 29
   },
@@ -915,7 +919,7 @@ const seedResident = [
     city: '',
     state: '',
     zipcode: '',
-    isVertified: true,
+    isVerified: true,
     userId: 45,
     apartmentId: 30
   }
