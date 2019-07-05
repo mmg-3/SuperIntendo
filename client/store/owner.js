@@ -126,9 +126,18 @@ export const closeTicket = (tixId, buildId) => async dispatch => {
   }
 }
 
-export const assignWorker = (ticketId, buildId, workerId) => async dispatch => {
+export const approveTicket = (ticketId, buildId) => async dispatch => {
   try {
-    await axios.put(`/api/owner/tickets/${ticketId}/assign/${workerId}`)
+    await axios.put(`/api/owner/tickets/${ticketId}/approve`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectTicket = (ticketId, buildId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${ticketId}/reject`)
     dispatch(getABuilding(buildId))
   } catch (err) {
     console.error(err)

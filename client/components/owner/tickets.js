@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import {
   getABuilding,
   getWorkers,
-  assignWorker,
+  approveTicket,
+  rejectTicket,
   closeTicket
 } from '../../store/owner'
-import WorkerSelection from './worker-selection'
 
 export const Tickets = props => {
   useEffect(() => {
@@ -28,7 +28,24 @@ export const Tickets = props => {
             {tix.issue}
             <br />
             {tix.status}
-            <WorkerSelection tixId={tix.id} buildId={props.match.params.id} />
+            <button
+              type="submit"
+              onClick={evt => {
+                evt.preventDefault()
+                props.approveTicket(tix.id, props.match.params.id)
+              }}
+            >
+              Approve
+            </button>
+            <button
+              type="submit"
+              onClick={evt => {
+                evt.preventDefault()
+                props.rejectTicket(tix.id, props.match.params.id)
+              }}
+            >
+              Reject
+            </button>
           </li>
         ))}
       </ul>
@@ -83,7 +100,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getABuilding: id => dispatch(getABuilding(id)),
   getWorkers: () => dispatch(getWorkers()),
-  closeTicket: (tixId, buildId) => dispatch(closeTicket(tixId, buildId))
+  closeTicket: (tixId, buildId) => dispatch(closeTicket(tixId, buildId)),
+  approveTicket: (tixId, buildId) => dispatch(approveTicket(tixId, buildId)),
+  rejectTicket: (tixId, buildId) => dispatch(rejectTicket(tixId, buildId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Tickets)
