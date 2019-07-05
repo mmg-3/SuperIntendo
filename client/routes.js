@@ -9,6 +9,8 @@ import AdminTickets from './components/owner/tickets'
 import NewResident from './components/resident/new-resident'
 import ResidentTickets from './components/resident/tickets'
 import ResidentProfile from './components/resident/profile'
+import NewWorker from './components/worker/new-worker'
+import AllTickets from './components/worker/all-tickets'
 import ResidentNews from './components/resident/news'
 import {me} from './store'
 
@@ -21,7 +23,13 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isOwner, isResidentVerified} = this.props
+    const {
+      isLoggedIn,
+      isOwner,
+      isResidentVerified,
+      isResident,
+      isWorker
+    } = this.props
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -31,6 +39,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/new-resident" exact component={NewResident} />
             {isOwner && (
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
@@ -49,7 +58,17 @@ class Routes extends Component {
                 <Route path="/news" exact component={ResidentNews} />
               </Switch>
             )}
-            <Route path="/new-resident" exact component={NewResident} />
+            {isWorker && (
+              <Switch>
+                <Route path="/tickets" exact component={AllTickets} />
+              </Switch>
+            )}
+            {!isOwner &&
+              !isResident && (
+                <Switch>
+                  <Route path="/new-worker" exact component={NewWorker} />}
+                </Switch>
+              )}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
