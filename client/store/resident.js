@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import {me} from './user'
+import {objToFormData} from './utils'
 
 /**
  * ACTION TYPES
@@ -54,7 +55,13 @@ export const getTickets = () => async dispatch => {
 
 export const createTicketThunk = ticket => async dispatch => {
   try {
-    const {data} = await axios.post('/api/resident/tickets', ticket)
+    const formData = objToFormData(ticket)
+
+    const {data} = await axios.post('/api/resident/tickets', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     dispatch(createTicket(data || {}))
     history.push('/tickets')
   } catch (err) {

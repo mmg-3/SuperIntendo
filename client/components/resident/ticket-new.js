@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {createTicketThunk} from '../../store/resident'
-import {TextField, makeOnChange} from '../utils'
+import {makeOnChange, TextField} from '../utils'
 
 const TicketNew = props => {
-  const [issue, setIssue] = useState('')
+  const [issue, setIssue] = useState()
   const [location, setLocation] = useState('kitchen')
   const date = new Date()
   let month = '' + (date.getMonth() + 1)
@@ -14,7 +14,7 @@ const TicketNew = props => {
   const dateString = `${date.getFullYear()}-${month}-${day}`
   const [formDate, setDate] = useState(dateString)
   const [neighbor, setNeighbor] = useState(false)
-  const [photoUrl, setPhotoUrl] = useState('')
+  const [file, setFile] = useState()
 
   const onSubmit = event => {
     event.preventDefault()
@@ -23,13 +23,13 @@ const TicketNew = props => {
       location,
       formDate,
       neighbor,
-      photoUrl
+      file
     })
-    setIssue('')
+    setIssue()
     setLocation('kitchen')
     setDate(dateString)
     setNeighbor(false)
-    setPhotoUrl('')
+    setFile()
   }
 
   return (
@@ -73,13 +73,15 @@ const TicketNew = props => {
           max={dateString}
           value={formDate}
         />
-        <TextField
-          name="photoUrl"
-          value={photoUrl}
-          label="Photo URL"
-          type="text"
-          onChange={makeOnChange(setPhotoUrl)}
+        <input
+          name="file"
+          label="Photo"
+          type="file"
+          accept="image/*"
+          multiple={false}
+          onChange={e => setFile(e.target.files[0])}
         />
+
         <button type="submit">Submit Ticket</button>
       </form>
     </div>

@@ -8,7 +8,12 @@ const Tickets = props => {
     props.getTickets()
   }, [])
   if (props.tickets.length === 0) {
-    return <div>Loading....</div>
+    return (
+      <div>
+        Loading....
+        <TicketNew />
+      </div>
+    )
   }
   const closedTickets = props.tickets.filter(tix => tix.status === 'closed')
   const openTickets = props.tickets.filter(tix => tix.status !== 'closed')

@@ -9,6 +9,7 @@ const {
 } = require('../db/models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const {uploader, imgurUpload} = require('../file_upload')
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
@@ -146,19 +147,26 @@ router.get('/tickets', async (req, res, next) => {
 })
 
 //create new ticket
-router.post('/tickets', async (req, res, next) => {
+router.post('/tickets', uploader.single('file'), async (req, res, next) => {
+  if (!req.file) {
+    res.sendStatus(400)
+    return
+  }
+
   try {
-    res.status(201).json(
-      await Ticket.create({
-        location: req.body.location,
-        formDate: req.body.formDate,
-        issue: req.body.issue,
-        neighbor: req.body.neighbor,
-        photoUrl: req.body.photoUrl,
-        residentId: req.user.residentId
-      })
-    )
+    const photoUrl = await imgurUpload(req.file)
+    const ticket = await Ticket.create({
+      location: req.body.location,
+      formDate: req.body.formDate,
+      issue: req.body.issue,
+      neighbor: req.body.neighbor,
+      photoUrl,
+      residentId: req.user.residentId
+    })
+    console.log(ticket)
+    res.status(201).json(ticket)
   } catch (err) {
+    console.log(err)
     next(err)
   }
 })
