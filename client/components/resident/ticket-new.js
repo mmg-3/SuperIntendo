@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {createTicketThunk} from '../../store/resident'
-import {TextField, makeOnChange} from './utils'
+import {TextField, makeOnChange} from '../utils'
 
 const TicketNew = props => {
   const [issue, setIssue] = useState('')

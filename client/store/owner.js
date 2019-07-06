@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {Tickets} from '../components/owner/tickets'
 
 /**
  * ACTION TYPES
@@ -9,6 +8,7 @@ const GOT_NEWS = 'GOT_NEWS'
 const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
+const CREATE_NEWS = 'CREATE_NEWS'
 const GOT_WORKERS = 'GOT_WORKERS'
 // const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
 
@@ -34,6 +34,7 @@ const appendBuilding = building => ({type: APPEND_BUILDING, building})
 const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
+const createNews = news => ({type: CREATE_NEWS, news})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
 // const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
@@ -99,6 +100,19 @@ export const getNews = id => async dispatch => {
   }
 }
 
+export const createNewsThunk = (buildingId, news) => async dispatch => {
+  try {
+    const {data} = await axios.post(
+      BASE_BUILDINGS_URL + buildingId + '/news',
+      news
+    )
+    dispatch(getABuilding(buildingId))
+    // history.push(BASE_BUILDINGS_URL + buildingId + '/news')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const getTickets = () => async dispatch => {
   try {
     const res = await axios.get(BASE_BUILDINGS_URL + 'tickets')
@@ -159,6 +173,8 @@ export default function(state = initialState, action) {
       return {...state, buildings: action.buildings}
     case GOT_A_BUILDING:
       return {...state, selectedBuilding: action.building}
+    case CREATE_NEWS:
+      return {...state, news: [action.news, ...state.news]}
     case GOT_WORKERS:
       return {...state, workers: action.workers}
     default:

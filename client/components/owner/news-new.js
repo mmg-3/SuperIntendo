@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
+import {TextField, makeOnChange} from '../utils'
 import {connect} from 'react-redux'
-import {createNewsThunk} from '../../store/resident'
-import {makeOnChange, TextField} from '../utils'
+import {createNewsThunk} from '../../store/owner'
 
 export const NewsNew = props => {
-  const [title, setTitle] = useState()
-  const [body, setBody] = useState()
-  const [photoUrl, setPhotoUrl] = useState()
+  console.log('props for news-new', props.selectedBuilding.id)
+  console.log('news', props.selectedBuilding.news)
+  const [title, setTitle] = useState(props.selectedBuilding.news.title)
+  const [body, setBody] = useState(props.selectedBuilding.news.body)
+  const [photoUrl, setPhotoUrl] = useState(props.selectedBuilding.news.photoUrl)
   const date = new Date()
   let month = '' + (date.getMonth() + 1)
   month = month.length === 1 ? '0' + month : month
@@ -14,10 +16,10 @@ export const NewsNew = props => {
   day = day.length === 1 ? '0' + day : day
   const dateString = `${date.getFullYear()}-${month}-${day}`
   const [expDay, setExpDay] = useState(dateString)
-
+  // const [status, setStatus] = useState('approved')
   const onSubmit = event => {
     event.preventDefault()
-    props.createNews({
+    props.createNews(props.selectedBuilding.id, {
       title,
       body,
       photoUrl,
@@ -28,9 +30,7 @@ export const NewsNew = props => {
     setPhotoUrl()
     setExpDay(dateString)
   }
-  if (props.message !== '') {
-    return <div>{props.message}</div>
-  }
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -62,6 +62,7 @@ export const NewsNew = props => {
           onChange={makeOnChange(setExpDay)}
           value={expDay}
         />
+
         <button type="submit">Submit Post</button>
       </form>
     </div>
@@ -69,15 +70,13 @@ export const NewsNew = props => {
 }
 
 const mapStateToProps = state => {
-  return {
-    message: state.resident.newsMessage
-  }
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createNews: news => {
-      dispatch(createNewsThunk(news))
+    createNews: (buildingId, news) => {
+      dispatch(createNewsThunk(buildingId, news))
     }
   }
 }

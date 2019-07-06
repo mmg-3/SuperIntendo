@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
+import NewsNew from '../owner/news-new'
+
 export const SingleBuilding = props => {
   useEffect(() => {
     // console.log(props)
@@ -47,6 +49,7 @@ export const SingleBuilding = props => {
         </div>
         <div>
           <Link to={`/buildings/${props.id}/news`}>News</Link>:
+          <NewsNew selectedBuilding={props} />
         </div>
         <div>
           <ul>

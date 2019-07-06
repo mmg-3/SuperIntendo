@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {TextField, makeOnChange} from './utils'
+import {TextField, makeOnChange} from '../utils'
 
 export const TicketForm = props => {
   const date = new Date()

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {makeOnChange, TextField} from '../resident/utils'
+import {makeOnChange, TextField} from '../utils'
 export const BuildingForm = props => {
   const [address, setAddress] = useState(props.address)
 
