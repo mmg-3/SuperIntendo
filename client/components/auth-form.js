@@ -11,25 +11,52 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+      <form onSubmit={handleSubmit} name={name} className="form">
+        <script
+          defer
+          src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+        />
+
+        <div className="field">
+          <p className="control has-icons-left has-icons-right">
+            <input
+              className="input"
+              name="email"
+              type="email"
+              placeholder="Email"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-envelope" />
+            </span>
+          </p>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+        <div className="field">
+          <p className="control has-icons-left">
+            <input
+              className="input"
+              name="password"
+              type="password"
+              placeholder="Password"
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-lock" />
+            </span>
+          </p>
+          {error &&
+            error.response && (
+              <div>
+                <p className="help is-danger">{error.response.data}</p>
+              </div>
+            )}
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
+        <div className="field is-horizontal">
+          <p className="control">
+            <button className="button is-primary" type="submit">
+              Login
+            </button>
+          </p>
         </div>
-        {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }

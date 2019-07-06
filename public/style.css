@@ -11417,4 +11417,10 @@ label.panel-block:hover {
   background-color: #fafafa;
   padding: 3rem 1.5rem 6rem;
 }
-/*# sourceMappingURL=bulma.css.map */
+
+.form {
+  margin: 0 auto;
+  max-width: 300px;
+  padding-top: 100px;
+  text-align: center;
+}
