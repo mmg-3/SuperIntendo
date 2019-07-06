@@ -11424,3 +11424,9 @@ label.panel-block:hover {
   padding-top: 100px;
   text-align: center;
 }
+ul {
+  padding: 0px;
+}
+li {
+  list-style: none;
+}

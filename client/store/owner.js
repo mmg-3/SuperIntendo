@@ -1,5 +1,7 @@
 import axios from 'axios'
 import history from '../history'
+import {Tickets} from '../components/owner/tickets'
+
 /**
  * ACTION TYPES
  */
@@ -9,6 +11,9 @@ const GOT_TICKETS = 'GOT_TICKETS'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const CREATE_NEWS = 'CREATE_NEWS'
+const GOT_WORKERS = 'GOT_WORKERS'
+// const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
+
 /**
  * INITIAL STATE
  */
@@ -16,7 +21,8 @@ const initialState = {
   buildings: [],
   news: [],
   tickets: [],
-  selectedBuilding: {}
+  selectedBuilding: {},
+  workers: []
 }
 
 const BASE_BUILDINGS_URL = '/api/owner/buildings/'
@@ -31,6 +37,8 @@ const gotNews = news => ({type: GOT_NEWS, news})
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const createNews = news => ({type: CREATE_NEWS, news})
+const gotWorkers = workers => ({type: GOT_WORKERS, workers})
+// const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
 /**
  * THUNK CREATORS
@@ -116,6 +124,42 @@ export const getTickets = () => async dispatch => {
   }
 }
 
+export const getWorkers = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/owner/workers')
+    dispatch(gotWorkers(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const closeTicket = (tixId, buildId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${tixId}/close`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const approveTicket = (ticketId, buildId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${ticketId}/approve`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectTicket = (ticketId, buildId) => async dispatch => {
+  try {
+    await axios.put(`/api/owner/tickets/${ticketId}/reject`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -133,6 +177,8 @@ export default function(state = initialState, action) {
       return {...state, selectedBuilding: action.building}
     case CREATE_NEWS:
       return {...state, news: [action.news, ...state.news]}
+    case GOT_WORKERS:
+      return {...state, workers: action.workers}
     default:
       return state
   }

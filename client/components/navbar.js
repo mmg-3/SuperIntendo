@@ -6,11 +6,6 @@ import {logout} from '../store'
 import {Navbar} from 'react-bulma-components/full'
 
 const NavBar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
-  const navbar = (
-    <div>
-      <Link to="/" />
-    </div>
-  )
   return (
     <div>
       <nav className="navbar" role="navigation" aria-label="main navigation">
