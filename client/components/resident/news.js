@@ -1,15 +1,20 @@
 import React, {useEffect} from 'react'
+import {connect} from 'react-redux'
+import {getNewsThunk} from '../../store/resident'
 import NewsNew from './news-new'
 import {NewsPost} from './news-post'
-import {getNewsThunk} from '../../store/resident'
-import {connect} from 'react-redux'
 
 const News = props => {
   useEffect(() => {
     props.getNews()
   }, [])
   if (props.news.length === 0) {
-    return <div>Loading...</div>
+    return (
+      <div>
+        <h2>No news...</h2>
+        <NewsNew />
+      </div>
+    )
   }
   return (
     <div>

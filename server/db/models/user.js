@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 const Resident = require('./resident')
 const Owner = require('./owner')
+const Worker = require('./worker')
 
 const User = db.define('user', {
   email: {
@@ -42,11 +43,13 @@ User.prototype.correctPassword = function(candidatePwd) {
 User.prototype.withPerms = async function() {
   const owner = (await this.getOwner()) || {}
   const resident = (await this.getResident()) || {}
+  const worker = (await this.getWorker()) || {}
   return {
     ...this.dataValues,
     isResident: !!resident.id,
     isResidentVerified: resident === null ? false : resident.isVerified,
-    isOwner: !!owner.id
+    isOwner: !!owner.id,
+    isWorker: !!worker.id
   }
 }
 
