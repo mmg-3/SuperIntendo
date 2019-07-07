@@ -73,7 +73,7 @@ router.get('/tickets', async (req, res, next) => {
     try {
       const tickets = await Ticket.findAll({
         where: {
-          workerId: req.user.workerId
+          status: 'approved'
         }
       })
       res.json(tickets)
@@ -85,18 +85,31 @@ router.get('/tickets', async (req, res, next) => {
   }
 })
 
+//worker can see all in-progress tickets
+router.get('/tickets/my-tickets', async (req, res, next) => {
+  try {
+    const tickets = await Ticket.findAll({
+      where: {
+        workerId: req.user.workerId
+      }
+    })
+    res.json(tickets)
+  } catch (err) {
+    next(err)
+  }
+})
 //worker can update status of ticket from assigned to in-progress
-router.put('/tickets/assigned/:ticketId', async (req, res, next) => {
+router.put('/tickets/select/:ticketId', async (req, res, next) => {
   try {
     const assignedTicket = await Ticket.update(
       {
-        status: 'in-progress'
+        status: 'in-progress',
+        workerId: req.user.workerId
       },
       {
         where: {
-          workerId: req.user.workerId,
           id: req.params.ticketId,
-          status: 'assigned'
+          status: 'approved'
         }
       }
     )
@@ -107,7 +120,7 @@ router.put('/tickets/assigned/:ticketId', async (req, res, next) => {
 })
 
 //worker can change status of ticket from in-progress to finished
-router.put('/tickets/in-progress/:ticketId', async (req, res, next) => {
+router.put('/tickets/my-tickets/:ticketId', async (req, res, next) => {
   try {
     const inProgTicket = await Ticket.update(
       {
