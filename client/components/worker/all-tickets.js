@@ -1,29 +1,23 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {
-  getTickets,
-  updateAssignedTicket,
-  updateInProgTicket
-} from '../../store/worker'
+import {getTickets, updateSelectedTicket} from '../../store/worker'
+import CurrentTickets from './current-tickets'
 
 export const AllTickets = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-  const updateAssigned = evt => {
+  const updateSelected = evt => {
     evt.preventDefault()
-    props.updateAssignedTicket(evt.target.value)
+    props.updateSelectedTicket(evt.target.value)
   }
-  const updateInProg = evt => {
-    evt.preventDefault()
-    props.updateInProgTicket(evt.target.value)
-  }
+
   return (
     <div>
       <h3>New Tickets</h3>
       <ul style={{listStyles: 'none'}}>
         {props.tickets
-          .filter(ticket => ticket.status === 'assigned')
+          .filter(ticket => ticket.status === 'approved')
           .map(ticket => {
             return (
               <li key={ticket.id}>
@@ -33,7 +27,7 @@ export const AllTickets = props => {
                 <br />
                 <button
                   type="submit"
-                  onClick={updateAssigned}
+                  onClick={updateSelected}
                   value={ticket.id}
                 >
                   Start
@@ -42,24 +36,7 @@ export const AllTickets = props => {
             )
           })}
       </ul>
-      <h3>Current Tickets</h3>
-      <ul>
-        {props.tickets
-          .filter(ticket => ticket.status === 'in-progress')
-          .map(ticket => {
-            return (
-              <li key={ticket.id}>
-                {ticket.issue}
-                <br />
-                {ticket.status}
-                <br />
-                <button type="submit" value={ticket.id} onClick={updateInProg}>
-                  Finish
-                </button>
-              </li>
-            )
-          })}
-      </ul>
+      <CurrentTickets />
     </div>
   )
 }
@@ -67,13 +44,11 @@ export const AllTickets = props => {
 const mapStateToProps = state => ({
   user: state.user,
   tickets: state.worker.tickets
-  // worker: state.worker
 })
 
 const mapDispatchToProps = dispatch => ({
   getTickets: () => dispatch(getTickets()),
-  updateAssignedTicket: ticketId => dispatch(updateAssignedTicket(ticketId)),
-  updateInProgTicket: ticketId => dispatch(updateInProgTicket(ticketId))
+  updateSelectedTicket: ticketId => dispatch(updateSelectedTicket(ticketId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllTickets)
