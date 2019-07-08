@@ -175,6 +175,15 @@ export const rejectTicket = (ticketId, buildId) => async dispatch => {
   }
 }
 
+export const updateNews = (newsId, buildId, action) => async dispatch => {
+  try {
+    await axios.put(`${BASE_BUILDINGS_URL}${buildId}/news/${newsId}/${action}`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
