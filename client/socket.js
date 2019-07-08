@@ -23,9 +23,12 @@ socket.on('connect', () => {
   console.log('Connected!')
 
   socket.on('job_open', () => {
-    if (isWorker(store) && canNotify()) {
-      makeNotification('a new job just opened, be sure to check it out')
+    if (isWorker(store)) {
+      // fetch new data regardless
       store.dispatch(getTickets())
+      if (canNotify()) {
+        makeNotification('a new job just opened, be sure to check it out')
+      }
       if (outOfFocus) {
         document.title = `!!  ${originalTitle}`
       }
