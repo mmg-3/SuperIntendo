@@ -328,17 +328,17 @@ describe('Owner routes', () => {
               .expect(401)
           })
         })
-        describe('PUT /api/owner/buildings/:buildingId/news/:newsId', () => {
+        describe('PUT /api/owner/buildings/:buildingId/news/:newsId/approve', () => {
           it('should change the status for a given news', async () => {
             const newsUrl = `/api/owner/buildings/${building.id}/news/${
               news1.id
-            }`
+            }/approve`
             expect(news1.status).to.equal('pending')
 
             const agent = await login(ownerData)
             await agent
               .put(newsUrl)
-              .send({status: 'approved'})
+              .send()
               .expect(204)
 
             await news1.reload()
@@ -347,11 +347,11 @@ describe('Owner routes', () => {
           it('should not allow you to change another news status', async () => {
             const newsUrl = `/api/owner/buildings/${building.id}/news/${
               fakeNews.id
-            }`
+            }/approve`
             const agent = await login(ownerData)
             await agent
               .put(newsUrl)
-              .send({status: 'approved'})
+              .send()
               .expect(401)
           })
         })
