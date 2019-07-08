@@ -298,9 +298,9 @@ router.get('/workers', async (req, res, next) => {
 })
 
 router.put('/workers/:workerId/verify', async (req, res, next) => {
-  const worker = await Worker.findByPk(req.params.workerId)
-  if (worker) {
-    try {
+  try {
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
       await Worker.update(
         {
           isVerified: true
@@ -312,28 +312,28 @@ router.put('/workers/:workerId/verify', async (req, res, next) => {
         }
       )
       res.sendStatus(204)
-    } catch (err) {
-      next(err)
+    } else {
+      res.sendStatus(418)
     }
-  } else {
-    res.sendStatus(418)
+  } catch (err) {
+    next(err)
   }
 })
 
 router.put('/workers/:workerId/reject', async (req, res, next) => {
-  const worker = await Worker.findByPk(req.params.workerId)
-  if (worker) {
-    try {
+  try {
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
       await Worker.destroy({
         where: {
           id: req.params.workerId
         }
       })
       res.sendStatus(204)
-    } catch (err) {
-      next(err)
+    } else {
+      res.sendStatus(418)
     }
-  } else {
-    res.sendStatus(418)
+  } catch (err) {
+    next(err)
   }
 })
