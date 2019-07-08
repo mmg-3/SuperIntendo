@@ -9,6 +9,8 @@ const {
   Worker
 } = require('../db/models')
 
+let io
+
 const isLoggedIn = (req, res, next) => {
   if (req.user && req.user.id) {
     next()
@@ -49,7 +51,8 @@ const buildingBelongsTo = (req, res, next) => {
     next(err)
   }
 }
-module.exports = router
+const setIO = IO => (io = IO)
+module.exports = {router, setIO}
 
 router.use(isLoggedIn)
 router.use(isOwner)
@@ -182,6 +185,10 @@ router.put('/tickets/:ticketId/approve', async (req, res, next) => {
         }
       }
     )
+    // we only care about emitting if we have an io instance
+    if (io) {
+      io.emit('job_open')
+    }
     res.sendStatus(204)
   } catch (err) {
     next(err)
