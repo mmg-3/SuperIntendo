@@ -13,6 +13,7 @@ import ResidentProfile from './components/resident/profile'
 import ResidentTickets from './components/resident/tickets'
 import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
+import Workers from './components/owner/workers'
 import {me} from './store'
 
 /**
@@ -29,7 +30,7 @@ class Routes extends Component {
       isOwner,
       isResidentVerified,
       isResident,
-      isWorker
+      isWorkerVerified
     } = this.props
     return (
       <Switch>
@@ -44,6 +45,7 @@ class Routes extends Component {
             {isOwner && (
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
+                <Route path="/workers" excat component={Workers} />
                 <Route path="/buildings/:id" exact component={SingleBuilding} />
                 <Route
                   path="/buildings/:id/tickets"
@@ -60,7 +62,7 @@ class Routes extends Component {
                 <Route path="/news" exact component={ResidentNews} />
               </Switch>
             )}
-            {isWorker && (
+            {isWorkerVerified && (
               <Switch>
                 <Route path="/tickets" exact component={AllTickets} />
               </Switch>
@@ -91,7 +93,8 @@ const mapState = state => {
     isLoggedIn: !!state.user.id,
     isResidentVerified: state.user.isResidentVerified,
     isOwner: state.user.isOwner,
-    isWorker: state.user.isWorker
+    isWorker: state.user.isWorker,
+    isWorkerVerified: state.user.isWorkerVerified
   }
 }
 
