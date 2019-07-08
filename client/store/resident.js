@@ -80,9 +80,14 @@ export const getNewsThunk = () => async dispatch => {
 
 export const createNewsThunk = news => async dispatch => {
   try {
-    const {data} = await axios.post('/api/resident/news', news)
+    const formData = objToFormData(news)
+
+    const {data} = await axios.post('/api/resident/news', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     dispatch(createdNews(data || {}))
-    // history.push('/news')
   } catch (err) {
     console.error(err)
   }
