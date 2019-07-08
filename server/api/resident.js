@@ -148,13 +148,11 @@ router.get('/tickets', async (req, res, next) => {
 
 //create new ticket
 router.post('/tickets', uploader.single('file'), async (req, res, next) => {
-  if (!req.file) {
-    res.sendStatus(400)
-    return
-  }
-
   try {
-    const photoUrl = await imgurUpload(req.file)
+    let photoUrl = undefined
+    if (req.file) {
+      photoUrl = await imgurUpload(req.file)
+    }
     const ticket = await Ticket.create({
       location: req.body.location,
       formDate: req.body.formDate,
@@ -163,7 +161,6 @@ router.post('/tickets', uploader.single('file'), async (req, res, next) => {
       photoUrl,
       residentId: req.user.residentId
     })
-    console.log(ticket)
     res.status(201).json(ticket)
   } catch (err) {
     console.log(err)
