@@ -258,25 +258,58 @@ router.post(
   }
 )
 
-//update status of a pending news
+const updateNews = (id, ownerId, buildingId, oldStatus, status) => {
+  return News.update(
+    {status},
+    {
+      where: {
+        status: oldStatus,
+        ownerId,
+        id,
+        buildingId
+      }
+    }
+  )
+}
+
+// approve a pending news
 router.put(
-  '/buildings/:buildingId/news/:newsId',
+  '/buildings/:buildingId/news/:newsId/approve',
   buildingBelongsTo,
   async (req, res, next) => {
     try {
-      const updateNews = await News.update(
-        {
-          status: req.body.status
-        },
-        {
-          where: {
-            ownerId: req.user.ownerId,
-            id: req.params.newsId,
-            buildingId: req.params.buildingId
-          }
-        }
+      const updatedNews = await updateNews(
+        req.params.newsId,
+        req.user.ownerId,
+        req.params.buildingId,
+        'pending',
+        'approved'
       )
-      if (updateNews[0] >= 1) {
+      if (updatedNews[0] >= 1) {
+        res.sendStatus(204)
+      } else {
+        res.sendStatus(401)
+      }
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+// deny a pending news
+router.put(
+  '/buildings/:buildingId/news/:newsId/deny',
+  buildingBelongsTo,
+  async (req, res, next) => {
+    try {
+      const updatedNews = await updateNews(
+        req.params.newsId,
+        req.user.ownerId,
+        req.params.buildingId,
+        'pending',
+        'denied'
+      )
+      if (updatedNews[0] >= 1) {
         res.sendStatus(204)
       } else {
         res.sendStatus(401)
