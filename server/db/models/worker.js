@@ -25,6 +25,10 @@ const Worker = db.define('worker', {
   skills: {
     type: Sequelize.ARRAY(Sequelize.STRING)
     // allowNull: false
+  },
+  isVerified: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
