@@ -11,6 +11,9 @@ const {
 
 let io
 
+const setIO = IO => (io = IO)
+module.exports = {router, setIO}
+
 const isLoggedIn = (req, res, next) => {
   if (req.user && req.user.id) {
     next()
@@ -51,8 +54,6 @@ const buildingBelongsTo = (req, res, next) => {
     next(err)
   }
 }
-const setIO = IO => (io = IO)
-module.exports = {router, setIO}
 
 router.use(isLoggedIn)
 router.use(isOwner)
