@@ -7,7 +7,6 @@ export const BuildingForm = props => {
   const [state, setState] = useState(props.state)
   const [zipcode, setZipcode] = useState(props.zipcode)
   const [buildingUrl, setBuildingUrl] = useState(props.buildingUrl)
-  const {isShowing, toggle} = useModal()
 
   const onSubmit = event => {
     event.preventDefault()
@@ -80,6 +79,19 @@ export const BuildingForm = props => {
                     placeholder="Zipcode"
                     value={zipcode}
                     onChange={makeOnChange(setZipcode)}
+                  />
+                </p>
+              </div>
+            </div>
+            <div className="column">
+              <div className="field">
+                <p className="control is-expanded">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="optional photo"
+                    value={buildingUrl}
+                    onChange={makeOnChange(setBuildingUrl)}
                   />
                 </p>
               </div>
