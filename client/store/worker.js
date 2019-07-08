@@ -7,6 +7,7 @@ import {me} from './user'
  */
 const initialState = {
   tickets: [],
+  myTickets: [],
   me: {}
 }
 
@@ -18,14 +19,16 @@ const BASE_URL = '/api/workers/'
 /**
  * ACTION TYPES
  */
-const GOT_TICKETS = 'GOT_ALL_TICKETS'
+const GOT_TICKETS = 'GOT_TICKETS'
 const GOT_SELF = 'GOT_SELF'
+const GOT_MY_TICKETS = 'GOT_MY_TICKETS'
 
 /**
  * ACTION CREATORS
  */
 const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotSelf = self => ({type: GOT_SELF, self})
+const gotMyTickets = tickets => ({type: GOT_MY_TICKETS, tickets})
 
 /**
  * THUNK CREATORS
@@ -34,6 +37,15 @@ export const getTickets = () => async dispatch => {
   try {
     const {data} = await axios.get(BASE_URL + 'tickets')
     dispatch(gotTickets(data || []))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getMyTickets = () => async dispatch => {
+  try {
+    const {data} = await axios.get(BASE_URL + `tickets/my-tickets`)
+    dispatch(gotMyTickets(data || []))
   } catch (err) {
     console.error(err)
   }
@@ -58,9 +70,10 @@ export const getSelf = () => async dispatch => {
   }
 }
 
-export const updateAssignedTicket = ticketId => async dispatch => {
+export const updateSelectedTicket = ticketId => async dispatch => {
   try {
-    await axios.put(BASE_URL + `tickets/assigned/${ticketId}`)
+    await axios.put(BASE_URL + `tickets/select/${ticketId}`)
+    dispatch(getMyTickets())
     dispatch(getTickets())
   } catch (err) {
     console.error(err)
@@ -69,8 +82,8 @@ export const updateAssignedTicket = ticketId => async dispatch => {
 
 export const updateInProgTicket = ticketId => async dispatch => {
   try {
-    await axios.put(BASE_URL + `/tickets/in-progress/${ticketId}`)
-    dispatch(getTickets())
+    await axios.put(BASE_URL + `/tickets/my-tickets/${ticketId}`)
+    dispatch(getMyTickets())
   } catch (err) {
     console.error(err)
   }
@@ -86,6 +99,8 @@ export default (state = initialState, action) => {
       return {...state, tickets: action.tickets}
     case GOT_SELF:
       return {...state, self: action.self}
+    case GOT_MY_TICKETS:
+      return {...state, myTickets: action.tickets}
     default:
       return state
   }
