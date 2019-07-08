@@ -45,7 +45,7 @@ class Routes extends Component {
             {isOwner && (
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
-                <Route path="/workers" excat component={Workers} />
+                <Route path="/workers" exact component={Workers} />
                 <Route path="/buildings/:id" exact component={SingleBuilding} />
                 <Route
                   path="/buildings/:id/tickets"
