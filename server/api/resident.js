@@ -5,10 +5,12 @@ const {
   News,
   Apartment,
   Building,
+  Owner,
   Worker
 } = require('../db/models')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
+const {uploader, imgurUpload} = require('../file_upload')
 module.exports = router
 
 const isLoggedIn = (req, res, next) => {
@@ -54,6 +56,16 @@ const getBuilding = async (req, res, next) => {
     next(err)
   }
 }
+
+const getOwner = async (req, res, next) => {
+  try {
+    const owner = await Building.findByPk(req.user.buildingId)
+    req.user.ownerId = owner.id
+    next()
+  } catch (err) {
+    next(err)
+  }
+}
 // associate a user with a residency
 // they only need to be logged in
 // they must NOT have another residence somewhere
@@ -94,6 +106,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 router.use(isLoggedIn)
 router.use(isResident)
 router.use(getBuilding)
+router.use(getOwner)
 //profile
 router.get('/', async (req, res, next) => {
   try {
@@ -146,18 +159,23 @@ router.get('/tickets', async (req, res, next) => {
 })
 
 //create new ticket
-router.post('/tickets', async (req, res, next) => {
+router.post('/tickets', uploader.single('file'), async (req, res, next) => {
   try {
-    res.status(201).json(
-      await Ticket.create({
-        location: req.body.location,
-        formDate: req.body.formDate,
-        issue: req.body.issue,
-        neighbor: req.body.neighbor,
-        photoUrl: req.body.photoUrl,
-        residentId: req.user.residentId
-      })
-    )
+    let photoUrl = undefined
+    if (req.file) {
+      photoUrl = await imgurUpload(req.file)
+    }
+    const ticket = await Ticket.create({
+      location: req.body.location,
+      formDate: req.body.formDate,
+      issue: req.body.issue,
+      neighbor: req.body.neighbor,
+      photoUrl,
+      residentId: req.user.residentId,
+      ownerId: req.user.ownerId,
+      apartmentId: req.user.apartmentId
+    })
+    res.status(201).json(ticket)
   } catch (err) {
     next(err)
   }
@@ -184,23 +202,28 @@ router.get('/news', async (req, res, next) => {
 })
 
 //create news
-router.post('/news', async (req, res, next) => {
+router.post('/news', uploader.single('file'), async (req, res, next) => {
   try {
-    res.status(201).json(
-      await News.create(
-        {
-          title: req.body.title,
-          body: req.body.body,
-          photoUrl: req.body.photoUrl,
-          expDay: req.body.expDay,
-          buildingId: req.user.buildingId,
-          residentId: req.user.residentId
-        },
-        {
-          include: [Resident]
-        }
-      )
+    let photoUrl = undefined
+    if (req.file) {
+      photoUrl = await imgurUpload(req.file)
+    }
+    const news = await News.create(
+      {
+        title: req.body.title,
+        body: req.body.body,
+        photoUrl,
+        expDay: req.body.expDay,
+        buildingId: req.user.buildingId,
+        ownerId: req.user.ownerId,
+        status: 'approved',
+        residentId: req.user.residentId
+      },
+      {
+        include: [Resident]
+      }
     )
+    res.status(201).json(news)
   } catch (err) {
     next(err)
   }

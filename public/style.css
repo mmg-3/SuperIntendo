@@ -19,9 +19,16 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
 ul {
   padding: 0px;
 }
+
 li {
   list-style: none;
+}
+
+img {
+  max-width: 300px;
+  max-height: 300px;
 }

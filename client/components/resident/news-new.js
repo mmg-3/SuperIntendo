@@ -6,7 +6,7 @@ import {makeOnChange, TextField} from '../utils'
 export const NewsNew = props => {
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
-  const [photoUrl, setPhotoUrl] = useState()
+  const [file, setFile] = useState()
   const date = new Date()
   let month = '' + (date.getMonth() + 1)
   month = month.length === 1 ? '0' + month : month
@@ -20,12 +20,12 @@ export const NewsNew = props => {
     props.createNews({
       title,
       body,
-      photoUrl,
+      file,
       expDay
     })
     setTitle()
     setBody()
-    setPhotoUrl()
+    setFile()
     setExpDay(dateString)
   }
   if (props.message !== '') {
@@ -48,13 +48,15 @@ export const NewsNew = props => {
           onChange={makeOnChange(setBody)}
           value={body}
         />
-        <TextField
-          name="photoUrl"
-          label="Photos"
-          type="text"
-          onChange={makeOnChange(setPhotoUrl)}
-          value={photoUrl}
+        <input
+          name="file"
+          label="Photo"
+          type="file"
+          accept="image/*"
+          multiple={false}
+          onChange={e => setFile(e.target.files[0])}
         />
+
         <TextField
           name="expDay"
           label="Expires on"
