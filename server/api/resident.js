@@ -59,8 +59,8 @@ const getBuilding = async (req, res, next) => {
 
 const getOwner = async (req, res, next) => {
   try {
-    const owner = await Building.findByPk(req.user.buildingId)
-    req.user.ownerId = owner.id
+    const building = await Building.findByPk(req.user.buildingId)
+    req.user.ownerId = building.ownerId
     next()
   } catch (err) {
     next(err)
@@ -191,7 +191,7 @@ router.get('/news', async (req, res, next) => {
           buildingId: req.user.buildingId,
           status: 'approved',
           expDay: {
-            [Op.gt]: new Date()
+            [Op.gte]: new Date()
           }
         }
       })
@@ -216,7 +216,7 @@ router.post('/news', uploader.single('file'), async (req, res, next) => {
         expDay: req.body.expDay,
         buildingId: req.user.buildingId,
         ownerId: req.user.ownerId,
-        status: 'approved',
+        status: 'pending',
         residentId: req.user.residentId
       },
       {
