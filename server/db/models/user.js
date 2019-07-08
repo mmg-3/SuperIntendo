@@ -49,7 +49,8 @@ User.prototype.withPerms = async function() {
     isResident: !!resident.id,
     isResidentVerified: resident === null ? false : resident.isVerified,
     isOwner: !!owner.id,
-    isWorker: !!worker.id
+    isWorker: !!worker.id,
+    isWorkerVerified: worker === null ? false : worker.isVerified
   }
 }
 

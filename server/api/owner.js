@@ -265,25 +265,34 @@ router.post(
   }
 )
 
-//update status of a pending news
+const updateNews = (id, ownerId, buildingId, oldStatus, status) => {
+  return News.update(
+    {status},
+    {
+      where: {
+        status: oldStatus,
+        ownerId,
+        id,
+        buildingId
+      }
+    }
+  )
+}
+
+// approve a pending news
 router.put(
-  '/buildings/:buildingId/news/:newsId',
+  '/buildings/:buildingId/news/:newsId/approve',
   buildingBelongsTo,
   async (req, res, next) => {
     try {
-      const updateNews = await News.update(
-        {
-          status: req.body.status
-        },
-        {
-          where: {
-            ownerId: req.user.ownerId,
-            id: req.params.newsId,
-            buildingId: req.params.buildingId
-          }
-        }
+      const updatedNews = await updateNews(
+        req.params.newsId,
+        req.user.ownerId,
+        req.params.buildingId,
+        'pending',
+        'approved'
       )
-      if (updateNews[0] >= 1) {
+      if (updatedNews[0] >= 1) {
         res.sendStatus(204)
       } else {
         res.sendStatus(401)
@@ -294,7 +303,31 @@ router.put(
   }
 )
 
-//get all workers
+// deny a pending news
+router.put(
+  '/buildings/:buildingId/news/:newsId/deny',
+  buildingBelongsTo,
+  async (req, res, next) => {
+    try {
+      const updatedNews = await updateNews(
+        req.params.newsId,
+        req.user.ownerId,
+        req.params.buildingId,
+        'pending',
+        'denied'
+      )
+      if (updatedNews[0] >= 1) {
+        res.sendStatus(204)
+      } else {
+        res.sendStatus(401)
+      }
+    } catch (err) {
+      next(err)
+    }
+  }
+)
+
+// get all workers
 router.get('/workers', async (req, res, next) => {
   try {
     const workers = await Worker.findAll()
@@ -304,16 +337,42 @@ router.get('/workers', async (req, res, next) => {
   }
 })
 
-//get single worker
-router.get('/workers/:workerId', async (req, res, next) => {
+router.put('/workers/:workerId/verify', async (req, res, next) => {
   try {
-    const workerId = req.params.workerId
-    const worker = await Worker.findOne({
-      where: {
-        userId: workerId
-      }
-    })
-    res.json(worker)
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
+      await Worker.update(
+        {
+          isVerified: true
+        },
+        {
+          where: {
+            id: req.params.workerId
+          }
+        }
+      )
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(418)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/workers/:workerId/reject', async (req, res, next) => {
+  try {
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
+      await Worker.destroy({
+        where: {
+          id: req.params.workerId
+        }
+      })
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(418)
+    }
   } catch (err) {
     next(err)
   }

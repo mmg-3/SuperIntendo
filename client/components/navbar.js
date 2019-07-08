@@ -18,10 +18,13 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
+
+            {isOwner && <Link to="/buildings">Buildings</Link>}
+            {/* Double isOwner because putting in divs messes up styling, may change later */}
+            {isOwner && <Link to="/workers">Workers</Link>}
             <a href="#" onClick={handleClick}>
               Logout
             </a>
-            {isOwner && <Link to="/buildings">Buildings</Link>}
           </div>
         ) : (
           <div>

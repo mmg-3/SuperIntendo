@@ -36,7 +36,6 @@ const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const createNews = news => ({type: CREATE_NEWS, news})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
-// const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
 /**
  * THUNK CREATORS
@@ -131,6 +130,24 @@ export const getWorkers = () => async dispatch => {
   }
 }
 
+export const verifyWorker = workerId => async dispatch => {
+  try {
+    await axios.put(`/api/owner/workers/${workerId}/verify`)
+    dispatch(getWorkers())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectWorker = workerId => async dispatch => {
+  try {
+    await axios.put(`api/owner/workers/${workerId}/reject`)
+    dispatch(getWorkers())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const closeTicket = (tixId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${tixId}/close`)
@@ -152,6 +169,15 @@ export const approveTicket = (ticketId, buildId) => async dispatch => {
 export const rejectTicket = (ticketId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${ticketId}/reject`)
+    dispatch(getABuilding(buildId))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateNews = (newsId, buildId, action) => async dispatch => {
+  try {
+    await axios.put(`${BASE_BUILDINGS_URL}${buildId}/news/${newsId}/${action}`)
     dispatch(getABuilding(buildId))
   } catch (err) {
     console.error(err)
