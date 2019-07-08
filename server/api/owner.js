@@ -320,7 +320,7 @@ router.put(
   }
 )
 
-//get all workers
+// get all workers
 router.get('/workers', async (req, res, next) => {
   try {
     const workers = await Worker.findAll()
@@ -330,16 +330,42 @@ router.get('/workers', async (req, res, next) => {
   }
 })
 
-//get single worker
-router.get('/workers/:workerId', async (req, res, next) => {
+router.put('/workers/:workerId/verify', async (req, res, next) => {
   try {
-    const workerId = req.params.workerId
-    const worker = await Worker.findOne({
-      where: {
-        userId: workerId
-      }
-    })
-    res.json(worker)
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
+      await Worker.update(
+        {
+          isVerified: true
+        },
+        {
+          where: {
+            id: req.params.workerId
+          }
+        }
+      )
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(418)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/workers/:workerId/reject', async (req, res, next) => {
+  try {
+    const worker = await Worker.findByPk(req.params.workerId)
+    if (worker) {
+      await Worker.destroy({
+        where: {
+          id: req.params.workerId
+        }
+      })
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(418)
+    }
   } catch (err) {
     next(err)
   }

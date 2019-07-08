@@ -2,13 +2,19 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {AllTickets} from './worker/all-tickets'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email, isResident, isResidentVerified, isOwner, isWorker} = props
+  const {
+    email,
+    isResident,
+    isResidentVerified,
+    isOwner,
+    isWorker,
+    isWorkerVerified
+  } = props
 
   return (
     <div>
@@ -30,12 +36,15 @@ export const UserHome = props => {
         !isResidentVerified && (
           <div>Your residence application is under review</div>
         )}
-      {isWorker && (
+      {isWorkerVerified && (
         <div>
-          {/* <AllTickets /> */}
           <Link to="/tickets">Tickets</Link>
         </div>
       )}
+      {isWorker &&
+        !isWorkerVerified && (
+          <div>Your application has been submitted and will be reviewed!</div>
+        )}
       {!isWorker && (
         <div>
           <Link to="/new-worker/">Become a worker</Link>
@@ -54,7 +63,8 @@ const mapState = state => {
     isResident: state.user.isResident,
     isOwner: state.user.isOwner,
     isWorker: state.user.isWorker,
-    isResidentVerified: state.user.isResidentVerified
+    isResidentVerified: state.user.isResidentVerified,
+    isWorkerVerified: state.user.isWorkerVerified
   }
 }
 
