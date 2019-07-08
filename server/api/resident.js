@@ -228,3 +228,21 @@ router.post('/news', uploader.single('file'), async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/my-building', async (req, res, next) => {
+  try {
+    const building = await Building.findByPk(req.user.buildingId)
+    res.json(building)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/my-apartment', async (req, res, next) => {
+  try {
+    const apartment = await Apartment.findByPk(req.user.apartmentId)
+    res.send(apartment)
+  } catch (err) {
+    next(err)
+  }
+})

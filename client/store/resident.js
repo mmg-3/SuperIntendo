@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import axios from 'axios'
 import history from '../history'
 import {me} from './user'
@@ -12,6 +13,8 @@ const GOT_TICKETS = 'GOT_TICKETS'
 const CREATE_TICKET = 'CREATE_TICKET'
 const GOT_NEWS = 'GOT_NEWS'
 const CREATED_NEWS = 'CREATED_NEWS'
+const GOT_MY_BUILDING = 'GOT_MY_BUILDING'
+const GOT_MY_APARTMENT = 'GOT_MY_APARTMENT'
 /**
  * INITIAL STATE
  */
@@ -20,7 +23,9 @@ const defaultResident = {
   self: {},
   tickets: [],
   news: [],
-  newsMessage: ''
+  newsMessage: '',
+  myBuilding: {},
+  myApartment: {}
 }
 
 /**
@@ -32,6 +37,8 @@ const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const createTicket = ticket => ({type: CREATE_TICKET, ticket})
 const gotNews = news => ({type: GOT_NEWS, news})
 const createdNews = news => ({type: CREATED_NEWS, news})
+const gotMyBuilding = building => ({type: GOT_MY_BUILDING, building})
+const gotMyApartment = apartment => ({type: GOT_MY_APARTMENT, apartment})
 /**
  * THUNK CREATORS
  */
@@ -39,6 +46,24 @@ export const getBuildings = () => async dispatch => {
   try {
     const res = await axios.get('/api/buildings')
     dispatch(gotBuildings(res.data || {}))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getMyBuilding = () => async dispatch => {
+  try {
+    const {data} = await axios.get('api/resident/my-building')
+    dispatch(gotMyBuilding(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const getMyApartment = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/api/resident/my-apartment')
+    dispatch(gotMyApartment(data))
   } catch (err) {
     console.error(err)
   }
@@ -129,6 +154,10 @@ export default function(state = defaultResident, action) {
   switch (action.type) {
     case GOT_BUILDINGS:
       return {...state, buildings: action.buildings}
+    case GOT_MY_BUILDING:
+      return {...state, myBuilding: action.building}
+    case GOT_MY_APARTMENT:
+      return {...state, myApartment: action.apartment}
     case GOT_SELF:
       return {...state, self: action.self}
     case GOT_TICKETS:
