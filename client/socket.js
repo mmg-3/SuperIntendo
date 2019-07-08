@@ -34,6 +34,12 @@ socket.on('connect', () => {
       }
     }
   })
+
+  socket.on('job_taken', () => {
+    if (isWorker(store)) {
+      store.dispatch(getTickets())
+    }
+  })
 })
 
 export default socket

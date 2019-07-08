@@ -1,8 +1,24 @@
 const express = require('express')
 const router = express.Router()
 const {Worker, Ticket} = require('../db/models')
-
-const setIO = () => {}
+// io will be assigned when setIO calleds
+let io
+// so if you need to use socket anywhere,
+// just use
+// const socket = await socketPromise
+// and then you can do socket.emit or whatever
+let socketPromise
+const setIO = IO => {
+  io = IO
+  // promise because socket is inside the callback so we don't have to nest everything
+  socketPromise = new Promise((res, rej) => {
+    io.on('connection', socket => {
+      // if something needs to wait for client
+      // IE. a socket.on(), do it in here
+      res(socket)
+    })
+  })
+}
 module.exports = {router, setIO}
 const isLoggedIn = (req, res, next) => {
   if (req.user && req.user.id) {
@@ -99,7 +115,7 @@ router.get('/tickets/my-tickets', async (req, res, next) => {
     next(err)
   }
 })
-//worker can update status of ticket from assigned to in-progress
+//worker can update status of ticket from approved to in-progress
 router.put('/tickets/select/:ticketId', async (req, res, next) => {
   try {
     const assignedTicket = await Ticket.update(
@@ -114,6 +130,8 @@ router.put('/tickets/select/:ticketId', async (req, res, next) => {
         }
       }
     )
+    const socket = await socketPromise
+    socket.broadcast.emit('job_taken')
     res.status(204).json(assignedTicket)
   } catch (err) {
     next(err)
