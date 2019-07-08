@@ -36,7 +36,6 @@ const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const createNews = news => ({type: CREATE_NEWS, news})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
-// const assignedWorker = worker => ({type: ASSIGNED_WORKER, worker})
 
 /**
  * THUNK CREATORS
@@ -126,6 +125,24 @@ export const getWorkers = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/owner/workers')
     dispatch(gotWorkers(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const verifyWorker = workerId => async dispatch => {
+  try {
+    await axios.put(`/api/owner/workers/${workerId}/verify`)
+    dispatch(getWorkers())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectWorker = workerId => async dispatch => {
+  try {
+    await axios.put(`api/owner/workers/${workerId}/reject`)
+    dispatch(getWorkers())
   } catch (err) {
     console.error(err)
   }
