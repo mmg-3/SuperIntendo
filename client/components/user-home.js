@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {getMyBuilding, getMyApartment} from '../store/resident'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
+  useEffect(() => {
+    props.getMyBuilding()
+    props.getMyApartment()
+  }, {})
   const {
     email,
     isResident,
@@ -18,7 +23,10 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h2>
+        {props.address} - {props.unit}
+      </h2>
+      <h3>Welcome, {email}.</h3>
       {!isResident &&
         !isWorker && (
           <div>
@@ -64,11 +72,18 @@ const mapState = state => {
     isOwner: state.user.isOwner,
     isWorker: state.user.isWorker,
     isResidentVerified: state.user.isResidentVerified,
-    isWorkerVerified: state.user.isWorkerVerified
+    isWorkerVerified: state.user.isWorkerVerified,
+    address: state.resident.myBuilding.address,
+    unit: state.resident.myApartment.unitNumber
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatchToProps = dispatch => ({
+  getMyBuilding: () => dispatch(getMyBuilding()),
+  getMyApartment: () => dispatch(getMyApartment())
+})
+
+export default connect(mapState, mapDispatchToProps)(UserHome)
 
 /**
  * PROP TYPES
