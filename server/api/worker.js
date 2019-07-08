@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const {Worker, Ticket} = require('../db/models')
-module.exports = router
 
+const setIO = () => {}
+module.exports = {router, setIO}
 const isLoggedIn = (req, res, next) => {
   if (req.user && req.user.id) {
     next()
