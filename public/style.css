@@ -6069,11 +6069,17 @@ fieldset[disabled] .select select:hover {
 }
 
 .card {
+  margin-left: 20px;
+  margin-right: 20px;
   background-color: white;
   box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
   color: #4a4a4a;
-  max-width: 100%;
+  max-width: 450px;
   position: relative;
+  /* text-align: center; */
+  /* display: flex; */
+  justify-content: center;
+  flex-flow: row wrap;
 }
 
 .card-header {
@@ -6107,6 +6113,7 @@ fieldset[disabled] .select select:hover {
 .card-image {
   display: block;
   position: relative;
+  height: 250;
 }
 
 .card-content {
