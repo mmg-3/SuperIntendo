@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
 import NewsNew from '../owner/news-new'
+import {VerifiedResidents} from './verified-residents'
 
 export const SingleBuilding = props => {
   useEffect(() => {
-    // console.log(props)
     props.getABuilding(props.match.params.id)
   }, [])
 
@@ -28,7 +28,6 @@ export const SingleBuilding = props => {
   const unverifiedResidents = residents.filter(res => !res.isVerified).sort()
   const numVacant = props.apartments.filter(apt => apt.residents.length > 0)
     .length
-  console.log(residents)
   return (
     <div>
       <div>
@@ -84,24 +83,11 @@ export const SingleBuilding = props => {
             </ul>
           </div>
         )}
-        {verifiedResidents.length > 0 && (
-          <div>
-            <div>
-              <Link to={`/buildings/${props.id}/residents`}>
-                Verified Residents
-              </Link>:
-            </div>
-            <div>
-              <ul>
-                {verifiedResidents.map(resident => (
-                  <li key={resident.id}>
-                    {resident.number} - {resident.firstName} {resident.lastName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        )}
+        <div>
+          <Link to={`/buildings/${props.id}/residents`}>
+            Verified Residents
+          </Link>
+        </div>
       </div>
     </div>
   )
