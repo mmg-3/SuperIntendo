@@ -6,7 +6,8 @@ const {
   Building,
   Apartment,
   Owner,
-  Worker
+  Worker,
+  User
 } = require('../db/models')
 
 let io
@@ -86,6 +87,29 @@ router.post('/buildings', async (req, res, next) => {
   }
 })
 
+router.get('/residents/:residentId', async (req, res, next) => {
+  try {
+    const residentInfo = await Building.findOne({
+      include: {
+        model: Apartment,
+        include: {
+          model: Resident,
+          where: {
+            id: req.params.residentId
+          }
+        }
+      }
+    })
+    if (residentInfo) {
+      res.json(residentInfo)
+    } else {
+      res.sendStatus(418)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 // changes a resident to verified
 router.put('/:residentId/approve', async (req, res, next) => {
   try {
@@ -150,7 +174,7 @@ router.get(
             News,
             {
               model: Apartment,
-              include: [{model: Resident}, {model: Ticket}]
+              include: [{model: Resident, include: User}, {model: Ticket}]
             }
           ]
         })
