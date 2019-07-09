@@ -4,19 +4,15 @@ import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
-import OwnerNews from './components/owner/news'
 import SingleBuilding from './components/owner/single-building'
-import AdminTickets from './components/owner/tickets'
+import Workers from './components/owner/workers'
 import NewResident from './components/resident/new-resident'
 import ResidentNews from './components/resident/news'
 import ResidentProfile from './components/resident/profile'
 import ResidentTickets from './components/resident/tickets'
 import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
-import Workers from './components/owner/workers'
 import {me} from './store'
-import VerifiedResidents from './components/owner/verified-residents'
-import SingleResident from './components/owner/single-resident'
 
 /**
  * COMPONENT
@@ -48,23 +44,7 @@ class Routes extends Component {
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/workers" exact component={Workers} />
-                <Route path="/buildings/:id" exact component={SingleBuilding} />
-                <Route
-                  path="/buildings/:id/residents"
-                  exact
-                  component={VerifiedResidents}
-                />
-                <Route
-                  path="/buildings/:id/residents/:residentId"
-                  exact
-                  component={SingleResident}
-                />
-                <Route
-                  path="/buildings/:id/tickets"
-                  exact
-                  component={AdminTickets}
-                />
-                <Route path="/buildings/:id/news" exact component={OwnerNews} />
+                <Route path="/buildings/:id" component={SingleBuilding} />
               </Switch>
             )}
             {isResidentVerified && (

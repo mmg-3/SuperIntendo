@@ -483,7 +483,7 @@ function makeResidents(users, apartments) {
       phoneNumber: '9172831320',
       photoUrl:
         'https://media.licdn.com/dms/image/C5603AQGBchSRLFF8IA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=zCnYUwDEFzs9415bQfgA1p3hnRlrK5PpgH3z1X-B82Q',
-      address1: '1774 74th Street ',
+      address1: '1774 74th Street',
       address2: '',
       city: 'Brooklyn',
       state: 'NY',
