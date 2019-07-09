@@ -19,7 +19,10 @@ const News = props => {
   return (
     <div>
       <NewsNew />
-      {props.news.map(news => <NewsPost key={news.id} {...news} />)}
+      <br />
+      <div className="columns is-three-quarters-mobile">
+        {props.news.map(news => <NewsPost key={news.id} {...news} />)}
+      </div>
     </div>
   )
 }
