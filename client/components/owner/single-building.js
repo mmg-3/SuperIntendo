@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
-import NewsNew from '../owner/news-new'
-import {VerifiedResidents} from './verified-residents'
+import '../css/owner/single-building.scss'
+import SingleBuildingHeader from './single-building-header'
+import SingleBuildingResidents from './single-building-residents'
+import SingleBuildingVacancy from './single-building-vacancy'
+import Tickets from './tickets'
 
 export const SingleBuilding = props => {
   useEffect(() => {
@@ -13,6 +16,7 @@ export const SingleBuilding = props => {
   if (!props.id) {
     return <div>Loading...</div>
   }
+
   const tickets = props.apartments
     .flatMap(apartment => apartment.tickets)
     .filter(ticket => ['pending', 'confirmed'].includes(ticket.status))
@@ -30,65 +34,29 @@ export const SingleBuilding = props => {
     .length
   return (
     <div>
-      <div>
-        {props.address} - {numVacant} vacant apartment(s)
-      </div>
-      <div className="ticket-container">
-        <div>
-          <Link to={`/buildings/${props.id}/tickets`}>Tickets</Link>:
-        </div>
-        <div>
-          <ul>
-            {tickets.map(ticket => (
-              <li key={ticket.id}>
-                {ticket.status} - #{ticket.id} {ticket.issue}@{ticket.location}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <Link to={`/buildings/${props.id}/news`}>News</Link>:
-          <NewsNew selectedBuilding={props} />
-        </div>
-        <div>
-          <ul>
-            {props.news.map(news => (
-              <li key={news.id}>
-                {news.title} - {news.body}
-              </li>
-            ))}
-          </ul>
-        </div>
-        {unverifiedResidents.length > 0 && (
-          <div>
-            Unverified Residents
-            <ul>
-              {unverifiedResidents.map(resident => (
-                <li key={resident.id}>
-                  {resident.number} - {resident.firstName} {resident.lastName} -{' '}
-                  <button
-                    type="button"
-                    onClick={() => props.verifyUser(props.id, resident.id)}
-                  >
-                    Approve
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => props.rejectUser(props.id, resident.id)}
-                  >
-                    Reject
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <div>
-          <Link to={`/buildings/${props.id}/residents`}>
-            Verified Residents
-          </Link>
-        </div>
-      </div>
+      <SingleBuildingHeader id={props.id} history={props.history} />
+      <Switch>
+        <Route
+          path="/buildings/:id/residents"
+          component={() => (
+            <SingleBuildingResidents
+              verifiedResidents={verifiedResidents}
+              unverifiedResidents={unverifiedResidents}
+              id={props.id}
+              verifyUser={props.verifyUser}
+              rejectUser={props.rejectUser}
+              getABuilding={props.getABuilding}
+            />
+          )}
+        />
+        <Route path="/buildings/:id/tickets" component={Tickets} />
+        <Route path="/buildings/:id/tickets" component={Tickets} />
+      </Switch>
+      <SingleBuildingVacancy
+        address={props.address}
+        numVacant={numVacant}
+        apartments={props.apartments}
+      />
     </div>
   )
 }

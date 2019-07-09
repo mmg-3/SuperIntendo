@@ -16,20 +16,38 @@ export const AllBuildings = props => {
   return (
     <div>
       <BuildingForm handleSubmit={props.createBuilding} />
-      <ul>
+      <div className="columns is-three-quarters-mobile">
         {props.buildings.map(building => (
-          <BuildingListItem key={building.id} {...building} />
+          <div className="column">
+            <BuildingListItem key={building.id} {...building} />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
 
 const BuildingListItem = props => {
   return (
-    <li>
-      <Link to={`/buildings/${props.id}`}>{props.address}</Link>
-    </li>
+    <Link to={`/buildings/${props.id}`}>
+      <div className="card">
+        <div className="card-image">
+          <figure className="image is-4by3">
+            <img src={props.buildingUrl} alt="Placeholder image" />
+          </figure>
+        </div>
+        <div className="card-content">
+          <div className="media">
+            <div className="media-content">
+              <p className="title is-5">{props.address}</p>
+              <p className="subtitle is-6">
+                {props.city} {props.state} {props.zipcode}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 }
 
