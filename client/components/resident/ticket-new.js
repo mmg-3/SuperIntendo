@@ -34,7 +34,7 @@ const TicketNew = props => {
 
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit} className="form-ticket">
         <div className="field is-horizontal">
           <div className="field-label is-normal">
             <label className="label">Where</label>
@@ -62,7 +62,7 @@ const TicketNew = props => {
         </div>
         <div className="field is-horizontal">
           <div className="field-label">
-            <label className="label">Neighbor?</label>
+            <label className="label">Neighbor</label>
           </div>
           <div className="field-body">
             <div className="field is-narrow">
@@ -75,14 +75,15 @@ const TicketNew = props => {
                     value={neighbor}
                     onChange={e => setNeighbor(e.target.checked)}
                   />
-                  Yes
+                  {` `}Yes
                 </label>
                 <label className="radio">
                   <input type="radio" name="member" />
-                  No
+                  {` `} No
                 </label>
               </div>
             </div>
+            <p className="help">does involve the apartment next to yours?</p>
           </div>
         </div>
         <div className="field is-horizontal">
@@ -104,8 +105,70 @@ const TicketNew = props => {
             </div>
           </div>
         </div>
-        <div className="field is-horizontal" />
-        <div className="field is-horizontal" />
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Issue</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <textarea
+                  className="textarea"
+                  placeholder="please describe the issue in detail"
+                  value={issue || ''}
+                  onChange={makeOnChange(setIssue)}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Photo</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <div className="file is-boxed">
+                  <label className="file-label">
+                    <input
+                      className="file-input"
+                      name="file"
+                      label="Photo"
+                      type="file"
+                      accept="image/*"
+                      multiple={false}
+                      onChange={e => setFile(e.target.files[0])}
+                    />
+                    <span className="file-cta">
+                      <span className="file-icon">
+                        <i className="fas fa-upload" />
+                      </span>
+                      <span className="file-label">Choose a file…</span>
+                    </span>
+                    <span className="file-name">
+                      need to enable file name display
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="field is-horizontal">
+          <div className="field-label">
+            <br />
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <button className="button is-primary" type="submit">
+                  Submit Ticket
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   )
