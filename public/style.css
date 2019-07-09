@@ -11456,3 +11456,14 @@ li {
 .add-new-building-address {
   min-width: 200px;
 }
+
+.page-tab {
+  margin-top: 20px;
+}
+
+.body {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
