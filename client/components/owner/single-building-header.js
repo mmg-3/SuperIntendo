@@ -1,5 +1,8 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-const SingleBuildingHeader = () => (
+import {Link} from 'react-router-dom'
+
+const SingleBuildingHeader = props => (
   <div className="page-tab">
     <div className="tabs is-small">
       <ul>
@@ -12,20 +15,20 @@ const SingleBuildingHeader = () => (
           </a>
         </li>
         <li className="is-active">
-          <a>
+          <Link to={`/buildings/${props.id}/residents`}>
             <span className="icon is-small">
               <i className="fas fa-users" aria-hidden="true" />
             </span>
             <span>Residents</span>
-          </a>
+          </Link>
         </li>
         <li>
-          <a>
+          <Link to={`/buildings/${props.id}/tickets`}>
             <span className="icon is-small">
               <i className="fas fa-clipboard-check" aria-hidden="true" />
             </span>
             <span>Tickets</span>
-          </a>
+          </Link>
         </li>
         <li>
           <a>
@@ -40,4 +43,7 @@ const SingleBuildingHeader = () => (
   </div>
 )
 
+SingleBuildingHeader.propTypes = {
+  id: PropTypes.number.isRequired
+}
 export default SingleBuildingHeader
