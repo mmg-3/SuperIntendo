@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {makeOnChange, TextField} from '../utils'
-import {updateProfile} from '../../store/resident'
 import {connect} from 'react-redux'
+import {updateProfile} from '../../store/resident'
+import {makeOnChange} from '../utils'
 
 export const ProfileForm = props => {
   const [firstName, setFirstName] = useState(props.firstName)
@@ -43,7 +43,6 @@ export const ProfileForm = props => {
                 <strong>
                   {props.firstName} {props.lastName}
                 </strong>{' '}
-                <small>@Apt:{props.unit}</small>
                 <br />
                 You could update your contact info. Add an address if your
                 mailing address is different.
