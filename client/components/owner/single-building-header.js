@@ -38,7 +38,7 @@ const SingleBuildingHeader = props => {
             </Link>
           </li>
           <li className={newsClass}>
-            <Link to={`buildings/${props.id}/news`}>
+            <Link to={`/buildings/${props.id}/news`}>
               <span className="icon is-small">
                 <i className="far fa-newspaper" aria-hidden="true" />
               </span>

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Route, Switch} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
 import '../css/owner/single-building.scss'
+import News from './news'
 import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
 import SingleBuildingVacancy from './single-building-vacancy'
@@ -50,7 +51,7 @@ export const SingleBuilding = props => {
           )}
         />
         <Route path="/buildings/:id/tickets" component={Tickets} />
-        <Route path="/buildings/:id/tickets" component={Tickets} />
+        <Route path="/buildings/:id/news" component={News} />
       </Switch>
       <SingleBuildingVacancy
         address={props.address}

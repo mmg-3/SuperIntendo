@@ -171,7 +171,7 @@ router.get(
       res.json(
         await Building.findByPk(req.params.buildingId, {
           include: [
-            News,
+            {model: News, include: Resident},
             {
               model: Apartment,
               include: [{model: Resident, include: User}, {model: Ticket}]
@@ -279,7 +279,7 @@ router.post(
             buildingId: req.params.buildingId
           },
           {
-            include: [Owner]
+            include: [{model: Owner}]
           }
         )
       )
