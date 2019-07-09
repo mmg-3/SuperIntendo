@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import axios from 'axios'
 
 /**
@@ -10,7 +11,6 @@ const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const CREATE_NEWS = 'CREATE_NEWS'
 const GOT_WORKERS = 'GOT_WORKERS'
-// const ASSIGNED_WORKER = 'ASSIGNED_WORKER'
 
 /**
  * INITIAL STATE
@@ -20,7 +20,8 @@ const initialState = {
   news: [],
   tickets: [],
   selectedBuilding: {},
-  workers: []
+  workers: [],
+  resident: {}
 }
 
 const BASE_BUILDINGS_URL = '/api/owner/buildings/'

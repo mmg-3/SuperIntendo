@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
-import NewsNew from '../owner/news-new'
-import SingleBuildingVacancy from './single-building-vacancy'
 import SingleBuildingResidents from './single-building-residents'
+import SingleBuildingVacancy from './single-building-vacancy'
 
 export const SingleBuilding = props => {
   useEffect(() => {
-    // console.log(props)
     props.getABuilding(props.match.params.id)
   }, [])
 
@@ -30,7 +27,6 @@ export const SingleBuilding = props => {
   const unverifiedResidents = residents.filter(res => !res.isVerified).sort()
   const numVacant = props.apartments.filter(apt => apt.residents.length > 0)
     .length
-  console.log(residents)
   return (
     <div>
       <SingleBuildingVacancy

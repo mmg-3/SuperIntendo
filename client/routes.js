@@ -15,6 +15,8 @@ import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
 import Workers from './components/owner/workers'
 import {me} from './store'
+import VerifiedResidents from './components/owner/verified-residents'
+import SingleResident from './components/owner/single-resident'
 
 /**
  * COMPONENT
@@ -47,6 +49,16 @@ class Routes extends Component {
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/workers" exact component={Workers} />
                 <Route path="/buildings/:id" exact component={SingleBuilding} />
+                <Route
+                  path="/buildings/:id/residents"
+                  exact
+                  component={VerifiedResidents}
+                />
+                <Route
+                  path="/buildings/:id/residents/:residentId"
+                  exact
+                  component={SingleResident}
+                />
                 <Route
                   path="/buildings/:id/tickets"
                   exact

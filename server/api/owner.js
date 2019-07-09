@@ -6,8 +6,11 @@ const {
   Building,
   Apartment,
   Owner,
-  Worker
+  Worker,
+  User
 } = require('../db/models')
+
+let io
 
 const isLoggedIn = (req, res, next) => {
   if (req.user && req.user.id) {
@@ -49,7 +52,8 @@ const buildingBelongsTo = (req, res, next) => {
     next(err)
   }
 }
-module.exports = router
+const setIO = IO => (io = IO)
+module.exports = {router, setIO}
 
 router.use(isLoggedIn)
 router.use(isOwner)
@@ -78,6 +82,29 @@ router.post('/buildings', async (req, res, next) => {
         ownerId: req.user.ownerId
       })
     )
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/residents/:residentId', async (req, res, next) => {
+  try {
+    const residentInfo = await Building.findOne({
+      include: {
+        model: Apartment,
+        include: {
+          model: Resident,
+          where: {
+            id: req.params.residentId
+          }
+        }
+      }
+    })
+    if (residentInfo) {
+      res.json(residentInfo)
+    } else {
+      res.sendStatus(418)
+    }
   } catch (err) {
     next(err)
   }
@@ -147,7 +174,7 @@ router.get(
             News,
             {
               model: Apartment,
-              include: [{model: Resident}, {model: Ticket}]
+              include: [{model: Resident, include: User}, {model: Ticket}]
             }
           ]
         })
@@ -182,6 +209,10 @@ router.put('/tickets/:ticketId/approve', async (req, res, next) => {
         }
       }
     )
+    // we only care about emitting if we have an io instance
+    if (io) {
+      io.emit('job_open')
+    }
     res.sendStatus(204)
   } catch (err) {
     next(err)
