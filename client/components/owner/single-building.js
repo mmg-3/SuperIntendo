@@ -31,8 +31,7 @@ export const SingleBuilding = props => {
     .flat()
   const verifiedResidents = residents.filter(res => res.isVerified).sort()
   const unverifiedResidents = residents.filter(res => !res.isVerified).sort()
-  const numVacant = props.apartments.filter(apt => apt.residents.length > 0)
-    .length
+  const vacancies = props.apartments.filter(apt => apt.residents.length === 0)
   return (
     <div>
       <SingleBuildingHeader id={props.id} history={props.history} />
@@ -52,12 +51,17 @@ export const SingleBuilding = props => {
         />
         <Route path="/buildings/:id/tickets" component={Tickets} />
         <Route path="/buildings/:id/news" component={News} />
+        <Route
+          path="*"
+          component={() => (
+            <SingleBuildingVacancy
+              address={props.address}
+              vacancies={vacancies}
+              apartments={props.apartments}
+            />
+          )}
+        />
       </Switch>
-      <SingleBuildingVacancy
-        address={props.address}
-        numVacant={numVacant}
-        apartments={props.apartments}
-      />
     </div>
   )
 }
