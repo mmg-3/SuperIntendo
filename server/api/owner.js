@@ -185,10 +185,14 @@ router.get(
   }
 )
 
-//see available workers for assignment
-router.get('/tickets/:ticketId/assign', async (req, res, next) => {
+router.get('/tickets', async (req, res, next) => {
   try {
-    res.json(await Worker.findAll())
+    const tickets = await Ticket.findAll({
+      where: {
+        ownerId: req.user.ownerId
+      }
+    })
+    res.json(tickets)
   } catch (err) {
     next(err)
   }

@@ -6,8 +6,8 @@ import '../css/owner/single-building.scss'
 import News from './news'
 import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
+import Tickets from './single-building-tickets'
 import SingleBuildingVacancy from './single-building-vacancy'
-import Tickets from './tickets'
 
 export const SingleBuilding = props => {
   useEffect(() => {
