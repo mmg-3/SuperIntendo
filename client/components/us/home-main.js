@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import './scss/core.scss'
 
 const MainHome = props => {
   return (
@@ -15,16 +16,16 @@ const MainHome = props => {
                 <h2 className="subtitle is-5 is-muted">
                   perform all the duties of a superintendent with few clicks
                 </h2>
-                <p>
+                <blockquote>
                   <a className="button cta rounded primary-btn raised">
                     Get Started
                   </a>
-                </p>
+                </blockquote>
               </div>
               <div className="column is-5 is-offset-1">
                 <figure className="image is-4by3">
                   <img
-                    src="assets/images/illustrations/worker.svg"
+                    src="./images/illustrations/worker.svg"
                     alt="Description"
                   />
                 </figure>
@@ -41,7 +42,41 @@ const MainHome = props => {
                   <a>
                     <img
                       className="partner-logo"
-                      src="https://www.fullstackacademy.com/images/fa-logo@2x.png"
+                      src="/images/illustrations/icons/fullstack-academy.png"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <img
+                      className="partner-logo"
+                      src="/images/illustrations/icons/react.png"
+                    />
+                  </a>
+                </li>
+
+                <li>
+                  <a>
+                    <img
+                      className="partner-logo"
+                      src="/images/illustrations/icons/postgresql-logo.png"
+                    />
+                  </a>
+                </li>
+
+                <li>
+                  <a>
+                    <img
+                      className="partner-logo"
+                      src="/images/illustrations/icons/redux.png"
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a>
+                    <img
+                      className="partner-logo"
+                      src="/images/illustrations/icons/bulma-logo.png"
                     />
                   </a>
                 </li>
@@ -67,15 +102,15 @@ const MainHome = props => {
                   data-animation="fadeInLeft"
                 >
                   <div className="card-title">
-                    <h4>Admin</h4>
+                    <h4>Owner</h4>
                   </div>
                   <div className="card-icon">
-                    <img src="assets/images/illustrations/icons/mouse-globe.svg" />
+                    <img src="/images/illustrations/icons/owner.svg" />
                   </div>
                   <div className="card-text">
-                    <p>
+                    <blockquote>
                       For property manager to manage buildings and residents
-                    </p>
+                    </blockquote>
                   </div>
                   <div className="card-action">
                     <a
@@ -96,13 +131,13 @@ const MainHome = props => {
                     <h4>Residents</h4>
                   </div>
                   <div className="card-icon">
-                    <img src="assets/images/illustrations/icons/laptop-cloud.svg" />
+                    <img src="/images/illustrations/icons/resident.svg" />
                   </div>
                   <div className="card-text">
-                    <p>
+                    <blockquote>
                       For tenant to inquire maintainances, access community news
                       board, and contact property manager
-                    </p>
+                    </blockquote>
                   </div>
                   <div className="card-action">
                     <a
@@ -123,13 +158,13 @@ const MainHome = props => {
                     <h4>Worker</h4>
                   </div>
                   <div className="card-icon">
-                    <img src="assets/images/illustrations/icons/plug-cloud.svg" />
+                    <img src="/images/illustrations/icons/worker.svg" />
                   </div>
                   <div className="card-text">
-                    <p>
+                    <blockquote>
                       For contractor to find tasks, work on assignments, and get
                       paid
-                    </p>
+                    </blockquote>
                   </div>
                   <div className="card-action">
                     <a
@@ -161,13 +196,13 @@ const MainHome = props => {
             <div className="column is-8 mt-60">
               <article className="media icon-box">
                 <figure className="media-left">
-                  <p className="image">
-                    <img src="assets/images/illustrations/icons/laptop-globe.svg" />
-                  </p>
+                  <blockquote className="image">
+                    <img src="/images/illustrations/icons/laptop-globe.svg" />
+                  </blockquote>
                 </figure>
                 <div className="media-content mt-50">
                   <div className="content">
-                    <p>
+                    <blockquote>
                       <span className="icon-box-title">
                         Seamless Integration on Cloud
                       </span>
@@ -176,38 +211,38 @@ const MainHome = props => {
                         on the cloud. no more loosing important files. track all
                         history online.
                       </span>
-                    </p>
+                    </blockquote>
                   </div>
                 </div>
               </article>
               <article className="media icon-box">
                 <figure className="media-left">
-                  <p className="image">
-                    <img src="assets/images/illustrations/icons/doc-sync.svg" />
-                  </p>
+                  <blockquote className="image">
+                    <img src="/images/illustrations/icons/doc-sync.svg" />
+                  </blockquote>
                 </figure>
                 <div className="media-content mt-50">
                   <div className="content">
-                    <p>
+                    <blockquote>
                       <span className="icon-box-title">One Place for All</span>
                       <span className="icon-box-text">
                         manage tenants, store building info, track maintainance
                         tasks, contact contractor, pay for tasks done ... this
                         is the ultimate place for all your needs
                       </span>
-                    </p>
+                    </blockquote>
                   </div>
                 </div>
               </article>
               <article className="media icon-box">
                 <figure className="media-left">
-                  <p className="image">
-                    <img src="assets/images/illustrations/icons/mobile-feed.svg" />
-                  </p>
+                  <blockquote className="image">
+                    <img src="/images/illustrations/icons/mobile-feed.svg" />
+                  </blockquote>
                 </figure>
                 <div className="media-content mt-50">
                   <div className="content">
-                    <p>
+                    <blockquote>
                       <span className="icon-box-title">
                         Cross Device Synchronisation
                       </span>
@@ -217,7 +252,7 @@ const MainHome = props => {
                         status or update tenant info from the comfort of your
                         office or on the go.
                       </span>
-                    </p>
+                    </blockquote>
                   </div>
                 </div>
               </article>
@@ -233,7 +268,7 @@ const MainHome = props => {
               <div className="has-text-centered">
                 <img
                   className="pushed-image"
-                  src="assets/images/illustrations/mockups/app-mockup.png"
+                  src="/images/illustrations/mockups/app-mockup.png"
                 />
               </div>
             </div>
@@ -244,11 +279,14 @@ const MainHome = props => {
             <h3 className="subtitle is-5 is-muted">to rule them all</h3>
           </div>
 
-          <p className="has-text-centered mt-20">
-            <a className="button cta is-large rounded secondary-btn raised">
+          <blockquote className="has-text-centered mt-20">
+            <a
+              className="button cta is-large rounded secondary-btn raised"
+              href="#signup"
+            >
               Get Started
             </a>
-          </p>
+          </blockquote>
         </div>
       </section>
 
@@ -257,8 +295,7 @@ const MainHome = props => {
           <div className="title-wrapper has-text-centered">
             <h2 className="title is-2 light-text is-spaced">Meet the Team</h2>
             <h3 className="subtitle is-5 light-text">
-              We are the Caulipizzas, the full-stack developers behind this
-              product.
+              We are the Caulipizzas, full-stack developers.
             </h3>
           </div>
 
@@ -276,7 +313,7 @@ const MainHome = props => {
                       src="https://media.licdn.com/dms/image/C5603AQHmHAcBEZYuQw/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=rgSo-7vj5em4TFHK-Xd5YWoDWpmLiNp18JCeOGh2zB0"
                       alt=""
                     />
-                    <h5>Constance Kang</h5>
+                    <h5>Constance K.</h5>
                     <span>@republicofkang</span>
                   </div>
                 </figure>
@@ -293,7 +330,7 @@ const MainHome = props => {
                       src="https://media.licdn.com/dms/image/C4D03AQGkhD1zOz60Kw/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=JOBV_Rj3tY2jfjYFf_GMnHRN9IypkDX-9R3xFsBoE3Q"
                       alt=""
                     />
-                    <h5>Manuel Bugallo</h5>
+                    <h5>Manuel B.</h5>
                     <span>@marvinody</span>
                   </div>
                 </figure>
@@ -310,7 +347,7 @@ const MainHome = props => {
                       src="https://media.licdn.com/dms/image/C4D03AQHZ9x4BpHXXKA/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=gMAJOo-vUK7IdQ3LZgpB0Qu978Ph5YSuBs_D5gbAf7M"
                       alt=""
                     />
-                    <h5>Vivian Tong</h5>
+                    <h5>Vivian T.</h5>
                     <span>@vivtong</span>
                   </div>
                 </figure>
