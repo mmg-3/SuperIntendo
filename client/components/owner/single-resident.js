@@ -16,22 +16,8 @@ export const SingleResident = props => {
     .flat()
     .filter(res => +res.id === +props.match.params.residentId)[0]
 
-  const phoneNumber = phoneStr => {
-    return (
-      phoneStr[0] +
-      phoneStr[1] +
-      phoneStr[2] +
-      '-' +
-      phoneStr[3] +
-      phoneStr[4] +
-      phoneStr[5] +
-      '-' +
-      phoneStr[6] +
-      phoneStr[7] +
-      phoneStr[8] +
-      phoneStr[9]
-    )
-  }
+  const phoneNumber = phoneStr =>
+    phoneStr.slice(0, 3) + '-' + phoneStr.slice(3, 6) + '-' + phoneStr.slice(6)
 
   const alternativeAddress = address => {
     if (address.length > 0) {

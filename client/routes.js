@@ -5,6 +5,7 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
+import OwnerTickets from './components/owner/tickets'
 import Workers from './components/owner/workers'
 import NewResident from './components/resident/new-resident'
 import ResidentNews from './components/resident/news'
@@ -49,6 +50,7 @@ class Routes extends Component {
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/workers" exact component={Workers} />
                 <Route path="/buildings/:id" component={SingleBuilding} />
+                <Route path="/tickets" exact component={OwnerTickets} />
               </Switch>
             )}
             {isResidentVerified && (

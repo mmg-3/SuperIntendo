@@ -267,22 +267,6 @@ describe('Owner routes', () => {
         })
       })
       describe('/api/owner/tickets', () => {
-        describe('GET /api/owner/tickets/:ticketId/assign', () => {
-          it('should get available workers for an assignment', async () => {
-            const agent = await login(ownerData)
-            const res = await agent
-              .get(`/api/owner/tickets/${ticket1.id}/assign`)
-              .expect(200)
-
-            expect(res.body).to.be.instanceOf(Array)
-            expect(res.body).to.have.lengthOf(2)
-
-            expect(res.body.map(t => t.firstName)).to.have.members([
-              worker1.firstName,
-              worker2.firstName
-            ])
-          })
-        })
         describe('PUT /tickets/:ticketId/close', () => {
           it('should close a ticket if status is confirmed', async () => {
             const agent = await login(ownerData)
