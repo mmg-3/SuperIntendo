@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
+import '../css/owner/single-building.scss'
+import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
 import SingleBuildingVacancy from './single-building-vacancy'
-
 export const SingleBuilding = props => {
   useEffect(() => {
     props.getABuilding(props.match.params.id)
@@ -29,6 +30,7 @@ export const SingleBuilding = props => {
     .length
   return (
     <div>
+      <SingleBuildingHeader />
       <SingleBuildingVacancy
         address={props.address}
         numVacant={numVacant}
