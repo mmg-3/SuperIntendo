@@ -48,7 +48,7 @@ export const SingleBuildingResidents = props => {
           <div>
             <h3 className="title is-6">
               Unverified Residents{' '}
-              <span className="tag is-warning">Warning</span>
+              <span className="tag is-warning">take action</span>
             </h3>
 
             <table className="table">

@@ -50,7 +50,7 @@ export const BuildingForm = props => {
                   <input
                     className="input"
                     type="text"
-                    placeholder="City"
+                    placeholder="city"
                     value={city}
                     onChange={makeOnChange(setCity)}
                   />
@@ -63,7 +63,7 @@ export const BuildingForm = props => {
                   <input
                     className="input"
                     type="text"
-                    placeholder="State"
+                    placeholder="state"
                     value={state}
                     onChange={makeOnChange(setState)}
                   />
@@ -76,7 +76,7 @@ export const BuildingForm = props => {
                   <input
                     className="input"
                     type="text"
-                    placeholder="Zipcode"
+                    placeholder="zipcode"
                     value={zipcode}
                     onChange={makeOnChange(setZipcode)}
                   />
