@@ -9,11 +9,11 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
     <div>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/">
+          <Link className="navbar-item" to="/">
             <img src="https://serving.photos.photobox.com/417870350dcbba6bc5b20e24b53c78ce07974175fdc30435a49d5a584bf5397931b9f0af.jpg" />
-          </a>
+          </Link>
 
-          <a
+          <Link
             role="button"
             className="navbar-burger burger"
             aria-label="menu"
@@ -23,48 +23,50 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
-          </a>
+          </Link>
         </div>
         {isLoggedIn &&
           isOwner && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <a className="navbar-item">Home</a>
+                <Link className="navbar-item">Home</Link>
 
-                <a className="navbar-item" href="/buildings">
+                <Link className="navbar-item" to="/buildings">
                   Buildings
-                </a>
+                </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link">Tickets</a>
+                  <Link to="/tickets" className="navbar-link">
+                    Tickets
+                  </Link>
 
                   <div className="navbar-dropdown">
-                    <a className="navbar-item">Actions Needed</a>
-                    <a className="navbar-item">Closed Tickets</a>
+                    <Link className="navbar-item">Actions Needed</Link>
+                    <Link className="navbar-item">Closed Tickets</Link>
                   </div>
                 </div>
 
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link">Users</a>
+                  <Link className="navbar-link">Users</Link>
 
                   <div className="navbar-dropdown">
-                    <a className="navbar-item">Residents</a>
-                    <a className="navbar-item">Workers</a>
-                    <a className="navbar-item">Admin</a>
+                    <Link className="navbar-item">Residents</Link>
+                    <Link className="navbar-item">Workers</Link>
+                    <Link className="navbar-item">Admin</Link>
                   </div>
                 </div>
-                <a className="navbar-item">FAQs</a>
+                <Link className="navbar-item">FAQs</Link>
               </div>
 
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <a
+                    <Link
                       className="button is-light"
-                      href="#"
+                      to="#"
                       onClick={handleClick}
                     >
                       Log out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -74,31 +76,31 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isResident && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <a className="navbar-item">Home</a>
+                <Link className="navbar-item">Home</Link>
 
-                <a className="navbar-item">My Account</a>
+                <Link className="navbar-item">My Account</Link>
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link">Tickets</a>
+                  <Link className="navbar-link">Tickets</Link>
 
                   <div className="navbar-dropdown">
-                    <a className="navbar-item">Current Ticket</a>
-                    <a className="navbar-item">Archived Tickets</a>
+                    <Link className="navbar-item">Current Ticket</Link>
+                    <Link className="navbar-item">Archived Tickets</Link>
                   </div>
                 </div>
-                <a className="navbar-item">News</a>
-                <a className="navbar-item">FAQs</a>
+                <Link className="navbar-item">News</Link>
+                <Link className="navbar-item">FAQs</Link>
               </div>
 
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <a
+                    <Link
                       className="button is-light"
-                      href="#"
+                      to="#"
                       onClick={handleClick}
                     >
                       Log out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -108,31 +110,31 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isWorker && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <a className="navbar-item">Home</a>
+                <Link className="navbar-item">Home</Link>
 
-                <a className="navbar-item">My Account</a>
+                <Link className="navbar-item">My Account</Link>
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <a className="navbar-link">Tickets</a>
+                  <Link className="navbar-link">Tickets</Link>
 
                   <div className="navbar-dropdown">
-                    <a className="navbar-item">Current Ticket</a>
-                    <a className="navbar-item">Archived Tickets</a>
+                    <Link className="navbar-item">Current Ticket</Link>
+                    <Link className="navbar-item">Archived Tickets</Link>
                   </div>
                 </div>
-                <a className="navbar-item">Payment</a>
-                <a className="navbar-item">FAQs</a>
+                <Link className="navbar-item">Payment</Link>
+                <Link className="navbar-item">FAQs</Link>
               </div>
 
               <div className="navbar-end">
                 <div className="navbar-item">
                   <div className="buttons">
-                    <a
+                    <Link
                       className="button is-light"
-                      href="#"
+                      to="#"
                       onClick={handleClick}
                     >
                       Log out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -141,24 +143,24 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
         {!isLoggedIn && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">
-              <a className="navbar-item">Home</a>
+              <Link className="navbar-item">Home</Link>
 
-              <a className="navbar-item">Pricing</a>
+              <Link className="navbar-item">Pricing</Link>
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">Documentation</a>
+                <Link className="navbar-link">Documentation</Link>
 
                 <div className="navbar-dropdown">
-                  <a className="navbar-item">For Owner</a>
-                  <a className="navbar-item">For Resident</a>
-                  <a className="navbar-item">For Worker</a>
+                  <Link className="navbar-item">For Owner</Link>
+                  <Link className="navbar-item">For Resident</Link>
+                  <Link className="navbar-item">For Worker</Link>
                 </div>
               </div>
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">More</a>
+                <Link className="navbar-link">More</Link>
 
                 <div className="navbar-dropdown">
-                  <a className="navbar-item">About Us</a>
-                  <a className="navbar-item">Contact</a>
+                  <Link className="navbar-item">About Us</Link>
+                  <Link className="navbar-item">Contact</Link>
                 </div>
               </div>
             </div>
@@ -166,12 +168,12 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
             <div className="navbar-end">
               <div className="navbar-item">
                 <div className="buttons">
-                  <a className="button is-primary" href="/signup">
+                  <Link className="button is-primary" to="/signup">
                     <strong>Sign up</strong>
-                  </a>
-                  <a className="button is-light" href="/login">
+                  </Link>
+                  <Link className="button is-light" to="/login">
                     Log in
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

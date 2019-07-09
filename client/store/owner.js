@@ -115,7 +115,7 @@ export const createNewsThunk = (buildingId, news) => async dispatch => {
 
 export const getTickets = () => async dispatch => {
   try {
-    const res = await axios.get(BASE_BUILDINGS_URL + 'tickets')
+    const res = await axios.get('/api/owner/tickets')
     dispatch(gotTickets(res.data || []))
   } catch (err) {
     console.error(err)

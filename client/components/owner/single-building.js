@@ -3,10 +3,11 @@ import {connect} from 'react-redux'
 import {Route, Switch} from 'react-router-dom'
 import {getABuilding, rejectUser, verifyUser} from '../../store/owner'
 import '../css/owner/single-building.scss'
+import News from './news'
 import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
+import Tickets from './single-building-tickets'
 import SingleBuildingVacancy from './single-building-vacancy'
-import Tickets from './tickets'
 
 export const SingleBuilding = props => {
   useEffect(() => {
@@ -30,8 +31,7 @@ export const SingleBuilding = props => {
     .flat()
   const verifiedResidents = residents.filter(res => res.isVerified).sort()
   const unverifiedResidents = residents.filter(res => !res.isVerified).sort()
-  const numVacant = props.apartments.filter(apt => apt.residents.length > 0)
-    .length
+  const vacancies = props.apartments.filter(apt => apt.residents.length === 0)
   return (
     <div>
       <SingleBuildingHeader id={props.id} history={props.history} />
@@ -50,13 +50,18 @@ export const SingleBuilding = props => {
           )}
         />
         <Route path="/buildings/:id/tickets" component={Tickets} />
-        <Route path="/buildings/:id/tickets" component={Tickets} />
+        <Route path="/buildings/:id/news" component={News} />
+        <Route
+          path="*"
+          component={() => (
+            <SingleBuildingVacancy
+              address={props.address}
+              vacancies={vacancies}
+              apartments={props.apartments}
+            />
+          )}
+        />
       </Switch>
-      <SingleBuildingVacancy
-        address={props.address}
-        numVacant={numVacant}
-        apartments={props.apartments}
-      />
     </div>
   )
 }

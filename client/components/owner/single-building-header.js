@@ -7,19 +7,23 @@ const SingleBuildingHeader = props => {
 
   const residentsClass = pathname.includes('residents') ? 'is-active' : '',
     newsClass = pathname.includes('news') ? 'is-active' : '',
-    ticketsClass = pathname.includes('tickets') ? 'is-active' : ''
+    ticketsClass = pathname.includes('tickets') ? 'is-active' : '',
+    homeClass =
+      residentsClass === '' && newsClass === '' && ticketsClass === ''
+        ? 'is-active'
+        : ''
 
   return (
     <div className="page-tab">
       <div className="tabs is-small">
         <ul>
-          <li>
-            <a>
+          <li className={homeClass}>
+            <Link to={`/buildings/${props.id}/`}>
               <span className="icon is-small">
                 <i className="fas fa-exclamation-circle" aria-hidden="true" />
               </span>
-              <span>Vacancy</span>
-            </a>
+              <span>Home</span>
+            </Link>
           </li>
           <li className={residentsClass}>
             <Link to={`/buildings/${props.id}/residents`}>
@@ -38,7 +42,7 @@ const SingleBuildingHeader = props => {
             </Link>
           </li>
           <li className={newsClass}>
-            <Link to={`buildings/${props.id}/news`}>
+            <Link to={`/buildings/${props.id}/news`}>
               <span className="icon is-small">
                 <i className="far fa-newspaper" aria-hidden="true" />
               </span>

@@ -171,7 +171,7 @@ router.get(
       res.json(
         await Building.findByPk(req.params.buildingId, {
           include: [
-            News,
+            {model: News, include: Resident},
             {
               model: Apartment,
               include: [{model: Resident, include: User}, {model: Ticket}]
@@ -185,10 +185,14 @@ router.get(
   }
 )
 
-//see available workers for assignment
-router.get('/tickets/:ticketId/assign', async (req, res, next) => {
+router.get('/tickets', async (req, res, next) => {
   try {
-    res.json(await Worker.findAll())
+    const tickets = await Ticket.findAll({
+      where: {
+        ownerId: req.user.ownerId
+      }
+    })
+    res.json(tickets)
   } catch (err) {
     next(err)
   }
@@ -279,7 +283,7 @@ router.post(
             buildingId: req.params.buildingId
           },
           {
-            include: [Owner]
+            include: [{model: Owner}]
           }
         )
       )

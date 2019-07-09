@@ -1,5 +1,6 @@
+@import './variables.scss';
 @import '~bulma';
 
-.is-primary {
-  background-color: #40c9ce;
+.button.is-primary {
+  background-color: $primaryColor;
 }
