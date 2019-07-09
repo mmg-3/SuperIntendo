@@ -1,3 +1,5 @@
+/* eslint-disable complexity */
+import moment from 'moment'
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/owner'
@@ -11,20 +13,59 @@ const Tickets = props => {
   }
 
   const pending = props.tickets.filter(tix => tix.status === 'pending'),
-    confirmed = props.tickets.filter(tix => tix.status === 'confirmed'),
     assigned = props.tickets.filter(tix => tix.status === 'assigned'),
     inProgress = props.tickets.filter(tix => tix.status === 'in-progress'),
+    finished = props.tickets.filter(tix => tix.status === 'finished'),
+    confirmed = props.tickets.filter(tix => tix.status === 'confirmed'),
     closed = props.tickets.filter(tix => tix.status === 'closed')
 
+  const showActionsNeeded = pending.length > 0 || confirmed.length > 0,
+    showWaiting =
+      assigned.length > 0 || inProgress.length > 0 || finished.length > 0,
+    showClosed = closed.length > 0
+
   return (
-    <div>{ticketTable(closed, 'Past Tickets', 'archived', 'is-light')}</div>
+    <div className="body">
+      {showActionsNeeded && (
+        <div>
+          <h2 id="actions-needed">Actions Needed</h2>
+          <div className="body">
+            {pending.length > 0 &&
+              ticketTableWithAction(pending, 'Pending', 'is-warning')}
+            {confirmed.length > 0 &&
+              ticketTableWithAction(confirmed, 'Confirmed', 'is-warning')}
+          </div>
+        </div>
+      )}
+      {showWaiting && (
+        <div>
+          <h2>Waiting for other user</h2>
+          <div className="body">
+            {assigned.length > 0 &&
+              ticketTable(assigned, 'Assigned', 'is-primary')}
+            {inProgress.length > 0 &&
+              ticketTable(inProgress, 'In Progress', 'is-primary')}
+            {finished.length > 0 &&
+              ticketTable(finished, 'Finished', 'is-primary')}
+          </div>
+        </div>
+      )}
+      {showClosed && (
+        <div>
+          <h2 id="closed">Closed</h2>
+          <div className="body">
+            {closed.length > 0 && ticketTable(closed, 'Archived', 'is-light')}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
-const ticketTable = (tickets, title, label, labelClass) => (
-  <div>
+const ticketTable = (tickets, title, labelClass) => (
+  <div className="body">
     <h3 className="title is-6">
-      {title} <span className={`tag ${labelClass}`}>{label}</span>
+      <span className={`tag ${labelClass}`}>{title}</span>
     </h3>
     <table className="table">
       <thead>
@@ -40,7 +81,7 @@ const ticketTable = (tickets, title, label, labelClass) => (
         <tbody key={tix.id}>
           <tr>
             <td>{tix.id}</td>
-            <td>{tix.createdAt}</td>
+            <td>{moment(tix.createdAt).format('MMMM Do YYYY')}</td>
             <td>{tix.location}</td>
             <td>{tix.issue}</td>
             <td>{tix.status}</td>
@@ -51,10 +92,10 @@ const ticketTable = (tickets, title, label, labelClass) => (
   </div>
 )
 
-const ticketTableWithAction = (tickets, title, label, labelClass) => (
-  <div>
+const ticketTableWithAction = (tickets, title, labelClass) => (
+  <div className="body">
     <h3 className="title is-6">
-      {title} <span className={`tag ${labelClass}`}>{label}</span>
+      <span className={`tag ${labelClass}`}>{title}</span>
     </h3>
     <table className="table">
       <thead>
@@ -71,7 +112,7 @@ const ticketTableWithAction = (tickets, title, label, labelClass) => (
         <tbody key={tix.id}>
           <tr>
             <td>{tix.id}</td>
-            <td>{tix.createdAt}</td>
+            <td>{moment(tix.createdAt).format('MMMM Do YYYY')}</td>
             <td>{tix.location}</td>
             <td>{tix.issue}</td>
             <td>{tix.status}</td>
