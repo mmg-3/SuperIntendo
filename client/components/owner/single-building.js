@@ -6,6 +6,7 @@ import '../css/owner/single-building.scss'
 import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
 import SingleBuildingVacancy from './single-building-vacancy'
+import Tickets from './tickets'
 
 export const SingleBuilding = props => {
   useEffect(() => {
@@ -33,7 +34,7 @@ export const SingleBuilding = props => {
     .length
   return (
     <div>
-      <SingleBuildingHeader id={props.id} />
+      <SingleBuildingHeader id={props.id} history={props.history} />
       <Switch>
         <Route
           path="/buildings/:id/residents"
@@ -48,6 +49,8 @@ export const SingleBuilding = props => {
             />
           )}
         />
+        <Route path="/buildings/:id/tickets" component={Tickets} />
+        <Route path="/buildings/:id/tickets" component={Tickets} />
       </Switch>
       <SingleBuildingVacancy
         address={props.address}
