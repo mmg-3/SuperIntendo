@@ -14,8 +14,20 @@ export const TicketForm = props => {
 
   return (
     <div>
-      <form>
-        <select name="location" onChange={makeOnChange(setLocation)}>
+      <form onSubmit={onSubmit}>
+        <TextField
+          name="issue"
+          label="Describe the issue:"
+          type="text"
+          value={issue || ''}
+          placeholder="The sink in the kitchen is leaking"
+          onChange={makeOnChange(setIssue)}
+        />
+        <select
+          name="location"
+          onChange={makeOnChange(setLocation)}
+          value={location}
+        >
           <option value="bedroom">Bedroom</option>
           <option value="kitchen">Kitchen</option>
           <option value="bathroom">Bathroom</option>
@@ -23,22 +35,6 @@ export const TicketForm = props => {
           <option value="living-room">Living Room</option>
           <option value="other">Other</option>
         </select>
-        <TextField
-          name="first-occurence"
-          label="When did it happen?"
-          type="date"
-          onChange={makeOnChange(setDate)}
-          max={dateString}
-          value={formDate}
-        />
-        <TextField
-          name="issue"
-          label="Describe the issue"
-          type="text"
-          placeholder="The sink in the kitchen is leaking"
-          value={issue}
-          onChange={makeOnChange(setIssue)}
-        />
         <div>
           Does this involve your neighbor?
           <TextField
@@ -49,6 +45,23 @@ export const TicketForm = props => {
             onChange={e => setNeighbor(e.target.checked)}
           />
         </div>
+        <TextField
+          name="formDate"
+          label="When did it happen?"
+          type="date"
+          onChange={makeOnChange(setDate)}
+          max={dateString}
+          value={formDate}
+        />
+        <input
+          name="file"
+          label="Photo"
+          type="file"
+          accept="image/*"
+          multiple={false}
+          onChange={e => setFile(e.target.files[0])}
+        />
+
         <button type="submit">Submit Ticket</button>
       </form>
     </div>

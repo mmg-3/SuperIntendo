@@ -29,12 +29,14 @@ export const ProfileForm = props => {
 
   return (
     <div className="body">
-      <div>{/* <img src={props.photoUrl} /> */}</div>
+      <div>
+        <img src={props.photoUrl} />
+      </div>
       <div className="columns">
         <form onSubmit={onSubmit}>
           <div className="field is-horizontal">
             <div className="field-label is-normal">
-              <label className="label">Basic Info</label>
+              <label className="label" />
             </div>
             <div className="field-body">
               <div className="field">
@@ -84,55 +86,73 @@ export const ProfileForm = props => {
             </div>
           </div>
           <div className="field is-horizontal">
-            <div className="field-label is-normal">
-              <label className="label">Alternative Address</label>
-            </div>
-            <div>
-              <div className="field-body">
-                <div className="field is-horizontal">
-                  <p className="control is-expanded">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Street Name"
-                      value={address1}
-                      onChange={makeOnChange(setAddress1)}
-                    />
-                  </p>
-                </div>
-                <div className="">
-                  <div className="field is-horizontal">
-                    <p className="control is-expanded">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="Apartment or Unit Number"
-                        value={address2}
-                        onChange={makeOnChange(setAddress2)}
-                      />
-                    </p>
-                  </div>
-                </div>
-                <div className="">
-                  <div className="field is-horizontal">
-                    <p className="control is-expanded">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="City"
-                        value={city}
-                        onChange={makeOnChange(setCity)}
-                      />
-                    </p>
-                  </div>
+            <div className="field-label" />
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <button className="button is-primary" type="submit">
+                    Save
+                  </button>
                 </div>
               </div>
-              <div className="" />
-              <div className="field is-horizontal">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="columns">
+        <form onSubmit={onSubmit}>
+          <div className="field is-horizontal">
+            <div className="field-label is-normal">
+              <label className="label" />
+            </div>
+            <div className="field-body">
+              <div className="field">
                 <p className="control is-expanded">
                   <input
                     className="input"
                     type="text"
+                    placeholder="Address"
+                    value={address1}
+                    onChange={makeOnChange(setAddress1)}
+                  />
+                </p>
+              </div>
+              <div className="field">
+                <p className="control is-expanded">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Unit No."
+                    value={address2}
+                    onChange={makeOnChange(setAddress2)}
+                  />
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="field is-horizontal">
+            <div className="field-label" />
+            <div className="field-body">
+              <div className="field is-expanded">
+                <p className="control is-expanded">
+                  <input
+                    className="input"
+                    type="tel"
+                    placeholder="City"
+                    value={city}
+                    onChange={makeOnChange(setCity)}
+                  />
+                </p>
+              </div>
+            </div>
+            <div className="field-label" />
+            <div className="field-body">
+              <div className="field is-expanded">
+                <p className="control is-expanded">
+                  <input
+                    className="input"
+                    type="tel"
                     placeholder="State"
                     value={state}
                     onChange={makeOnChange(setState)}
@@ -140,12 +160,13 @@ export const ProfileForm = props => {
                 </p>
               </div>
             </div>
-            <div className="">
-              <div className="field">
+            <div className="field-label" />
+            <div className="field-body">
+              <div className="field is-expanded">
                 <p className="control is-expanded">
                   <input
                     className="input"
-                    type="text"
+                    type="tel"
                     placeholder="Zipcode"
                     value={zipcode}
                     onChange={makeOnChange(setZipcode)}
@@ -153,15 +174,16 @@ export const ProfileForm = props => {
                 </p>
               </div>
             </div>
-            <div className="field is-horizontal">
-              <div className="field-label" />
-              <div className="field-body">
-                <div className="field">
-                  <div className="control">
-                    <button className="button is-primary" type="submit">
-                      Save
-                    </button>
-                  </div>
+          </div>
+
+          <div className="field is-horizontal">
+            <div className="field-label" />
+            <div className="field-body">
+              <div className="field">
+                <div className="control">
+                  <button className="button is-primary" type="submit">
+                    Save
+                  </button>
                 </div>
               </div>
             </div>

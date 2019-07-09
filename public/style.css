@@ -11431,6 +11431,12 @@ label.panel-block:hover {
   padding-top: 100px;
   text-align: center;
 }
+.form-ticket {
+  margin-left: 20px;
+  margin-right: 20px;
+  max-width: 500px;
+  margin-top: 20px;
+}
 ul {
   padding: 0px;
 }
