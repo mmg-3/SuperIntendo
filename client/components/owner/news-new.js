@@ -4,8 +4,6 @@ import {connect} from 'react-redux'
 import {createNewsThunk} from '../../store/owner'
 
 export const NewsNew = props => {
-  console.log('props for news-new', props.selectedBuilding.id)
-  console.log('news', props.selectedBuilding.news)
   const [title, setTitle] = useState(props.selectedBuilding.news.title)
   const [body, setBody] = useState(props.selectedBuilding.news.body)
   const [photoUrl, setPhotoUrl] = useState(props.selectedBuilding.news.photoUrl)
@@ -69,9 +67,9 @@ export const NewsNew = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {}
-}
+// const mapStateToProps = state => {
+//   return {}
+// }
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -81,4 +79,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsNew)
+export default connect(null, mapDispatchToProps)(NewsNew)
