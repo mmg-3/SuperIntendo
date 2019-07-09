@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-
 export const SingleBuildingResidents = props => {
   return (
     <div>
@@ -120,12 +119,9 @@ export const SingleBuildingResidents = props => {
                 </tr>
               </thead>
 
-              {props.verifiedResidents.map(resident => (
-                <tbody key={resident.id}>
-                  <Link
-                    to={`/buildings/${props.id}/residents/${resident.id}`}
-                  />
-                  <tr>
+              <tbody>
+                {props.verifiedResidents.map(resident => (
+                  <tr key={resident.id}>
                     <th>{resident.number}</th>
                     <td>{resident.firstName}</td>
                     <td>{resident.lastName}</td>
@@ -137,14 +133,22 @@ export const SingleBuildingResidents = props => {
                       </Link>
                     </td>
                   </tr>
-                </tbody>
-              ))}
+                ))}
+              </tbody>
             </table>
           </div>
         )}
       </div>
     </div>
   )
+}
+
+SingleBuildingResidents.propTypes = {
+  unverifiedResidents: PropTypes.array.isRequired,
+  verifiedResidents: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
+  verifyUser: PropTypes.func.isRequired,
+  rejectUser: PropTypes.func.isRequired
 }
 
 export default SingleBuildingResidents

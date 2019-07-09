@@ -37,6 +37,7 @@ export const SingleBuilding = props => {
       <SingleBuildingResidents
         verifiedResidents={verifiedResidents}
         unverifiedResidents={unverifiedResidents}
+        id={props.id}
         verifyUser={props.verifyUser}
         rejectUser={props.rejectUser}
         getABuilding={props.getABuilding}
