@@ -34,55 +34,78 @@ const TicketNew = props => {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <TextField
-          name="issue"
-          label="Describe the issue:"
-          type="text"
-          value={issue || ''}
-          placeholder="The sink in the kitchen is leaking"
-          onChange={makeOnChange(setIssue)}
-        />
-        <select
-          name="location"
-          onChange={makeOnChange(setLocation)}
-          value={location}
-        >
-          <option value="bedroom">Bedroom</option>
-          <option value="kitchen">Kitchen</option>
-          <option value="bathroom">Bathroom</option>
-          <option value="dining-room">Dining Room</option>
-          <option value="living-room">Living Room</option>
-          <option value="other">Other</option>
-        </select>
-        <div>
-          Does this involve your neighbor?
-          <TextField
-            name="neighbor-involvement"
-            label="Yes"
-            value={neighbor}
-            type="checkbox"
-            onChange={e => setNeighbor(e.target.checked)}
-          />
+      <form>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">Where</label>
+          </div>
+          <div className="field-body">
+            <div className="field is-narrow">
+              <div className="control">
+                <div className="select is-fullwidth">
+                  <select
+                    name="location"
+                    onChange={makeOnChange(setLocation)}
+                    value={location}
+                  >
+                    <option value="bedroom">Bedroom</option>
+                    <option value="kitchen">Kitchen</option>
+                    <option value="bathroom">Bathroom</option>
+                    <option value="dining-room">Dining Room</option>
+                    <option value="living-room">Living Room</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <TextField
-          name="formDate"
-          label="When did it happen?"
-          type="date"
-          onChange={makeOnChange(setDate)}
-          max={dateString}
-          value={formDate}
-        />
-        <input
-          name="file"
-          label="Photo"
-          type="file"
-          accept="image/*"
-          multiple={false}
-          onChange={e => setFile(e.target.files[0])}
-        />
-
-        <button type="submit">Submit Ticket</button>
+        <div className="field is-horizontal">
+          <div className="field-label">
+            <label className="label">Neighbor?</label>
+          </div>
+          <div className="field-body">
+            <div className="field is-narrow">
+              <div className="control">
+                <label className="radio">
+                  <input
+                    type="radio"
+                    name="neighbor-involvement"
+                    label="Yes"
+                    value={neighbor}
+                    onChange={e => setNeighbor(e.target.checked)}
+                  />
+                  Yes
+                </label>
+                <label className="radio">
+                  <input type="radio" name="member" />
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="field is-horizontal">
+          <div className="field-label is-normal">
+            <label className="label">When</label>
+          </div>
+          <div className="field-body">
+            <div className="field">
+              <div className="control">
+                <input
+                  name="formDate"
+                  type="date"
+                  onChange={makeOnChange(setDate)}
+                  max={dateString}
+                  value={formDate}
+                />
+              </div>
+              <p className="help">when did this issue first occur?</p>
+            </div>
+          </div>
+        </div>
+        <div className="field is-horizontal" />
+        <div className="field is-horizontal" />
       </form>
     </div>
   )
