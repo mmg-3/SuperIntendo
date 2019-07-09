@@ -11436,7 +11436,17 @@ label.panel-block:hover {
   margin-right: 20px;
   max-width: 500px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
+
+.profile-media {
+  margin-left: 20px;
+  margin-right: 20px;
+  max-width: 500px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
 ul {
   padding: 0px;
 }
