@@ -1,3 +1,5 @@
-.is-primary {
-  background-color: #40c9ce;
+@import './variables.scss';
+
+.button.is-primary {
+  background-color: $primaryColor;
 }

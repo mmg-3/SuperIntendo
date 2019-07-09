@@ -1,3 +1,13 @@
+@import '../variables.scss';
+
 .page-tab span {
   font-size: 14px;
+}
+
+p {
+  &.exp {
+    color: $primaryColor;
+    font-size: 1.05em;
+    font-weight: bold;
+  }
 }
