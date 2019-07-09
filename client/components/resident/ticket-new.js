@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {createTicketThunk} from '../../store/resident'
-import {makeOnChange, TextField} from '../utils'
+import {makeOnChange} from '../utils'
 
 const TicketNew = props => {
   const [issue, setIssue] = useState()
@@ -147,7 +147,7 @@ const TicketNew = props => {
                       <span className="file-label">Choose a file…</span>
                     </span>
                     <span className="file-name">
-                      need to enable file name display
+                      {(file && file.name) || 'image'}
                     </span>
                   </label>
                 </div>

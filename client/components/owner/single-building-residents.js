@@ -1,48 +1,9 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-
 export const SingleBuildingResidents = props => {
   return (
     <div>
-      <div className="page-tab">
-        <div className="tabs is-small">
-          <ul>
-            <li>
-              <a>
-                <span className="icon is-small">
-                  <i className="fas fa-exclamation-circle" aria-hidden="true" />
-                </span>
-                <span>Vacancy</span>
-              </a>
-            </li>
-            <li className="is-active">
-              <a>
-                <span className="icon is-small">
-                  <i className="fas fa-users" aria-hidden="true" />
-                </span>
-                <span>Residents</span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span className="icon is-small">
-                  <i className="fas fa-clipboard-check" aria-hidden="true" />
-                </span>
-                <span>Tickets</span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span className="icon is-small">
-                  <i className="far fa-newspaper" aria-hidden="true" />
-                </span>
-                <span>News</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div className="body">
         {props.unverifiedResidents.length > 0 && (
           <div>
@@ -119,12 +80,9 @@ export const SingleBuildingResidents = props => {
                 </tr>
               </thead>
 
-              {props.verifiedResidents.map(resident => (
-                <tbody key={resident.id}>
-                  <Link
-                    to={`/buildings/${props.id}/residents/${resident.id}`}
-                  />
-                  <tr>
+              <tbody>
+                {props.verifiedResidents.map(resident => (
+                  <tr key={resident.id}>
                     <th>{resident.number}</th>
                     <td>{resident.firstName}</td>
                     <td>{resident.lastName}</td>
@@ -136,14 +94,22 @@ export const SingleBuildingResidents = props => {
                       </Link>
                     </td>
                   </tr>
-                </tbody>
-              ))}
+                ))}
+              </tbody>
             </table>
           </div>
         )}
       </div>
     </div>
   )
+}
+
+SingleBuildingResidents.propTypes = {
+  unverifiedResidents: PropTypes.array.isRequired,
+  verifiedResidents: PropTypes.array.isRequired,
+  id: PropTypes.number.isRequired,
+  verifyUser: PropTypes.func.isRequired,
+  rejectUser: PropTypes.func.isRequired
 }
 
 export default SingleBuildingResidents
