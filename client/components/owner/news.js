@@ -13,30 +13,90 @@ export const News = props => {
   const allNews = props.news
   return (
     <div>
-      <h2>{props.address} News</h2>
-      <h3>Pending News To Approve</h3>
-      <ul>
-        {allNews.filter(news => news.status === 'pending').map(news => (
-          <li key={news.id}>
-            <h5>
-              {news.title}
-              <button
-                type="button"
-                onClick={() => props.approveNews(news.id, props.id)}
-              >
-                Approve
-              </button>
-              <button
-                type="button"
-                onClick={() => props.denyNews(news.id, props.id)}
-              >
-                Reject
-              </button>
-            </h5>
-            <sub>{news.body}</sub>
-          </li>
-        ))}
-      </ul>
+      <div className="page-tab">
+        <div className="tabs is-small">
+          <ul>
+            <li>
+              <a>
+                <span className="icon is-small">
+                  <i className="fas fa-exclamation-circle" aria-hidden="true" />
+                </span>
+                <span>Vacancy</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span className="icon is-small">
+                  <i className="fas fa-users" aria-hidden="true" />
+                </span>
+                <span>Residents</span>
+              </a>
+            </li>
+            <li>
+              <a>
+                <span className="icon is-small">
+                  <i className="fas fa-clipboard-check" aria-hidden="true" />
+                </span>
+                <span>Tickets</span>
+              </a>
+            </li>
+            <li className="is-active">
+              <a>
+                <span className="icon is-small">
+                  <i className="far fa-newspaper" aria-hidden="true" />
+                </span>
+                <span>News</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="body">
+        <h3 className="title is-6">
+          News Pending Approval{' '}
+          <span className="tag is-warning">need action</span>
+        </h3>
+        <div className="columns is-three-quarters-mobile">
+          {allNews.filter(news => news.status === 'pending').map(news => (
+            <div key={news.id} className="column">
+              <div className="card">
+                <div className="card-image">
+                  <figure className="image is-4by3">
+                    <img src={news.photoUrl} />
+                  </figure>
+                </div>
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-content">
+                      <p className="title is-5">{news.title}</p>
+                      <p className="subtitle is-6">Author:</p>
+                    </div>
+                  </div>
+                  <div className="content">
+                    {news.body}
+                    <br />
+                    <a>Expires: {news.expDay}</a>
+                    <br />
+                    <button
+                      type="button"
+                      onClick={() => props.approveNews(props.news.id, props.id)}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => props.denyNews(props.news.id, props.id)}
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
