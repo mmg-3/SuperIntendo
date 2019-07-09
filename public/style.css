@@ -2283,7 +2283,7 @@ fieldset[disabled] .button.is-dark.is-inverted.is-outlined {
 }
 
 .button.is-primary {
-  background-color: #00d1b2;
+  background-color: #139ad8;
   border-color: transparent;
   color: #fff;
 }
@@ -7635,7 +7635,8 @@ a.navbar-item.is-active,
 }
 
 .navbar-item img {
-  max-height: 1.75rem;
+  /* max-height: 1.75rem; */
+  min-height: 70px;
 }
 
 .navbar-item.has-dropdown {

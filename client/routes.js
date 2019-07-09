@@ -13,6 +13,7 @@ import ResidentProfile from './components/resident/profile'
 import ResidentTickets from './components/resident/tickets'
 import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
+import MainHome from './components/us/home-main'
 import {me} from './store'
 
 /**
@@ -34,6 +35,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route path="/main" component={MainHome} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
