@@ -34,7 +34,6 @@ export const News = props => {
                       <div className="media-content">
                         <p className="title is-5">{news.title}</p>
                         <p className="subtitle is-6">Author: {author}</p>
-                        {console.log('THE PROPS IN NEWS', props)}
                       </div>
                     </div>
                     <div className="content">
