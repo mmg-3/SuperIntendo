@@ -27,7 +27,6 @@ export const ProfileForm = props => {
     })
   }
 
-  console.log('props', props)
   return (
     <div className="body">
       <div className="profile-media">

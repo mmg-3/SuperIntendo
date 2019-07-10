@@ -16,7 +16,7 @@ export const TicketNew = props => {
 
   return (
     <div className="body">
-      <h4 className="subtitle is-4">News Tickets</h4>{' '}
+      <h4 className="subtitle is-4">New Tickets</h4>{' '}
       <table className="table">
         <thead>
           <tr>
