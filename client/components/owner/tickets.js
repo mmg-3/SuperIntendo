@@ -1,7 +1,8 @@
 /* eslint-disable complexity */
 import moment from 'moment'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import history from '../../history'
 import {
   approveTicket,
   closeTicket,
@@ -13,8 +14,6 @@ const Tickets = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-
-  const [modalActive, setModelActive] = useState(false)
 
   if (props.tickets.length === 0) {
     return <div>No tickets for any buildings!</div>
@@ -31,7 +30,6 @@ const Tickets = props => {
     showWaiting =
       assigned.length > 0 || inProgress.length > 0 || finished.length > 0,
     showClosed = closed.length > 0
-  const modalClass = 'class ' + (modalActive ? 'is-active' : '')
   return (
     <div className="body">
       {showActionsNeeded && (
@@ -64,16 +62,11 @@ const Tickets = props => {
           <h2>Waiting for other user</h2>
           <div className="body">
             {assigned.length > 0 &&
-              ticketTable(assigned, 'Assigned', 'is-primary', setModelActive)}
+              ticketTable(assigned, 'Assigned', 'is-primary')}
             {inProgress.length > 0 &&
-              ticketTable(
-                inProgress,
-                'In Progress',
-                'is-primary',
-                setModelActive
-              )}
+              ticketTable(inProgress, 'In Progress', 'is-primary')}
             {finished.length > 0 &&
-              ticketTable(finished, 'Finished', 'is-primary', setModelActive)}
+              ticketTable(finished, 'Finished', 'is-primary')}
           </div>
         </div>
       )}
@@ -91,7 +84,7 @@ const Tickets = props => {
   )
 }
 
-const ticketTable = (tickets, title, labelClass, setModal) => {
+const ticketTable = (tickets, title, labelClass) => {
   return (
     <div className="body ticket-holder">
       <h3 className="title is-6">
@@ -111,7 +104,10 @@ const ticketTable = (tickets, title, labelClass, setModal) => {
           {tickets.map(tix => {
             const time = moment(tix.createdAt)
             return (
-              <tr key={tix.id} onClick={() => setModal(true)}>
+              <tr
+                key={tix.id}
+                onClick={() => history.push(`/tickets/${tix.id}`)}
+              >
                 <td>{tix.id}</td>
                 <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
                 <td>
@@ -153,7 +149,10 @@ const ticketTableWithAction = (
           {tickets.map(tix => {
             const time = moment(tix.createdAt)
             return (
-              <tr key={tix.id}>
+              <tr
+                key={tix.id}
+                onClick={() => history.push(`/tickets/${tix.id}`)}
+              >
                 <td>{tix.id}</td>
                 <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
                 <td>
@@ -165,7 +164,10 @@ const ticketTableWithAction = (
                   {accept && (
                     <a
                       className="button is-success"
-                      onClick={() => accept.ticket(tix.id)}
+                      onClick={e => {
+                        e.stopPropagation()
+                        accept.ticket(tix.id)
+                      }}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-check" />
@@ -176,7 +178,10 @@ const ticketTableWithAction = (
                   {reject && (
                     <a
                       className="button is-danger is-outlined"
-                      onClick={() => reject.ticket(tix.id)}
+                      onClick={e => {
+                        e.stopPropagation()
+                        reject.ticket(tix.id)
+                      }}
                     >
                       <span>Reject</span>
                       <span className="icon is-small">
