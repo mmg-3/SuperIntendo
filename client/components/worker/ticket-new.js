@@ -45,7 +45,8 @@ export const TicketNew = props => {
                     <a
                       className="button is-success"
                       type="submit"
-                      onClick={() => props.updateSelectedTicket(ticket.id)}
+                      onClick={updateSelected}
+                      value={ticket.id}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-check" />
