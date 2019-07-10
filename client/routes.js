@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
+import {Component, default as React} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
+import OwnerSingleTicket from './components/owner/single-ticket'
 import OwnerTickets from './components/owner/tickets'
 import Workers from './components/owner/workers'
 import NewResident from './components/resident/new-resident'
 import ResidentNews from './components/resident/news'
 import ResidentProfile from './components/resident/profile'
 import ResidentTickets from './components/resident/tickets'
-import AllTickets from './components/worker/all-tickets'
-import NewWorker from './components/worker/new-worker'
 import MainHome from './components/us/home-main'
 import Pricing from './components/us/pricing'
+import AllTickets from './components/worker/all-tickets'
+import NewWorker from './components/worker/new-worker'
 import AllResidents from './components/owner/all-residents'
 import {me} from './store'
 import AllUsers from './components/owner/all-users'
@@ -62,6 +63,11 @@ class Routes extends Component {
                 />
                 <Route path="/buildings/:id" component={SingleBuilding} />
                 <Route path="/tickets" exact component={OwnerTickets} />
+                <Route
+                  path="/tickets/:id"
+                  exact
+                  component={OwnerSingleTicket}
+                />
                 <Route path="/workers" exact component={Workers} />
                 <Route path="/residents" exact component={AllResidents} />
                 <Route path="/users" exact component={AllUsers} />
