@@ -9,7 +9,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
     <div>
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link className="navbar-item" to="/">
+          <Link to="/" className="navbar-item">
             <img src="https://serving.photos.photobox.com/417870350dcbba6bc5b20e24b53c78ce07974175fdc30435a49d5a584bf5397931b9f0af.jpg" />
           </Link>
 
@@ -29,9 +29,11 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isOwner && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <Link className="navbar-item">Home</Link>
+                <Link to="/home" className="navbar-item">
+                  Home
+                </Link>
 
-                <Link className="navbar-item" to="/buildings">
+                <Link to="/buildings" className="navbar-item">
                   Buildings
                 </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
@@ -50,15 +52,23 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 </div>
 
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link">Users</Link>
+                  <Link to="/users" className="navbar-link">
+                    Users
+                  </Link>
 
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">Residents</Link>
-                    <Link className="navbar-item">Workers</Link>
+                    <Link to="/residents" className="navbar-item">
+                      Residents
+                    </Link>
+                    <Link to="/workers" className="navbar-item">
+                      Workers
+                    </Link>
                     <Link className="navbar-item">Admin</Link>
                   </div>
                 </div>
-                <Link className="navbar-item">FAQs</Link>
+                <Link to="/faqs" className="navbar-item">
+                  FAQs
+                </Link>
               </div>
 
               <div className="navbar-end">

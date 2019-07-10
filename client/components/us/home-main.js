@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import './scss/core.scss'
+import {Link} from 'react-router-dom'
 
 const MainHome = props => {
   return (
@@ -17,9 +18,12 @@ const MainHome = props => {
                   perform all the duties of a superintendent with few clicks
                 </h2>
                 <blockquote>
-                  <a className="button cta rounded primary-btn raised">
+                  <Link
+                    to="/signup"
+                    className="button cta rounded primary-btn raised"
+                  >
                     Get Started
-                  </a>
+                  </Link>
                 </blockquote>
               </div>
               <div className="column is-5 is-offset-1">
@@ -39,46 +43,36 @@ const MainHome = props => {
             <div className="tabs is-centered">
               <ul>
                 <li>
-                  <a>
-                    <img
-                      className="partner-logo"
-                      src="/images/illustrations/icons/fullstack-academy.png"
-                    />
-                  </a>
+                  <img
+                    className="partner-logo"
+                    src="/images/illustrations/icons/fullstack-academy.png"
+                  />
                 </li>
                 <li>
-                  <a>
-                    <img
-                      className="partner-logo"
-                      src="/images/illustrations/icons/react.png"
-                    />
-                  </a>
+                  <img
+                    className="partner-logo"
+                    src="/images/illustrations/icons/react.png"
+                  />
                 </li>
 
                 <li>
-                  <a>
-                    <img
-                      className="partner-logo"
-                      src="/images/illustrations/icons/postgresql-logo.png"
-                    />
-                  </a>
+                  <img
+                    className="partner-logo"
+                    src="/images/illustrations/icons/postgresql-logo.png"
+                  />
                 </li>
 
                 <li>
-                  <a>
-                    <img
-                      className="partner-logo"
-                      src="/images/illustrations/icons/redux.png"
-                    />
-                  </a>
+                  <img
+                    className="partner-logo"
+                    src="/images/illustrations/icons/redux.png"
+                  />
                 </li>
                 <li>
-                  <a>
-                    <img
-                      className="partner-logo"
-                      src="/images/illustrations/icons/bulma-logo.png"
-                    />
-                  </a>
+                  <img
+                    className="partner-logo"
+                    src="/images/illustrations/icons/bulma-logo.png"
+                  />
                 </li>
               </ul>
             </div>
@@ -113,12 +107,12 @@ const MainHome = props => {
                     </blockquote>
                   </div>
                   <div className="card-action">
-                    <a
-                      href="#"
+                    <Link
+                      to="/signup"
                       className="button btn-align-md accent-btn raised"
                     >
                       Get Started
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -140,12 +134,12 @@ const MainHome = props => {
                     </blockquote>
                   </div>
                   <div className="card-action">
-                    <a
-                      href="#"
+                    <Link
+                      to="/signup"
                       className="button btn-align-md secondary-btn raised"
                     >
                       Get Started
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -167,12 +161,12 @@ const MainHome = props => {
                     </blockquote>
                   </div>
                   <div className="card-action">
-                    <a
-                      href="#"
+                    <Link
+                      to="/signup"
                       className="button btn-align-md primary-btn raised"
                     >
                       Get Started
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -280,12 +274,12 @@ const MainHome = props => {
           </div>
 
           <blockquote className="has-text-centered mt-20">
-            <a
+            <Link
+              to="/signup"
               className="button cta is-large rounded secondary-btn raised"
-              href="#signup"
             >
               Get Started
-            </a>
+            </Link>
           </blockquote>
         </div>
       </section>
@@ -394,7 +388,10 @@ const MainHome = props => {
                       />
                     </div>
                     <div className="form-footer has-text-centered mt-10">
-                      <button className="button cta is-large primary-btn raised is-clear">
+                      <button
+                        type="submit"
+                        className="button cta is-large primary-btn raised is-clear"
+                      >
                         Send Message
                       </button>
                     </div>
