@@ -42,7 +42,7 @@ export const NewWorker = props => {
     })
   }
   return (
-    <div>
+    <div className="body">
       <form onSubmit={onSubmit}>
         <TextField
           required={true}
