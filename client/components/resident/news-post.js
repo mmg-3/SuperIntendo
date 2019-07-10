@@ -1,6 +1,9 @@
 import React from 'react'
+import moment from 'moment'
 
 export const NewsPost = props => {
+  const time = moment(props.expDay)
+
   return (
     <div className="column">
       <div className="card">
@@ -13,13 +16,18 @@ export const NewsPost = props => {
           <div className="media">
             <div className="media-content">
               <p className="title is-5">{props.title}</p>
-              <p className="subtitle is-6">Author:</p>
+              <p className="subtitle is-6">
+                Author:{' '}
+                {props.resident
+                  ? `${props.resident.firstName} ${props.resident.lastName}`
+                  : 'Management'}
+              </p>
             </div>
           </div>
           <div className="content">
             {props.body}
             <br />
-            <a>Expires: {props.expDay}</a>
+            <p className="exp">Expires: {time.fromNow()}</p>
           </div>
         </div>
       </div>

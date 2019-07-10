@@ -190,6 +190,44 @@ router.post('/tickets', uploader.single('file'), async (req, res, next) => {
   }
 })
 
+//update status from finished to confirmed
+router.put('/tickets/:ticketId/confirm', async (req, res, next) => {
+  try {
+    await Ticket.update(
+      {
+        status: 'confirmed'
+      },
+      {
+        where: {
+          id: req.params.ticketId
+        }
+      }
+    )
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//update status from finished to rejected
+router.put('/tickets/:ticketId/reject', async (req, res, next) => {
+  try {
+    await Ticket.update(
+      {
+        status: 'rejected'
+      },
+      {
+        where: {
+          id: req.params.ticketId
+        }
+      }
+    )
+    res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+})
+
 //get all news
 router.get('/news', async (req, res, next) => {
   try {
