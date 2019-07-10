@@ -9,8 +9,8 @@ const TicketCurrent = props => {
   }, [])
 
   return (
-    <div>
-      <h2>CURRENT TICKETS</h2>
+    <div className="body">
+      <h4 className="subtitle is-4">Current Tickets</h4>
       <table className="table">
         <thead>
           <tr>
