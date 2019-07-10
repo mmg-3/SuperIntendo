@@ -38,7 +38,6 @@ router.post(
   uploader.single('file'),
   async (req, res, next) => {
     try {
-      console.log(req.body)
       let worker = Worker.findOne({
         where: {
           userId: req.user.id

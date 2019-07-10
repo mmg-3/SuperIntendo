@@ -10,7 +10,6 @@ export const TicketForm = props => {
   const [formDate, setDate] = useState(props.date)
   const [issue, setIssue] = useState(props.issue)
   const [neighbor, setNeighbor] = useState(props.neighborInvolved)
-  console.log(neighbor)
 
   return (
     <div>
