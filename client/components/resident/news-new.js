@@ -42,7 +42,7 @@ export const NewsNew = props => {
             <div className="field">
               <div className="control">
                 <input
-                  className="textarea"
+                  className="input"
                   placeholder="summarize this post in 5 words"
                   name="title"
                   type="text"

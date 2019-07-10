@@ -8,8 +8,8 @@ export const TicketArchived = props => {
     props.getTickets()
   }, [])
   return (
-    <div>
-      <h1>ARCHIVED TICKETS</h1>
+    <div className="body">
+      <h4 className="subtitle is-4">Archived Tickets</h4>
       <table className="table">
         <thead>
           <tr>
