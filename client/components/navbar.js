@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import PropTypes from 'prop-types'
 import React from 'react'
 import {connect} from 'react-redux'
@@ -63,7 +64,6 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                     <Link to="/workers" className="navbar-item">
                       Workers
                     </Link>
-                    <Link className="navbar-item">Admin</Link>
                   </div>
                 </div>
                 <Link to="/faqs" className="navbar-item">
@@ -92,7 +92,9 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
               <div className="navbar-start">
                 <Link className="navbar-item">Home</Link>
 
-                <Link className="navbar-item">My Account</Link>
+                <Link className="navbar-item" to="/home">
+                  My Account
+                </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <Link className="navbar-link">Tickets</Link>
 
@@ -125,8 +127,9 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
                 <Link className="navbar-item">Home</Link>
-
-                <Link className="navbar-item">My Account</Link>
+                <Link className="navbar-item" to="/home">
+                  My Account
+                </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <Link className="navbar-link">Tickets</Link>
 
@@ -157,9 +160,13 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
         {!isLoggedIn && (
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">
-              <Link className="navbar-item">Home</Link>
+              <Link className="navbar-item" to="/">
+                Home
+              </Link>
 
-              <Link className="navbar-item">Pricing</Link>
+              <Link className="navbar-item" to="/pricing">
+                Pricing
+              </Link>
               <div className="navbar-item has-dropdown is-hoverable">
                 <Link className="navbar-link">Documentation</Link>
 
@@ -193,6 +200,56 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
             </div>
           </div>
         )}
+        {isLoggedIn &&
+          !isOwner &&
+          !isResident &&
+          !isWorker && (
+            <div id="navbarBasicExample" className="navbar-menu">
+              <div className="navbar-start">
+                <Link className="navbar-item" to="/">
+                  Home
+                </Link>
+                <Link className="navbar-item" to="/home">
+                  My Account
+                </Link>
+
+                <Link className="navbar-item" to="/pricing">
+                  Pricing
+                </Link>
+                <div className="navbar-item has-dropdown is-hoverable">
+                  <Link className="navbar-link">Documentation</Link>
+
+                  <div className="navbar-dropdown">
+                    <Link className="navbar-item">For Owner</Link>
+                    <Link className="navbar-item">For Resident</Link>
+                    <Link className="navbar-item">For Worker</Link>
+                  </div>
+                </div>
+                <div className="navbar-item has-dropdown is-hoverable">
+                  <Link className="navbar-link">More</Link>
+
+                  <div className="navbar-dropdown">
+                    <Link className="navbar-item">About Us</Link>
+                    <Link className="navbar-item">Contact</Link>
+                  </div>
+                </div>
+              </div>
+
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <div className="buttons">
+                    <Link
+                      className="button is-light"
+                      to="#"
+                      onClick={handleClick}
+                    >
+                      Log out
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
       </nav>
     </div>
   )
