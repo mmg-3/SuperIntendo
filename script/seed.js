@@ -402,6 +402,463 @@ function makeApartments(buildings) {
   ])
 }
 
+function makeResidents(users, apartments) {
+  // shift users over by 1 to fix off-by-one error
+  const adjustedUsers = [{}, ...users]
+  const adjustedApartments = [{}, ...apartments]
+  return Promise.all([
+    Resident.create({
+      firstName: 'Noah',
+      lastName: 'Schefer',
+      phoneNumber: '6462738272',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C5603AQH5abIAlQHgrw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=POaHMdNl4-_sY_98Dyee1prjXo9rFD-BJmmx_A9ZBKQ',
+      address1: '67-03 8th Ave',
+      address2: 'Apt 12G',
+      city: 'Brooklyn',
+      state: 'New York',
+      zipcode: '11372',
+      isVerified: true,
+      userId: adjustedUsers[4].id,
+      apartmentId: adjustedApartments[1].id
+    }),
+    Resident.create({
+      firstName: 'Michael',
+      lastName: 'Siciliano',
+      phoneNumber: '9172836625',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQFtbF_ywr4QWA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=j_ddoS3NjPqm9dWxZ_pvGNkyBKmTutNY2PJ_pv7Wvpk',
+      address1: '89 34th Street',
+      address2: '',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10016',
+      isVerified: true,
+      userId: adjustedUsers[5].id,
+      apartmentId: adjustedApartments[2].id
+    }),
+    Resident.create({
+      firstName: 'Masha',
+      lastName: 'Obaturova',
+      phoneNumber: '2126377726',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQHzWeTXL_O66A/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=gc0aTg6C1wrKWtAjr8f7XwY9hr6A3Lzjn_D1T3dx2Dw',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[6].id,
+      apartmentId: adjustedApartments[3].id
+    }),
+    Resident.create({
+      firstName: 'Daphne',
+      lastName: 'Clyne',
+      phoneNumber: '3432726610',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQHjGNRJktniyg/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=mjTeU1KucKIFzCsxzmucRv1-00-yixiTA6BPKeXQc-I',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[7].id,
+      apartmentId: adjustedApartments[4].id
+    }),
+    Resident.create({
+      firstName: 'Ricky',
+      lastName: 'Lau',
+      phoneNumber: '9173420926',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQFzInf6VWScPg/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=7351X4upO4XLm8_FKOeiTBve4U-xZP8i2_2sdIJxQWk',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[9].id,
+      apartmentId: adjustedApartments[5].id
+    }),
+    Resident.create({
+      firstName: 'Hari',
+      lastName: 'Doshi',
+      phoneNumber: '9170028352',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQFuvF45otw-Lw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=KMToHtH5Sa6wF0DK2d8lwHxEBisicv55R1h6dyrDV0Q',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[10].id,
+      apartmentId: adjustedApartments[6].id
+    }),
+    Resident.create({
+      firstName: 'Daniel',
+      lastName: 'Rivera',
+      phoneNumber: '6462510265',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQGQ1-tT74D4nQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=cNBOMA345W5ds_Iy1BLJxUdnHFL2KxVRDRiktaDXmlU',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[11].id,
+      apartmentId: adjustedApartments[7].id
+    }),
+    Resident.create({
+      firstName: 'Zachary',
+      lastName: 'Droge',
+      phoneNumber: '9172831320',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C5603AQGBchSRLFF8IA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=zCnYUwDEFzs9415bQfgA1p3hnRlrK5PpgH3z1X-B82Q',
+      address1: '1774 74th Street',
+      address2: '',
+      city: 'Brooklyn',
+      state: 'NY',
+      zipcode: '11204',
+      isVerified: true,
+      userId: adjustedUsers[12].id,
+      apartmentId: adjustedApartments[8].id
+    }),
+    Resident.create({
+      firstName: 'Alexander',
+      lastName: 'Mann',
+      phoneNumber: '2128830090',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQFVi0gNUdYzzg/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=lZbzTGP0EpCRBGw3gfXN_EPZtNHqugkNLJqYkTR5Qu4',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[13].id,
+      apartmentId: adjustedApartments[9].id
+    }),
+    Resident.create({
+      firstName: 'Dan',
+      lastName: 'Tracy',
+      phoneNumber: '9172827162',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C5603AQEBsMeh7eiDKw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=MCBaLjXcCWwWkVqhmWaGNLbtkY9GdwsV6ZCvdLrzCio',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[14].id,
+      apartmentId: adjustedApartments[10].id
+    }),
+    Resident.create({
+      firstName: 'Thomas',
+      lastName: 'Luo',
+      phoneNumber: '6462019382',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQGl9DeqcOv1pQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=vOHrv9dV-UF0_CyjVW44tjHBwT1l8Q6dy5giCoO4xTM',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[15].id,
+      apartmentId: adjustedApartments[11].id
+    }),
+    Resident.create({
+      firstName: 'Kevin',
+      lastName: 'Lam',
+      phoneNumber: '3470913625',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQFt5YfAeok3VQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=t57MJ_duc-Cd5e1fWCuDCgkYLrg_KGjWDQyY0DfdDsU',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[16].id,
+      apartmentId: adjustedApartments[12].id
+    }),
+    Resident.create({
+      firstName: 'Eric',
+      lastName: 'Kreiter',
+      phoneNumber: '9172883043',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQGjnu7rToDaJQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=Bddg_yoOxnhsuJxzndLttSZVtqxmMBjVmPOG1lSY5tA',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[17].id,
+      apartmentId: adjustedApartments[13].id
+    }),
+    Resident.create({
+      firstName: 'William',
+      lastName: 'Golden',
+      phoneNumber: '9172034273',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQGt71QsxEVg3w/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=r1WQZ6Zxgt1HIEzOoprV7Ijd3Al7G9npeRBCD3ZrPIo',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[19].id,
+      apartmentId: adjustedApartments[14].id
+    }),
+    Resident.create({
+      firstName: 'Tristan',
+      lastName: 'Watanabe',
+      phoneNumber: '2120092771',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQEUpwaH68cmsA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=eb7YHnZKDF5N15DdgjU-1nDrKsY9IvbJgeucCThV4vE',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[20].id,
+      apartmentId: adjustedApartments[15].id
+    }),
+    Resident.create({
+      firstName: 'Xavier',
+      lastName: 'Olivares',
+      phoneNumber: '3472993528',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQEn6XFiu1je6Q/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=qj5Xq10y2ue1nm2eqiIK9rTK_S9fGwse0GQf6_zdMrQ',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[21].id,
+      apartmentId: adjustedApartments[16].id
+    }),
+    Resident.create({
+      firstName: 'Feng',
+      lastName: 'Jiang',
+      phoneNumber: '9170342843',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQEGNIRwpxE4AQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=m20GGlCdgjGYAif8DN5f7ZQ1rL-CNN1XGdTNnNhIsa4',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[22].id,
+      apartmentId: adjustedApartments[17].id
+    }),
+    Resident.create({
+      firstName: 'Alyona',
+      lastName: 'Rodina',
+      phoneNumber: '2120382699',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQF0bfhNPnGsqQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=nlZvKV0YdOZG8MmVAL6qScX4MIVatMcNbKgj_QgCAag',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[23].id,
+      apartmentId: adjustedApartments[18].id
+    }),
+    Resident.create({
+      firstName: 'Eric',
+      lastName: 'Loucks',
+      phoneNumber: '2129388827',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQH0iIEm7i9LrA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=Of-jvKvQvMUhftfPvkuogZx2rvWx3wAfskAmc61ZmLA',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[28].id,
+      apartmentId: adjustedApartments[19].id
+    }),
+    Resident.create({
+      firstName: 'Sofia',
+      lastName: 'Benitez',
+      phoneNumber: '9172998376',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQHZga0vOb4ZUQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=I6Y4xRdKLXKnQ-4YLzMagqBGsZ8h-yUMHUgwdaSDz9o',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[30].id,
+      apartmentId: adjustedApartments[20].id
+    }),
+    Resident.create({
+      firstName: 'Jason',
+      lastName: 'Cho',
+      phoneNumber: '3472091008',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQHaUfJ4IQNwGg/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=W9dO89ZJeLTUb3FIxcY_tw6KAlrixag0lBsW3iYYDew',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[31].id,
+      apartmentId: adjustedApartments[21].id
+    }),
+    Resident.create({
+      firstName: 'Nikita',
+      lastName: 'Girko',
+      phoneNumber: '2129934526',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C5603AQFXyDPtfQZiHA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=Aq7NXyJyPFCjkoSBmpSZ2LMRbeHeRk14DQgk8bcm1M4',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[33].id,
+      apartmentId: adjustedApartments[22].id
+    }),
+    Resident.create({
+      firstName: 'Jack',
+      lastName: 'Dwyer',
+      phoneNumber: '6462879933',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQEU7Pos2IlcWw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=vy6cewAeFp4WRjiGky1a3jM-yCib9tNbVVLM1e3_BJc',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[42].id,
+      apartmentId: adjustedApartments[23].id
+    }),
+    Resident.create({
+      firstName: 'Justin',
+      lastName: 'Kichler',
+      phoneNumber: '6462930012',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQGIjBGck5rIlA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=h5bh8YgZuik0TMzZqiQGDwvF_xWeMba9hV8FUq5OTNA',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[34].id,
+      apartmentId: adjustedApartments[24].id
+    }),
+    Resident.create({
+      firstName: 'Manuel',
+      lastName: 'Bugallo',
+      phoneNumber: '9172887829',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQGkhD1zOz60Kw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=jKjGa152l9bwNPtGbY08aqlMtzz7ubP-NOQ0FwovWuI',
+      address1: '349 Lakeville Rd',
+      address2: '',
+      city: 'Great Neck',
+      state: 'NY',
+      zipcode: '11020',
+      isVerified: true,
+      userId: adjustedUsers[38].id,
+      apartmentId: adjustedApartments[25].id
+    }),
+    Resident.create({
+      firstName: 'Constance',
+      lastName: 'Kang',
+      phoneNumber: '9175185800',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C5603AQHmHAcBEZYuQw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=6wiNTQkjAM_k8Po07-DD2EJcPA479r0lA5Jaw2a65ZU',
+      address1: '33 Liberty St',
+      address2: '',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10045',
+      isVerified: true,
+      userId: adjustedUsers[41].id,
+      apartmentId: adjustedApartments[26].id
+    }),
+    Resident.create({
+      firstName: 'Daniel',
+      lastName: 'Wasserman',
+      phoneNumber: '9172889344',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQEuHdBw4OYRQw/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=dAewg4b1HBLpriz36yLiBK-TrsJYAfGuEIyt4_EbOPw',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[40].id,
+      apartmentId: adjustedApartments[27].id
+    }),
+    Resident.create({
+      firstName: 'Jennifer',
+      lastName: 'Scheinhorn',
+      phoneNumber: '3474444444',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4E03AQHuFYA6LqIXMQ/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=sk44xZcAFLvNBcw0jGrhvZs6Oz9qR8AoR50dY-V3Bz8',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: false,
+      userId: adjustedUsers[43].id,
+      apartmentId: adjustedApartments[28].id
+    }),
+    Resident.create({
+      firstName: 'Nick',
+      lastName: 'Balestrieri',
+      phoneNumber: '9172132413',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQEUuv33Ahvnqg/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=yoaMDikheW613hA13ZAdjH4qaTL4hITQglew5i6Xt74',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      isVerified: true,
+      userId: adjustedUsers[44].id,
+      apartmentId: adjustedApartments[29].id
+    }),
+    Resident.create({
+      firstName: 'Ricargo',
+      lastName: 'Pineda',
+      phoneNumber: '6460896755',
+      photoUrl:
+        'https://media.licdn.com/dms/image/C4D03AQEcWJi126wSfA/profile-displayphoto-shrink_800_800/0?e=1567641600&v=beta&t=nw2qIPrV83r2RBWsHh6vjcwyjDfd5p35tkeSzZ2h3Q4',
+      address1: '',
+      address2: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      userId: adjustedUsers[45].id,
+      apartmentId: adjustedApartments[30].id
+    })
+  ])
+}
+
 function makeWorker(users) {
   // shift users over by 1 to fix off-by-one error
   const adjustedUsers = [{}, ...users]
