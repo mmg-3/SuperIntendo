@@ -1,0 +1,11 @@
+.ticket-holder {
+  tbody {
+    tr {
+      cursor: pointer;
+
+      &:hover {
+        background-color: grey;
+      }
+    }
+  }
+}

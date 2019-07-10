@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import moment from 'moment'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/owner'
 import '../css/owner/ticket.scss'
@@ -8,6 +8,8 @@ const Tickets = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
+
+  const [modalActive, setModelActive] = useState(false)
 
   if (props.tickets.length === 0) {
     return <div>No tickets for any buildings!</div>
@@ -24,7 +26,7 @@ const Tickets = props => {
     showWaiting =
       assigned.length > 0 || inProgress.length > 0 || finished.length > 0,
     showClosed = closed.length > 0
-
+  const modalClass = 'class ' + (modalActive ? 'is-active' : '')
   return (
     <div className="body">
       {showActionsNeeded && (
@@ -43,11 +45,16 @@ const Tickets = props => {
           <h2>Waiting for other user</h2>
           <div className="body">
             {assigned.length > 0 &&
-              ticketTable(assigned, 'Assigned', 'is-primary')}
+              ticketTable(assigned, 'Assigned', 'is-primary', setModelActive)}
             {inProgress.length > 0 &&
-              ticketTable(inProgress, 'In Progress', 'is-primary')}
+              ticketTable(
+                inProgress,
+                'In Progress',
+                'is-primary',
+                setModelActive
+              )}
             {finished.length > 0 &&
-              ticketTable(finished, 'Finished', 'is-primary')}
+              ticketTable(finished, 'Finished', 'is-primary', setModelActive)}
           </div>
         </div>
       )}
@@ -63,9 +70,9 @@ const Tickets = props => {
   )
 }
 
-const ticketTable = (tickets, title, labelClass) => {
+const ticketTable = (tickets, title, labelClass, setModal) => {
   return (
-    <div className="body">
+    <div className="body ticket-holder">
       <h3 className="title is-6">
         <span className={`tag ${labelClass}`}>{title}</span>
       </h3>
@@ -83,7 +90,7 @@ const ticketTable = (tickets, title, labelClass) => {
           {tickets.map(tix => {
             const time = moment(tix.createdAt)
             return (
-              <tr key={tix.id}>
+              <tr key={tix.id} onClick={() => setModal(true)}>
                 <td>{tix.id}</td>
                 <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
                 <td>
@@ -102,7 +109,7 @@ const ticketTable = (tickets, title, labelClass) => {
 
 const ticketTableWithAction = (tickets, title, labelClass) => {
   return (
-    <div className="body">
+    <div className="body ticket-holder">
       <h3 className="title is-6">
         <span className={`tag ${labelClass}`}>{title}</span>
       </h3>
