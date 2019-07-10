@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/resident'
-import {TicketItem} from './ticket-item'
-import TicketNew from './ticket-new'
+import TicketArchived from './ticket-archived'
+import TicketCurrent from './ticket-current'
+
 const Tickets = props => {
   useEffect(() => {
     props.getTickets()
@@ -10,20 +11,14 @@ const Tickets = props => {
   if (props.tickets.length === 0) {
     return (
       <div>
-        Loading....
-        <TicketNew />
+        <h2>No tickets to display</h2>
       </div>
     )
   }
-  const closedTickets = props.tickets.filter(tix => tix.status === 'closed')
-  const openTickets = props.tickets.filter(tix => tix.status !== 'closed')
   return (
     <div>
-      <TicketNew />
-      Open:
-      {openTickets.map(ticket => <TicketItem key={ticket.id} {...ticket} />)}
-      Closed:
-      {closedTickets.map(ticket => <TicketItem key={ticket.id} {...ticket} />)}
+      <TicketCurrent />
+      <TicketArchived />
     </div>
   )
 }

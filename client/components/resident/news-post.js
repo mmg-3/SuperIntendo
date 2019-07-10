@@ -13,7 +13,12 @@ export const NewsPost = props => {
           <div className="media">
             <div className="media-content">
               <p className="title is-5">{props.title}</p>
-              <p className="subtitle is-6">Author:</p>
+              <p className="subtitle is-6">
+                Author:{' '}
+                {props.resident
+                  ? `${props.resident.firstName} ${props.resident.lastName}`
+                  : 'Management'}
+              </p>
             </div>
           </div>
           <div className="content">
