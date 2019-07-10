@@ -63,6 +63,12 @@ router.get('/buildings', async (req, res, next) => {
   try {
     res.json(
       await Building.findAll({
+        include: {
+          model: Apartment,
+          include: {
+            model: Resident
+          }
+        },
         where: {ownerId: req.user.ownerId}
       })
     )
@@ -82,6 +88,26 @@ router.post('/buildings', async (req, res, next) => {
         ownerId: req.user.ownerId
       })
     )
+  } catch (err) {
+    next(err)
+  }
+})
+
+//get all residents (verified and unverified) in all buildings
+router.get('/residents', async (req, res, next) => {
+  try {
+    const residents = await Building.findAll({
+      include: {
+        model: Apartment,
+        include: {
+          model: Resident
+        }
+      },
+      where: {
+        ownerId: req.user.ownerId
+      }
+    })
+    res.json(residents)
   } catch (err) {
     next(err)
   }
