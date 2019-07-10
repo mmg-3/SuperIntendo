@@ -25,6 +25,7 @@ import TicketCurrent from './components/resident/ticket-current'
 import NewsNew from './components/resident/news-new'
 import TicketNew from './components/resident/ticket-new'
 import TicketArchived from './components/resident/ticket-archived'
+import WorkerProfile from './components/worker/worker-profile'
 
 /**
  * COMPONENT
@@ -103,7 +104,12 @@ class Routes extends Component {
             )}
             {isWorkerVerified && (
               <Switch>
+                <Route path="/my-account" exact component={WorkerProfile} />
                 <Route path="/tickets" exact component={AllTickets} />
+                <Route path="/tickets/new" />
+                <Route path="/tickets/current" />
+                <Route path="tickets/completed" />
+                <Route path="/payment" />
               </Switch>
             )}
             {!isOwner &&

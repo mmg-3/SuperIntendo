@@ -90,6 +90,41 @@ router.post(
 router.use(isLoggedIn)
 router.use(isWorker)
 
+//get self
+router.get('/worker', async (req, res, next) => {
+  try {
+    const worker = await Worker.findByPk(req.user.workerId)
+    res.json(worker)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//update profile
+router.put('/', async (req, res, next) => {
+  try {
+    res.sendStatus(204)
+    await Ticket.update(
+      {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode
+      },
+      {
+        where: {
+          id: req.user.workerId
+        }
+      }
+    )
+  } catch (err) {
+    next(err)
+  }
+})
+
 //get all tickets assigned to worker
 router.get('/tickets', async (req, res, next) => {
   if (req.user.id) {

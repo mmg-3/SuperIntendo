@@ -152,20 +152,35 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isWorker && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <Link className="navbar-item">Home</Link>
-                <Link className="navbar-item" to="/home">
+                <Link to="/home" className="navbar-item">
+                  Home
+                </Link>
+                <Link to="/my-account" className="navbar-item">
                   My Account
                 </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link">Tickets</Link>
+                  <Link to="/tickets" className="navbar-link">
+                    Tickets
+                  </Link>
 
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">Current Ticket</Link>
-                    <Link className="navbar-item">Archived Tickets</Link>
+                    <Link to="/tickets/new" className="navbar-item">
+                      New Tickets
+                    </Link>
+                    <Link to="/tickets/current" className="navbar-item">
+                      Current Tickets
+                    </Link>
+                    <Link to="/tickets/completed" className="navbar-item">
+                      Completed Tickets
+                    </Link>
                   </div>
                 </div>
-                <Link className="navbar-item">Payment</Link>
-                <Link className="navbar-item">FAQs</Link>
+                <Link to="/payment" className="navbar-item">
+                  Payment
+                </Link>
+                <Link to="/faqs" className="navbar-item">
+                  FAQs
+                </Link>
               </div>
 
               <div className="navbar-end">
