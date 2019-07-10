@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const {Worker, Ticket} = require('../db/models')
+const {uploader, imgurUpload} = require('../file_upload')
 
 const setIO = () => {}
 module.exports = {router, setIO}
@@ -31,47 +32,60 @@ const isWorker = async (req, res, next) => {
 }
 
 //worker can sign up
-router.post('/', isLoggedIn, async (req, res, next) => {
-  try {
-    let worker = Worker.findOne({
-      where: {
-        userId: req.user.id
+router.post(
+  '/',
+  isLoggedIn,
+  uploader.single('file'),
+  async (req, res, next) => {
+    try {
+      console.log(req.body)
+      let worker = Worker.findOne({
+        where: {
+          userId: req.user.id
+        }
+      })
+      console.log('finding worker')
+      if (worker && worker.id) {
+        return res.sendStatus(409)
       }
-    })
-    if (worker && worker.id) {
-      res.sendStatus(409)
-    }
-    const {
-      firstName,
-      lastName,
-      phoneNumber,
-      imageUrl,
-      mailingAddress1,
-      mailingAddress2,
-      city,
-      state,
-      zipcode,
-      skills
-    } = req.body
+      if (!req.file) {
+        return res.status(400).send('Image is required to become a worker')
+      }
+      console.log('has file')
 
-    worker = await Worker.create({
-      firstName,
-      lastName,
-      phoneNumber,
-      imageUrl,
-      mailingAddress1,
-      mailingAddress2,
-      city,
-      state,
-      zipcode,
-      skills,
-      userId: req.user.id
-    })
-    res.status(201).json(worker)
-  } catch (err) {
-    next(err)
+      const imageUrl = await imgurUpload(req.file)
+      console.log('uploaded file', imageUrl)
+      const {
+        firstName,
+        lastName,
+        phoneNumber,
+        mailingAddress1,
+        mailingAddress2,
+        city,
+        state,
+        zipcode,
+        skills
+      } = req.body
+
+      worker = await Worker.create({
+        firstName,
+        lastName,
+        phoneNumber,
+        imageUrl,
+        mailingAddress1,
+        mailingAddress2,
+        city,
+        state,
+        zipcode,
+        skills: skills.split(','),
+        userId: req.user.id
+      })
+      res.status(201).json(worker)
+    } catch (err) {
+      next(err)
+    }
   }
-})
+)
 
 router.use(isLoggedIn)
 router.use(isWorker)

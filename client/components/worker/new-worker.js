@@ -77,7 +77,7 @@ export const NewWorker = props => {
                   <input
                     className="input"
                     type="text"
-                    placeholder="First Name"
+                    placeholder="Last Name"
                     value={lastName}
                     onChange={makeOnChange(setLastName)}
                   />
@@ -98,7 +98,7 @@ export const NewWorker = props => {
                       <input
                         className="input"
                         type="tel"
-                        placeholder="Your phone number"
+                        placeholder="555-555-5555"
                         value={phoneNumber}
                         onChange={makeOnChange(setPhoneNumber)}
                       />
