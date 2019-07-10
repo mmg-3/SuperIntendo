@@ -1,6 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import {me} from './user'
+import {objToFormData} from './utils'
 
 /**
  * INITIAL STATE
@@ -53,7 +54,13 @@ export const getMyTickets = () => async dispatch => {
 
 export const createWorker = worker => async dispatch => {
   try {
-    const {data} = await axios.post('/api/workers', worker)
+    const formData = objToFormData(worker)
+
+    const {data} = await axios.post('/api/workers/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     dispatch(gotSelf(data))
     dispatch(me())
     history.push('/home')
