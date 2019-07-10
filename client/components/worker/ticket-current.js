@@ -7,21 +7,21 @@ export const TicketCurrent = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-  const updateSelected = evt => {
+  const updateInProg = evt => {
     evt.preventDefault()
-    props.updateSelectedTicket(evt.target.value)
+    props.updateInProgTicket(evt.target.value)
   }
 
-  const created = moment(props.createdAt)
+  const updated = moment(props.updatedAt)
 
   return (
     <div className="body">
-      <h4 className="subtitle is-4">News Tickets</h4>{' '}
+      <h4 className="subtitle is-4">Current Tickets</h4>{' '}
       <table className="table">
         <thead>
           <tr>
             <th>Ticket No.</th>
-            <th>Date Submitted</th>
+            <th>Last Update</th>
             <th>Issue</th>
             <th>Status</th>
             <th>Action</th>
@@ -29,14 +29,14 @@ export const TicketCurrent = props => {
         </thead>
         <tbody style={{listStyles: 'none'}}>
           {props.tickets
-            .filter(ticket => ticket.status === 'approved')
+            .filter(ticket => ticket.status === 'in-progress')
             .map(ticket => {
               return (
                 <tr key={ticket.id}>
                   <td>{ticket.id}</td>
                   <td>
-                    <p title={created.format('MMMM Do YYYY')}>
-                      {created.fromNow()}
+                    <p title={updated.format('MMMM Do YYYY')}>
+                      {updated.fromNow()}
                     </p>
                   </td>
                   <td>{ticket.issue}</td>
@@ -45,12 +45,12 @@ export const TicketCurrent = props => {
                     <a
                       className="button is-success"
                       type="submit"
-                      onClick={() => props.updateSelectedTicket(ticket.id)}
+                      onClick={() => props.updateInProgTicket(ticket.id)}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-check" />
                       </span>
-                      <span>Accept Task</span>
+                      <span>Completed</span>
                     </a>
                   </td>
                 </tr>
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => ({
   updateSelectedTicket: ticketId => dispatch(updateSelectedTicket(ticketId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketNew)
+export default connect(mapStateToProps, mapDispatchToProps)(TicketCurrent)

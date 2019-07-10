@@ -1,27 +1,20 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets, updateSelectedTicket} from '../../store/worker'
-import moment from 'moment'
 
 export const TicketCompleted = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-  const updateSelected = evt => {
-    evt.preventDefault()
-    props.updateSelectedTicket(evt.target.value)
-  }
-
-  const created = moment(props.createdAt)
 
   return (
     <div className="body">
-      <h4 className="subtitle is-4">News Tickets</h4>{' '}
+      <h4 className="subtitle is-4">Completed Tickets</h4>{' '}
       <table className="table">
         <thead>
           <tr>
             <th>Ticket No.</th>
-            <th>Date Submitted</th>
+            <th>Finished Date</th>
             <th>Issue</th>
             <th>Status</th>
             <th>Action</th>
@@ -29,30 +22,15 @@ export const TicketCompleted = props => {
         </thead>
         <tbody style={{listStyles: 'none'}}>
           {props.tickets
-            .filter(ticket => ticket.status === 'approved')
+            .filter(ticket => ticket.status === 'finished')
             .map(ticket => {
               return (
                 <tr key={ticket.id}>
                   <td>{ticket.id}</td>
-                  <td>
-                    <p title={created.format('MMMM Do YYYY')}>
-                      {created.fromNow()}
-                    </p>
-                  </td>
+                  <td>{props.updatedAt}</td>
                   <td>{ticket.issue}</td>
                   <td>{ticket.status}</td>
-                  <td>
-                    <a
-                      className="button is-success"
-                      type="submit"
-                      onClick={() => props.updateSelectedTicket(ticket.id)}
-                    >
-                      <span className="icon is-small">
-                        <i className="fas fa-check" />
-                      </span>
-                      <span>Accept Task</span>
-                    </a>
-                  </td>
+                  <td>archived</td>
                 </tr>
               )
             })}
