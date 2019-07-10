@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/resident'
-import {TicketItem} from './ticket-item'
+import TicketItem from './ticket-item'
 
 export const TicketArchived = props => {
   useEffect(() => {

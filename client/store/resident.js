@@ -138,6 +138,24 @@ export const getSelf = () => async dispatch => {
   }
 }
 
+export const confirmTicket = ticketId => async dispatch => {
+  try {
+    await axios.put(`/api/resident/tickets/${ticketId}/confirm`)
+    dispatch(getTickets())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectTicket = ticketId => async dispatch => {
+  try {
+    await axios.put(`/api/resident/tickets/${ticketId}/reject`)
+    dispatch(getTickets())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const updateProfile = updatedSelf => async dispatch => {
   try {
     await axios.put('/api/resident', updatedSelf)

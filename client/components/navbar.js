@@ -99,7 +99,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                   </Link>
                   <div className="navbar-dropdown">
                     <Link to="/my-tickets/current" className="navbar-item">
-                      Current Ticket
+                      Current Tickets
                     </Link>
                     <Link to="/my-tickets/archived" className="navbar-item">
                       Archived Tickets
