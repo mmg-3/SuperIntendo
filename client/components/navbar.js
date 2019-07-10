@@ -29,9 +29,11 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isOwner && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <Link className="navbar-item">Home</Link>
+                <Link to="/main" className="navbar-item">
+                  Home
+                </Link>
 
-                <Link className="navbar-item" to="/buildings">
+                <Link to="/buildings" className="navbar-item">
                   Buildings
                 </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
@@ -46,7 +48,9 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 </div>
 
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link">Users</Link>
+                  <Link to="/users" className="navbar-link">
+                    Users
+                  </Link>
 
                   <div className="navbar-dropdown">
                     <Link className="navbar-item">Residents</Link>
