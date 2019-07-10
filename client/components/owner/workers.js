@@ -10,49 +10,52 @@ export const Workers = props => {
   return (
     <div>
       <h3>New Applicants</h3>
-      <ul liststyle={{style: 'none'}}>
-        {props.workers
-          .filter(worker => worker.isVerified === false)
-          .map(worker => {
-            return (
-              <div key={worker.id}>
-                <li>
-                  {worker.firstName} {worker.lastName}
-                  <button
-                    type="submit"
-                    value={worker.id}
-                    onClick={evt => {
-                      evt.preventDefault()
-                      props.verifyWorker(evt.target.value)
-                    }}
-                  >
-                    Verify
-                  </button>
-                  <button
-                    type="button"
-                    value={worker.id}
-                    onClick={evt => {
-                      evt.preventDefault()
-                      props.rejectWorker(evt.target.value)
-                    }}
-                  >
-                    Reject
-                  </button>
-                </li>
-              </div>
-            )
-          })}
-      </ul>
-      <h3>Verified Workers</h3>
-      <ul>
-        {props.workers
-          .filter(worker => worker.isVerified === true)
-          .map(worker => (
-            <li key={worker.id}>
-              {worker.firstName} {worker.lastName}
-            </li>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Profile</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.workers.filter(worker => !worker.isVerified).map(worker => (
+            <tr key={worker.id}>
+              <td>{worker.firstName}</td>
+              <td>{worker.lastName}</td>
+              <td>
+                {/* <Link
+                        to={`/buildings/${props.id}/residents/${resident.id}`}
+                      >
+                        details
+                      </Link> */}
+              </td>
+              <td>
+                <a
+                  className="button is-success"
+                  onClick={() => props.verifyWorker(worker.id)}
+                >
+                  <span className="icon is-small">
+                    <i className="fas fa-check" />
+                  </span>
+                  <span>Approve</span>
+                </a>
+
+                <a
+                  className="button is-danger is-outlined"
+                  onClick={() => props.rejectWorker(worker.id)}
+                >
+                  <span>Reject</span>
+                  <span className="icon is-small">
+                    <i className="fas fa-times" />
+                  </span>
+                </a>
+              </td>
+            </tr>
           ))}
-      </ul>
+        </tbody>
+      </table>
     </div>
   )
 }
