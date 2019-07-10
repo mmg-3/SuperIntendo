@@ -46,7 +46,11 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       lastName,
       phoneNumber,
       imageUrl,
-      mailingAddress,
+      mailingAddress1,
+      mailingAddress2,
+      city,
+      state,
+      zipcode,
       skills
     } = req.body
 
@@ -55,7 +59,11 @@ router.post('/', isLoggedIn, async (req, res, next) => {
       lastName,
       phoneNumber,
       imageUrl,
-      mailingAddress,
+      mailingAddress1,
+      mailingAddress2,
+      city,
+      state,
+      zipcode,
       skills,
       userId: req.user.id
     })
