@@ -152,7 +152,8 @@ export const rejectWorker = workerId => async dispatch => {
 export const closeTicket = (tixId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${tixId}/close`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
   } catch (err) {
     console.error(err)
   }
@@ -161,7 +162,8 @@ export const closeTicket = (tixId, buildId) => async dispatch => {
 export const approveTicket = (ticketId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${ticketId}/approve`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
   } catch (err) {
     console.error(err)
   }
@@ -170,7 +172,8 @@ export const approveTicket = (ticketId, buildId) => async dispatch => {
 export const rejectTicket = (ticketId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${ticketId}/reject`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
   } catch (err) {
     console.error(err)
   }
