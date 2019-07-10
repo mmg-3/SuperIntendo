@@ -48,6 +48,41 @@ function makeBuildings(ownerId) {
       zipcode: '11354',
       buildingUrl: 'https://cdn-img0.streeteasy.com/nyc/image/32/362124832.jpg',
       ownerId
+    }),
+    Building.create({
+      address: '130 William Street',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10038',
+      buildingUrl:
+        'http://claudiasaezfromm.com/wp-content/uploads/2019/01/130-william-corcoran-sunshine-claudia-saez-fromm-1.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '520 Park Avenue',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10022',
+      buildingUrl: 'https://cdn-img3.streeteasy.com/nyc/image/95/119648695.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '199 Beekman Ave',
+      city: 'Sleepy Hollow',
+      state: 'NY',
+      zipcode: '10591',
+      buildingUrl:
+        'https://cdn.tollbrothers.com/communities/13077/images/c1-HIGH_1920.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '98 Carriage Trail',
+      city: 'Tarrytown',
+      state: 'NY',
+      zipcode: '10591',
+      buildingUrl:
+        'https://dzv9cgq735oi4.cloudfront.net/pics/development/2013/19783//crop/1280,575',
+      ownerId
     })
   ])
 }
