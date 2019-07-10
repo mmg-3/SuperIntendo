@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {createWorker} from '../../store/worker'
-import {makeOnChange, TextField} from '../utils'
 import '../css/worker/new-worker.scss'
+import {makeOnChange} from '../utils'
 
 export const NewWorker = props => {
   const [firstName, setFirstName] = useState(props.firstName)
@@ -40,7 +40,7 @@ export const NewWorker = props => {
     props.createWorker({
       firstName,
       lastName,
-      imageUrl,
+      file,
       mailingAddress1,
       mailingAddress2,
       city,
