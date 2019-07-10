@@ -10,7 +10,7 @@ const TicketCurrent = props => {
 
   return (
     <div className="body">
-      <h4 className="subtitle is-4">Archived Tickets</h4>{' '}
+      <h4 className="subtitle is-4">Current Tickets</h4>
       <table className="table">
         <thead>
           <tr>
