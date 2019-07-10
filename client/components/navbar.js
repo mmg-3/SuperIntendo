@@ -90,21 +90,47 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
           isResident && (
             <div id="navbarBasicExample" className="navbar-menu">
               <div className="navbar-start">
-                <Link className="navbar-item">Home</Link>
-
-                <Link className="navbar-item" to="/home">
+                <Link to="/home" className="navbar-item">
+                  Home
+                </Link>
+                <Link to="/my-account" className="navbar-item">
                   My Account
                 </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link">Tickets</Link>
-
+                  <Link to="/my-tickets" className="navbar-link">
+                    Tickets
+                  </Link>
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">Current Ticket</Link>
-                    <Link className="navbar-item">Archived Tickets</Link>
+                    <Link to="/my-tickets/current" className="navbar-item">
+                      Current Tickets
+                    </Link>
+                    <Link to="/my-tickets/archived" className="navbar-item">
+                      Archived Tickets
+                    </Link>
+                    <Link
+                      to="/my-tickets/submit-ticket"
+                      className="navbar-item"
+                    >
+                      Submit a New Ticket
+                    </Link>
                   </div>
                 </div>
-                <Link className="navbar-item">News</Link>
-                <Link className="navbar-item">FAQs</Link>
+                <div className="navbar-item has-dropdown is-hoverable">
+                  <Link to="/news" className="navbar-link">
+                    News
+                  </Link>
+                  <div className="navbar-dropdown">
+                    <Link to="/news/post" className="navbar-item">
+                      Post News
+                    </Link>
+                    <Link to="/news" className="navbar-item">
+                      View News
+                    </Link>
+                  </div>
+                </div>
+                <Link to="/faqs" className="navbar-item">
+                  FAQs
+                </Link>
               </div>
 
               <div className="navbar-end">

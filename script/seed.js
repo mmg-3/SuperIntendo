@@ -38,7 +38,7 @@ function makeBuildings(ownerId) {
       state: 'NY',
       zipcode: '11249',
       buildingUrl:
-        'https://cdn.vox-cdn.com/thumbor/JMYvte1yBjbETc92fWaAuYTyZi0=/0x0:2200x1238/1200x800/filters:focal(924x443:1276x795)/cdn.vox-cdn.com/uploads/chorus_image/image/60047829/CURBED_420_Kent___3_towers_from_East_River.0.jpg',
+        'https://ds1.cityrealty.com/img/0c04cd0b287ac342223e23f3f3570ffa9cc5e294+1004++0+60/420-kent-avenue.jpg',
       ownerId
     }),
     Building.create({

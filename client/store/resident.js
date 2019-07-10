@@ -120,7 +120,14 @@ export const createNewsThunk = news => async dispatch => {
 
 export const createResident = data => async dispatch => {
   try {
-    const res = await axios.post('/api/resident', data)
+    const formData = objToFormData(data)
+    console.log(data)
+    console.log(formData)
+    const res = await axios.post('/api/resident/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     dispatch(gotSelf(res.data || {}))
     dispatch(me())
     history.push('/home')
@@ -133,6 +140,24 @@ export const getSelf = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/resident')
     dispatch(gotSelf(data || {}))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const confirmTicket = ticketId => async dispatch => {
+  try {
+    await axios.put(`/api/resident/tickets/${ticketId}/confirm`)
+    dispatch(getTickets())
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const rejectTicket = ticketId => async dispatch => {
+  try {
+    await axios.put(`/api/resident/tickets/${ticketId}/reject`)
+    dispatch(getTickets())
   } catch (err) {
     console.error(err)
   }
