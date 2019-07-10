@@ -26,6 +26,9 @@ import NewsNew from './components/resident/news-new'
 import TicketNew from './components/resident/ticket-new'
 import TicketArchived from './components/resident/ticket-archived'
 import WorkerProfile from './components/worker/worker-profile'
+import WorkerTicketCompleted from './components/worker/ticket-completed'
+import WorkerTicketCurrent from './components/worker/ticket-current'
+import WorkerTicketNew from './components/worker/ticket-new'
 
 /**
  * COMPONENT
@@ -106,9 +109,17 @@ class Routes extends Component {
               <Switch>
                 <Route path="/my-account" exact component={WorkerProfile} />
                 <Route path="/tickets" exact component={AllTickets} />
-                <Route path="/tickets/new" />
-                <Route path="/tickets/current" />
-                <Route path="tickets/completed" />
+                <Route path="/tickets/new" exact component={WorkerTicketNew} />
+                <Route
+                  path="/tickets/current"
+                  exact
+                  component={WorkerTicketCurrent}
+                />
+                <Route
+                  path="tickets/completed"
+                  excat
+                  component={WorkerTicketCompleted}
+                />
                 <Route path="/payment" />
               </Switch>
             )}
@@ -131,7 +142,6 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = state => {
-  console.log(state.user)
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey

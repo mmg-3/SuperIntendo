@@ -121,8 +121,6 @@ export const createNewsThunk = news => async dispatch => {
 export const createResident = data => async dispatch => {
   try {
     const formData = objToFormData(data)
-    console.log(data)
-    console.log(formData)
     const res = await axios.post('/api/resident/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
