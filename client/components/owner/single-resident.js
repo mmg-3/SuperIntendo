@@ -20,7 +20,7 @@ export const SingleResident = props => {
     phoneStr.slice(0, 3) + '-' + phoneStr.slice(3, 6) + '-' + phoneStr.slice(6)
 
   const alternativeAddress = address => {
-    if (address.length > 0) {
+    if (address && address.length > 0) {
       return (
         address +
         ', ' +

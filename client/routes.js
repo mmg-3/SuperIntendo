@@ -1,25 +1,31 @@
 import PropTypes from 'prop-types'
-import React, {Component} from 'react'
+import {Component, default as React} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
 import SingleBuilding from './components/owner/single-building'
+import OwnerSingleTicket from './components/owner/single-ticket'
 import OwnerTickets from './components/owner/tickets'
 import Workers from './components/owner/workers'
 import NewResident from './components/resident/new-resident'
 import ResidentNews from './components/resident/news'
 import ResidentProfile from './components/resident/profile'
 import ResidentTickets from './components/resident/tickets'
-import AllTickets from './components/worker/all-tickets'
-import NewWorker from './components/worker/new-worker'
 import MainHome from './components/us/home-main'
 import Pricing from './components/us/pricing'
+import AllTickets from './components/worker/all-tickets'
+import NewWorker from './components/worker/new-worker'
 import AllResidents from './components/owner/all-residents'
 import {me} from './store'
 import AllUsers from './components/owner/all-users'
 import SingleResident from './components/owner/single-resident'
 import FAQ from '../client/components/us/faq'
+import TicketCurrent from './components/resident/ticket-current'
+import NewsNew from './components/resident/news-new'
+import TicketNew from './components/resident/ticket-new'
+import TicketArchived from './components/resident/ticket-archived'
+import WorkerProfile from './components/worker/worker-profile'
 
 /**
  * COMPONENT
@@ -44,12 +50,13 @@ class Routes extends Component {
         <Route path="/pricing" component={Pricing} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/faqs" component={FAQ} />
+
         <Route exact path="/" component={MainHome} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route path="/faqs" component={FAQ} />
             <Route path="/new-resident" exact component={NewResident} />
             {isOwner && (
               <Switch>
@@ -62,6 +69,11 @@ class Routes extends Component {
                 />
                 <Route path="/buildings/:id" component={SingleBuilding} />
                 <Route path="/tickets" exact component={OwnerTickets} />
+                <Route
+                  path="/tickets/:id"
+                  exact
+                  component={OwnerSingleTicket}
+                />
                 <Route path="/workers" exact component={Workers} />
                 <Route path="/residents" exact component={AllResidents} />
                 <Route path="/users" exact component={AllUsers} />
@@ -69,14 +81,35 @@ class Routes extends Component {
             )}
             {isResidentVerified && (
               <Switch>
-                <Route path="/tickets" exact component={ResidentTickets} />
-                <Route path="/profile" exact component={ResidentProfile} />
+                <Route path="/my-tickets" exact component={ResidentTickets} />
+                <Route path="/my-account" exact component={ResidentProfile} />
                 <Route path="/news" exact component={ResidentNews} />
+                <Route path="/news/post" exact component={NewsNew} />
+                <Route
+                  path="/my-tickets/current"
+                  exact
+                  component={TicketCurrent}
+                />
+                <Route
+                  path="/my-tickets/archived"
+                  exact
+                  component={TicketArchived}
+                />
+                <Route
+                  path="/my-tickets/submit-ticket"
+                  exact
+                  component={TicketNew}
+                />
               </Switch>
             )}
             {isWorkerVerified && (
               <Switch>
+                <Route path="/my-account" exact component={WorkerProfile} />
                 <Route path="/tickets" exact component={AllTickets} />
+                <Route path="/tickets/new" />
+                <Route path="/tickets/current" />
+                <Route path="tickets/completed" />
+                <Route path="/payment" />
               </Switch>
             )}
             {!isOwner &&

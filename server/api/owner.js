@@ -216,9 +216,44 @@ router.get('/tickets', async (req, res, next) => {
     const tickets = await Ticket.findAll({
       where: {
         ownerId: req.user.ownerId
-      }
+      },
+      include: [
+        Resident,
+        Owner,
+        Worker,
+        {
+          model: Apartment,
+          include: Building
+        }
+      ]
     })
     res.json(tickets)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/tickets/:id', async (req, res, next) => {
+  try {
+    const ticket = await Ticket.findOne({
+      where: {
+        id: req.params.id,
+        ownerId: req.user.ownerId
+      },
+      include: [
+        Resident,
+        Owner,
+        Worker,
+        {
+          model: Apartment,
+          include: Building
+        }
+      ]
+    })
+    if (!ticket) {
+      return res.sendStatus(404)
+    }
+    res.json(ticket)
   } catch (err) {
     next(err)
   }

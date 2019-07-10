@@ -1,16 +1,15 @@
 import React, {useEffect} from 'react'
-import TicketItem from './ticket-item'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/resident'
+import TicketItem from './ticket-item'
 
-const TicketCurrent = props => {
+export const TicketArchived = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-
   return (
     <div className="body">
-      <h4 className="subtitle is-4">Current Tickets</h4>
+      <h4 className="subtitle is-4">Archived Tickets</h4>
       <table className="table">
         <thead>
           <tr>
@@ -26,7 +25,7 @@ const TicketCurrent = props => {
         <tbody>
           {props.tickets
             .filter(
-              tix => tix.status !== 'confirmed' || tix.status !== 'closed'
+              tix => tix.status === 'confirmed' || tix.status === 'closed'
             )
             .map(tix => <TicketItem {...tix} key={tix.id} />)}
         </tbody>
@@ -43,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
   getTickets: () => dispatch(getTickets())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketCurrent)
+export default connect(mapStateToProps, mapDispatchToProps)(TicketArchived)

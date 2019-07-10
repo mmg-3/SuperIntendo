@@ -38,7 +38,7 @@ function makeBuildings(ownerId) {
       state: 'NY',
       zipcode: '11249',
       buildingUrl:
-        'https://cdn.vox-cdn.com/thumbor/JMYvte1yBjbETc92fWaAuYTyZi0=/0x0:2200x1238/1200x800/filters:focal(924x443:1276x795)/cdn.vox-cdn.com/uploads/chorus_image/image/60047829/CURBED_420_Kent___3_towers_from_East_River.0.jpg',
+        'https://ds1.cityrealty.com/img/0c04cd0b287ac342223e23f3f3570ffa9cc5e294+1004++0+60/420-kent-avenue.jpg',
       ownerId
     }),
     Building.create({
@@ -47,6 +47,41 @@ function makeBuildings(ownerId) {
       state: 'NY',
       zipcode: '11354',
       buildingUrl: 'https://cdn-img0.streeteasy.com/nyc/image/32/362124832.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '130 William Street',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10038',
+      buildingUrl:
+        'http://claudiasaezfromm.com/wp-content/uploads/2019/01/130-william-corcoran-sunshine-claudia-saez-fromm-1.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '520 Park Avenue',
+      city: 'New York',
+      state: 'NY',
+      zipcode: '10022',
+      buildingUrl: 'https://cdn-img3.streeteasy.com/nyc/image/95/119648695.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '199 Beekman Ave',
+      city: 'Sleepy Hollow',
+      state: 'NY',
+      zipcode: '10591',
+      buildingUrl:
+        'https://cdn.tollbrothers.com/communities/13077/images/c1-HIGH_1920.jpg',
+      ownerId
+    }),
+    Building.create({
+      address: '98 Carriage Trail',
+      city: 'Tarrytown',
+      state: 'NY',
+      zipcode: '10591',
+      buildingUrl:
+        'https://dzv9cgq735oi4.cloudfront.net/pics/development/2013/19783//crop/1280,575',
       ownerId
     })
   ])
@@ -818,9 +853,43 @@ function makeResidents(users, apartments) {
       city: '',
       state: '',
       zipcode: '',
-      isVerified: true,
       userId: adjustedUsers[45].id,
       apartmentId: adjustedApartments[30].id
+    })
+  ])
+}
+
+function makeWorker(users) {
+  // shift users over by 1 to fix off-by-one error
+  const adjustedUsers = [{}, ...users]
+  return Promise.all([
+    Worker.create({
+      firstName: 'Jing',
+      lastName: 'Cao',
+      phoneNumber: '2729283372',
+      imageUrl:
+        'https://media.licdn.com/dms/image/C5603AQGD8pM4F3egsg/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=_LQaNLYfz2neMmq5B0hIIGvWCwfNFuyUM4RjyPgpFTE',
+      mailingAddress1: '829 12th Street',
+      mailingAddress2: '44B',
+      city: 'Brooklyn',
+      state: 'New York',
+      zipcode: '11277',
+      isVerified: true,
+      userId: adjustedUsers[24].id
+    }),
+    Worker.create({
+      firstName: 'David',
+      lastName: 'Patlut',
+      phoneNumber: '2122643077',
+      imageUrl:
+        'https://media.licdn.com/dms/image/C5603AQELDeaSxYnkAQ/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=MPzXJWRzMC6hMrk0ss5ZhutZVlnUdqdR2Eg68e1ptz4',
+      mailingAddress1: '10 Hanover Square',
+      mailingAddress2: '11',
+      city: 'New York',
+      state: 'New York',
+      zipcode: '10005',
+      isVerified: true,
+      userId: adjustedUsers[36].id
     })
   ])
 }
@@ -1124,6 +1193,7 @@ async function seed() {
   const buildings = await makeBuildings(owners[0].id)
   const apartments = await makeApartments(buildings)
   const residents = await makeResidents(users, apartments)
+  const worker = await makeWorker(users)
   const news = await makeNews(residents, owners, buildings)
   const tickets = await makeTickets(residents, owners, apartments)
   console.log(`seeded successfully`)

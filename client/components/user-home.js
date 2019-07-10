@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getMyBuilding, getMyApartment} from '../store/resident'
+import {getMyApartment, getMyBuilding} from '../store/resident'
 
 /**
  * COMPONENT

@@ -71,14 +71,18 @@ const TicketNew = props => {
                   <input
                     type="radio"
                     name="neighbor-involvement"
-                    label="Yes"
-                    value={neighbor}
-                    onChange={e => setNeighbor(e.target.checked)}
+                    checked={neighbor}
+                    onChange={() => setNeighbor(true)}
                   />
                   {` `}Yes
                 </label>
                 <label className="radio">
-                  <input type="radio" name="member" />
+                  <input
+                    type="radio"
+                    name="neighbor-involvement"
+                    checked={!neighbor}
+                    onChange={() => setNeighbor(false)}
+                  />
                   {` `} No
                 </label>
               </div>
