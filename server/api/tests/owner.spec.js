@@ -161,7 +161,10 @@ describe('Owner routes', () => {
         firstName: 'mario',
         lastName: 'bros',
         phoneNumber: '555-555-5555',
-        mailingAddress: '111',
+        mailingAddress1: '111',
+        city: '111',
+        state: '111',
+        zipcode: '111',
         imageUrl: 'a',
         skills: []
       })
@@ -170,7 +173,10 @@ describe('Owner routes', () => {
         firstName: 'luigi',
         lastName: 'bros',
         phoneNumber: '555-555-5555',
-        mailingAddress: '111',
+        mailingAddress1: '111',
+        city: '111',
+        state: '111',
+        zipcode: '111',
         imageUrl: 'a',
         skills: []
       })

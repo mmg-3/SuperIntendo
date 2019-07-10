@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getWorkers, verifyWorker, rejectWorker} from '../../store/owner'
 import {Link} from 'react-router-dom'
+import {getWorkers, rejectWorker, verifyWorker} from '../../store/owner'
 
 export const Workers = props => {
   useEffect(() => {
@@ -26,7 +26,7 @@ export const Workers = props => {
               <td>{worker.firstName}</td>
               <td>{worker.lastName}</td>
               <td>
-                <Link to={`/buildings/workers/${worker.id}`}>details</Link>
+                <Link to={`/workers/${worker.id}`}>details</Link>
               </td>
               <td>
                 <a
