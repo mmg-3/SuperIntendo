@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getWorkers, verifyWorker, rejectWorker} from '../../store/owner'
+import {Link} from 'react-router-dom'
 
 export const Workers = props => {
   useEffect(() => {
@@ -25,11 +26,7 @@ export const Workers = props => {
               <td>{worker.firstName}</td>
               <td>{worker.lastName}</td>
               <td>
-                {/* <Link
-                        to={`/buildings/${props.id}/residents/${resident.id}`}
-                      >
-                        details
-                      </Link> */}
+                <Link to={`/buildings/workers/${worker.id}`}>details</Link>
               </td>
               <td>
                 <a
@@ -51,6 +48,28 @@ export const Workers = props => {
                     <i className="fas fa-times" />
                   </span>
                 </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <h3>Approved Workers</h3>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Profile</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.workers.filter(worker => worker.isVerified).map(worker => (
+            <tr key={worker.id}>
+              <td>{worker.firstName}</td>
+              <td>{worker.lastName}</td>
+              <td>
+                <Link to={`/buildings/workers/${worker.id}`}>details</Link>
               </td>
             </tr>
           ))}

@@ -15,7 +15,11 @@ import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
 import MainHome from './components/us/home-main'
 import Pricing from './components/us/pricing'
+import AllResidents from './components/owner/all-residents'
 import {me} from './store'
+import AllUsers from './components/owner/all-users'
+import SingleResident from './components/owner/single-resident'
+import FAQ from '../client/components/us/faq'
 
 /**
  * COMPONENT
@@ -36,10 +40,12 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route path="/main" component={MainHome} />
+
         <Route path="/pricing" component={Pricing} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/faqs" component={FAQ} />
+        <Route exact path="/" component={MainHome} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -49,8 +55,16 @@ class Routes extends Component {
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/workers" exact component={Workers} />
+                <Route
+                  path="/buildings/:id/residents/:residentId"
+                  exact
+                  component={SingleResident}
+                />
                 <Route path="/buildings/:id" component={SingleBuilding} />
                 <Route path="/tickets" exact component={OwnerTickets} />
+                <Route path="/workers" exact component={Workers} />
+                <Route path="/residents" exact component={AllResidents} />
+                <Route path="/users" exact component={AllUsers} />
               </Switch>
             )}
             {isResidentVerified && (
