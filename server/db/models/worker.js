@@ -23,8 +23,7 @@ const Worker = db.define('worker', {
     allowNull: false
   },
   mailingAddress2: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   city: {
     type: Sequelize.STRING,
