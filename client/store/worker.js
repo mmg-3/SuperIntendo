@@ -8,7 +8,7 @@ import {me} from './user'
 const initialState = {
   tickets: [],
   myTickets: [],
-  me: {}
+  self: {}
 }
 
 /**
@@ -63,7 +63,7 @@ export const createWorker = worker => async dispatch => {
 }
 export const getSelf = () => async dispatch => {
   try {
-    const {data} = await axios.get('/api/workers')
+    const {data} = await axios.get('/api/workers/worker')
     dispatch(gotSelf(data || {}))
   } catch (err) {
     console.error(err)
