@@ -1,0 +1,13 @@
+.building-container {
+  flex-wrap: wrap;
+
+  .building-tile {
+    display: flex;
+    flex-basis: 21%;
+    justify-content: center;
+
+    .title.is-5 {
+      min-width: 250px;
+    }
+  }
+}
