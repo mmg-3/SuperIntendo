@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import './scss/core.scss'
 import {Link} from 'react-router-dom'
+import './scss/core.scss'
 
 const MainHome = props => {
   return (
@@ -262,7 +262,7 @@ const MainHome = props => {
               <div className="has-text-centered">
                 <img
                   className="pushed-image"
-                  src="/images/illustrations/mockups/app-mockup.png"
+                  src="https://i.imgur.com/7FMmhiq.png"
                 />
               </div>
             </div>
@@ -297,11 +297,7 @@ const MainHome = props => {
             <div className="columns is-vcentered">
               <div className="column is-4">
                 <figure className="testimonial">
-                  <blockquote>
-                    Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu,
-                    hinc minim appetere te usu, ea case duis scribentur has. Duo
-                    te consequat elaboraret, has quando suavitate at.
-                  </blockquote>
+                  <blockquote>I constantly do style updates.</blockquote>
                   <div className="author">
                     <img
                       src="https://media.licdn.com/dms/image/C5603AQHmHAcBEZYuQw/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=rgSo-7vj5em4TFHK-Xd5YWoDWpmLiNp18JCeOGh2zB0"
@@ -315,9 +311,8 @@ const MainHome = props => {
               <div className="column is-4">
                 <figure className="testimonial">
                   <blockquote>
-                    Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu,
-                    hinc minim appetere te usu, ea case duis scribentur has. Duo
-                    te consequat elaboraret, has quando suavitate at.
+                    I love working on the big backends and enjoy thinking up
+                    complicated solutions to problems that no one has.
                   </blockquote>
                   <div className="author">
                     <img
@@ -331,11 +326,7 @@ const MainHome = props => {
               </div>
               <div className="column is-4">
                 <figure className="testimonial">
-                  <blockquote>
-                    Lorem ipsum dolor sit amet, elit deleniti dissentias quo eu,
-                    hinc minim appetere te usu, ea case duis scribentur has. Duo
-                    te consequat elaboraret, has quando suavitate at.
-                  </blockquote>
+                  <blockquote>I have nothing to say.</blockquote>
                   <div className="author">
                     <img
                       src="https://media.licdn.com/dms/image/C4D03AQHZ9x4BpHXXKA/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=gMAJOo-vUK7IdQ3LZgpB0Qu978Ph5YSuBs_D5gbAf7M"

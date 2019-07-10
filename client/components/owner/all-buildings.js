@@ -2,8 +2,8 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {createBuilding, getBuildings} from '../../store/owner'
+import '../css/owner/building.scss'
 import {BuildingForm} from './building-form'
-
 export const AllBuildings = props => {
   useEffect(() => {
     props.getBuildings()
@@ -16,9 +16,9 @@ export const AllBuildings = props => {
   return (
     <div>
       <BuildingForm handleSubmit={props.createBuilding} />
-      <div className="columns is-three-quarters-mobile">
+      <div className="columns is-three-quarters-mobile building-container">
         {props.buildings.map(building => (
-          <div className="column">
+          <div className="column building-tile">
             <BuildingListItem key={building.id} {...building} />
           </div>
         ))}
