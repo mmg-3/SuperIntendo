@@ -69,39 +69,48 @@ const getOwner = async (req, res, next) => {
 // associate a user with a residency
 // they only need to be logged in
 // they must NOT have another residence somewhere
-router.post('/', isLoggedIn, async (req, res, next) => {
-  try {
-    let resident = await Resident.findOne({
-      where: {userId: req.user.id}
-    })
-    // if the resident exists, just stop
-    if (resident && resident.id) {
-      return res.sendStatus(409)
+router.post(
+  '/',
+  isLoggedIn,
+  uploader.single('file'),
+  async (req, res, next) => {
+    try {
+      let resident = await Resident.findOne({
+        where: {userId: req.user.id}
+      })
+      // if the resident exists, just stop
+      if (resident && resident.id) {
+        return res.sendStatus(409)
+      }
+      if (!req.file) {
+        // image is required
+        return res.status(400).send('Image is required for a resident')
+      }
+      const photoUrl = await imgurUpload(req.file)
+      const {
+        firstName,
+        lastName,
+        phoneNumber,
+        mailingAddress,
+        apartmentId
+      } = req.body
+
+      resident = await Resident.create({
+        firstName,
+        lastName,
+        phoneNumber,
+        photoUrl,
+        mailingAddress,
+        apartmentId,
+        userId: req.user.id
+      })
+
+      res.status(201).json(resident)
+    } catch (err) {
+      next(err)
     }
-    const {
-      firstName,
-      lastName,
-      phoneNumber,
-      imageUrl,
-      mailingAddress,
-      apartmentId
-    } = req.body
-
-    resident = await Resident.create({
-      firstName,
-      lastName,
-      phoneNumber,
-      imageUrl,
-      mailingAddress,
-      apartmentId,
-      userId: req.user.id
-    })
-
-    res.status(201).json(resident)
-  } catch (err) {
-    next(err)
   }
-})
+)
 
 router.use(isLoggedIn)
 router.use(isResident)
