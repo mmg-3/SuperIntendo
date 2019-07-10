@@ -7,6 +7,7 @@ import axios from 'axios'
 const GOT_BUILDINGS = 'GOT_BUILDINGS'
 const GOT_NEWS = 'GOT_NEWS'
 const GOT_TICKETS = 'GOT_TICKETS'
+const GOT_TICKET = 'GOT_TICKET'
 const APPEND_BUILDING = 'APPEND_BUILDING'
 const GOT_A_BUILDING = 'GOT_A_BUILDING'
 const CREATE_NEWS = 'CREATE_NEWS'
@@ -20,6 +21,7 @@ const initialState = {
   news: [],
   tickets: [],
   selectedBuilding: {},
+  selectedTicket: {},
   workers: [],
   resident: {}
 }
@@ -37,6 +39,7 @@ const gotTickets = tickets => ({type: GOT_TICKETS, tickets})
 const gotABuilding = building => ({type: GOT_A_BUILDING, building})
 const createNews = news => ({type: CREATE_NEWS, news})
 const gotWorkers = workers => ({type: GOT_WORKERS, workers})
+const gotTicket = ticket => ({type: GOT_TICKET, ticket})
 
 /**
  * THUNK CREATORS
@@ -121,6 +124,14 @@ export const getTickets = () => async dispatch => {
     console.error(err)
   }
 }
+export const getTicket = id => async dispatch => {
+  try {
+    const res = await axios.get('/api/owner/tickets/' + id)
+    dispatch(gotTicket(res.data || []))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const getWorkers = () => async dispatch => {
   try {
@@ -152,7 +163,9 @@ export const rejectWorker = workerId => async dispatch => {
 export const closeTicket = (tixId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${tixId}/close`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
+    !buildId && dispatch(getTicket(tixId))
   } catch (err) {
     console.error(err)
   }
@@ -161,7 +174,9 @@ export const closeTicket = (tixId, buildId) => async dispatch => {
 export const approveTicket = (ticketId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${ticketId}/approve`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
+    !buildId && dispatch(getTicket(ticketId))
   } catch (err) {
     console.error(err)
   }
@@ -170,7 +185,9 @@ export const approveTicket = (ticketId, buildId) => async dispatch => {
 export const rejectTicket = (ticketId, buildId) => async dispatch => {
   try {
     await axios.put(`/api/owner/tickets/${ticketId}/reject`)
-    dispatch(getABuilding(buildId))
+    buildId && dispatch(getABuilding(buildId))
+    !buildId && dispatch(getTickets())
+    !buildId && dispatch(getTicket(ticketId))
   } catch (err) {
     console.error(err)
   }
@@ -204,6 +221,8 @@ export default function(state = initialState, action) {
       return {...state, news: [action.news, ...state.news]}
     case GOT_WORKERS:
       return {...state, workers: action.workers}
+    case GOT_TICKET:
+      return {...state, selectedTicket: action.ticket}
     default:
       return state
   }

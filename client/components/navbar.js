@@ -42,8 +42,12 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                   </Link>
 
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">Actions Needed</Link>
-                    <Link className="navbar-item">Closed Tickets</Link>
+                    <Link className="navbar-item" to="/tickets#actions-needed">
+                      Actions Needed
+                    </Link>
+                    <Link className="navbar-item" to="/tickets#closed">
+                      Closed Tickets
+                    </Link>
                   </div>
                 </div>
 
