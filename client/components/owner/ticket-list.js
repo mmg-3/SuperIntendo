@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import history from '../../history'
 
-const ticketTable = (tickets, title, labelClass, baseURL) => {
+const ticketTable = (tickets, title, labelClass) => {
   return (
     <div className="body ticket-holder">
       <h3 className="title is-6">
@@ -26,12 +26,16 @@ const ticketTable = (tickets, title, labelClass, baseURL) => {
             return (
               <tr
                 key={tix.id}
-                onClick={() => history.push(`${baseURL}${tix.id}`)}
+                onClick={() => history.push(`/tickets/${tix.id}`)}
               >
                 <td>{tix.id}</td>
                 <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
                 <td>
-                  {tix.apartment.building.address} - {tix.apartment.unitNumber}
+                  {!tix.apartment
+                    ? tix.location
+                    : `${tix.apartment.building.address} - ${
+                        tix.apartment.unitNumber
+                      }`}
                 </td>
                 <td>{tix.issue}</td>
                 <td>{tix.status}</td>
@@ -48,8 +52,7 @@ const ticketTableWithAction = (
   tickets,
   title,
   labelClass,
-  {accept, reject},
-  baseURL
+  {accept, reject}
 ) => {
   return (
     <div className="body ticket-holder">
@@ -72,12 +75,16 @@ const ticketTableWithAction = (
             return (
               <tr
                 key={tix.id}
-                onClick={() => history.push(`${baseURL}${tix.id}`)}
+                onClick={() => history.push(`/tickets/${tix.id}`)}
               >
                 <td>{tix.id}</td>
                 <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
                 <td>
-                  {tix.apartment.building.address} - {tix.apartment.unitNumber}
+                  {!tix.apartment
+                    ? tix.location
+                    : `${tix.apartment.building.address} - ${
+                        tix.apartment.unitNumber
+                      }`}
                 </td>
                 <td>{tix.issue}</td>
                 <td>{tix.status}</td>
@@ -122,7 +129,7 @@ const ticketTableWithAction = (
 
 const TicketList = props => {
   const pending = props.tickets.filter(tix => tix.status === 'pending'),
-    assigned = props.tickets.filter(tix => tix.status === 'assigned'),
+    approved = props.tickets.filter(tix => tix.status === 'approved'),
     inProgress = props.tickets.filter(tix => tix.status === 'in-progress'),
     finished = props.tickets.filter(tix => tix.status === 'finished'),
     confirmed = props.tickets.filter(tix => tix.status === 'confirmed'),
@@ -130,7 +137,7 @@ const TicketList = props => {
 
   const showActionsNeeded = pending.length > 0 || confirmed.length > 0,
     showWaiting =
-      assigned.length > 0 || inProgress.length > 0 || finished.length > 0,
+      approved.length > 0 || inProgress.length > 0 || finished.length > 0,
     showClosed = closed.length > 0
   return (
     <div className="body">
@@ -139,35 +146,23 @@ const TicketList = props => {
           <h2 id="actions-needed">Actions Needed</h2>
           <div className="body">
             {pending.length > 0 &&
-              ticketTableWithAction(
-                pending,
-                'Pending',
-                'is-warning',
-                {
-                  accept: {
-                    name: 'Approve',
-                    ticket: id => props.approveTicket(id)
-                  },
-                  reject: {
-                    name: 'Reject',
-                    ticket: id => props.rejectTicket(id)
-                  }
+              ticketTableWithAction(pending, 'Pending', 'is-warning', {
+                accept: {
+                  name: 'Approve',
+                  ticket: id => props.approveTicket(id)
                 },
-                props.baseURL
-              )}
+                reject: {
+                  name: 'Reject',
+                  ticket: id => props.rejectTicket(id)
+                }
+              })}
             {confirmed.length > 0 &&
-              ticketTableWithAction(
-                confirmed,
-                'Confirmed',
-                'is-warning',
-                {
-                  accept: {
-                    name: 'Close',
-                    ticket: id => props.closeTicket(id)
-                  }
-                },
-                props.baseURL
-              )}
+              ticketTableWithAction(confirmed, 'Confirmed', 'is-warning', {
+                accept: {
+                  name: 'Close',
+                  ticket: id => props.closeTicket(id)
+                }
+              })}
           </div>
         </div>
       )}
@@ -175,17 +170,12 @@ const TicketList = props => {
         <div>
           <h2>Waiting for other user</h2>
           <div className="body">
-            {assigned.length > 0 &&
-              ticketTable(assigned, 'Assigned', 'is-primary', props.baseURL)}
+            {approved.length > 0 &&
+              ticketTable(approved, 'Assigned', 'is-primary')}
             {inProgress.length > 0 &&
-              ticketTable(
-                inProgress,
-                'In Progress',
-                'is-primary',
-                props.baseURL
-              )}
+              ticketTable(inProgress, 'In Progress', 'is-primary')}
             {finished.length > 0 &&
-              ticketTable(finished, 'Finished', 'is-primary', props.baseURL)}
+              ticketTable(finished, 'Finished', 'is-primary')}
           </div>
         </div>
       )}
@@ -195,8 +185,7 @@ const TicketList = props => {
             <span id="closed">Closed</span>{' '}
           </h2>
           <div className="body">
-            {closed.length > 0 &&
-              ticketTable(closed, 'Archived', 'is-light', props.baseURL)}
+            {closed.length > 0 && ticketTable(closed, 'Archived', 'is-light')}
           </div>
         </div>
       )}
