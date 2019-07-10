@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getTickets, updateSelectedTicket} from '../../store/worker'
 import moment from 'moment'
 
-export const TicketNew = props => {
+export const TicketCompleted = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
@@ -72,4 +72,4 @@ const mapDispatchToProps = dispatch => ({
   updateSelectedTicket: ticketId => dispatch(updateSelectedTicket(ticketId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TicketNew)
+export default connect(mapStateToProps, mapDispatchToProps)(TicketCompleted)
