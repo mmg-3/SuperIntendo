@@ -1,0 +1,18 @@
+.ticket-holder {
+  tbody {
+    tr {
+      &:hover {
+        background-color: lighten(grey, 20);
+      }
+    }
+  }
+}
+
+.title {
+  text-transform: capitalize;
+}
+
+.single.ticket {
+  max-width: 600px;
+  margin: auto;
+}
