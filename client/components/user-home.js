@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import PropTypes from 'prop-types'
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
@@ -22,42 +23,50 @@ export const UserHome = props => {
   } = props
 
   return (
-    <div>
-      <h2>
-        {props.address} - {props.unit}
-      </h2>
-      <h3>Welcome, {email}.</h3>
-      {!isResident &&
-        !isWorker && (
-          <div>
-            <Link to="/new-resident/">Become a resident</Link>
+    <div className="body">
+      <section className="hero is-bold">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title is-4">
+              "Life is too complicated not to be orderly"
+            </h1>
+            <h2 className="subtitle">Hello, {email}</h2>
+            {!isResident &&
+              !isWorker && (
+                <div>
+                  <Link to="/new-resident/">Become a resident</Link>
+                </div>
+              )}
+            {isResidentVerified && (
+              <div>
+                <Link to="/tickets">Tickets</Link>
+                <Link to="/profile">Profile</Link>
+                <Link to="/news">News</Link>
+              </div>
+            )}
+            {isResident &&
+              !isResidentVerified && (
+                <div>Your residence application is under review</div>
+              )}
+            {isWorkerVerified && (
+              <div>
+                <Link to="/tickets">Tickets</Link>
+              </div>
+            )}
+            {isWorker &&
+              !isWorkerVerified && (
+                <div>
+                  Your application has been submitted and will be reviewed!
+                </div>
+              )}
+            {!isWorker && (
+              <div>
+                <Link to="/new-worker/">Become a worker</Link>
+              </div>
+            )}
           </div>
-        )}
-      {isResidentVerified && (
-        <div>
-          <Link to="/tickets">Tickets</Link>
-          <Link to="/profile">Profile</Link>
-          <Link to="/news">News</Link>
         </div>
-      )}
-      {isResident &&
-        !isResidentVerified && (
-          <div>Your residence application is under review</div>
-        )}
-      {isWorkerVerified && (
-        <div>
-          <Link to="/tickets">Tickets</Link>
-        </div>
-      )}
-      {isWorker &&
-        !isWorkerVerified && (
-          <div>Your application has been submitted and will be reviewed!</div>
-        )}
-      {!isWorker && (
-        <div>
-          <Link to="/new-worker/">Become a worker</Link>
-        </div>
-      )}
+      </section>
     </div>
   )
 }
