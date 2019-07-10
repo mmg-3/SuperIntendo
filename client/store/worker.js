@@ -68,10 +68,20 @@ export const createWorker = worker => async dispatch => {
     console.error(err)
   }
 }
+
 export const getSelf = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/workers/worker')
     dispatch(gotSelf(data || {}))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const updateProfile = updatedSelf => async dispatch => {
+  try {
+    await axios.put('/api/workers', updatedSelf)
+    dispatch(getSelf())
   } catch (err) {
     console.error(err)
   }

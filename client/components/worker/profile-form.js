@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-// import {updateProfile} from '../../store/resident'
+import {updateProfile} from '../../store/worker'
 import {makeOnChange} from '../utils'
 
 export const ProfileForm = props => {
@@ -199,16 +199,15 @@ export const ProfileForm = props => {
 const mapStateToProps = state => {
   return {
     ...state.worker.self
-    // unit: state.resident.myApartment.unitNumber
   }
 }
 
 const mapDispatchToProps = dispatch => {
-  // return {
-  //   updateProfile: updatedSelf => {
-  //     dispatch(updateProfile(updatedSelf))
-  //   }
-  // }
+  return {
+    updateProfile: updatedSelf => {
+      dispatch(updateProfile(updatedSelf))
+    }
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)
