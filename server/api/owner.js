@@ -190,7 +190,16 @@ router.get('/tickets', async (req, res, next) => {
     const tickets = await Ticket.findAll({
       where: {
         ownerId: req.user.ownerId
-      }
+      },
+      include: [
+        Resident,
+        Owner,
+        Worker,
+        {
+          model: Apartment,
+          include: Building
+        }
+      ]
     })
     res.json(tickets)
   } catch (err) {

@@ -3,6 +3,7 @@ import moment from 'moment'
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/owner'
+import '../css/owner/ticket.scss'
 const Tickets = props => {
   useEffect(() => {
     props.getTickets()
@@ -62,88 +63,101 @@ const Tickets = props => {
   )
 }
 
-const ticketTable = (tickets, title, labelClass) => (
-  <div className="body">
-    <h3 className="title is-6">
-      <span className={`tag ${labelClass}`}>{title}</span>
-    </h3>
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Ticket No.</th>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Issue</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      {tickets.map(tix => (
-        <tbody key={tix.id}>
+const ticketTable = (tickets, title, labelClass) => {
+  return (
+    <div className="body">
+      <h3 className="title is-6">
+        <span className={`tag ${labelClass}`}>{title}</span>
+      </h3>
+      <table className="table">
+        <thead>
           <tr>
-            <td>{tix.id}</td>
-            <td>{moment(tix.createdAt).format('MMMM Do YYYY')}</td>
-            <td>{tix.location}</td>
-            <td>{tix.issue}</td>
-            <td>{tix.status}</td>
+            <th>Ticket No.</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Issue</th>
+            <th>Status</th>
           </tr>
+        </thead>
+        <tbody>
+          {tickets.map(tix => {
+            const time = moment(tix.createdAt)
+            return (
+              <tr key={tix.id}>
+                <td>{tix.id}</td>
+                <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
+                <td>
+                  {tix.apartment.building.address} - {tix.apartment.unitNumber}
+                </td>
+                <td>{tix.issue}</td>
+                <td>{tix.status}</td>
+              </tr>
+            )
+          })}
         </tbody>
-      ))}
-    </table>
-  </div>
-)
+      </table>
+    </div>
+  )
+}
 
-const ticketTableWithAction = (tickets, title, labelClass) => (
-  <div className="body">
-    <h3 className="title is-6">
-      <span className={`tag ${labelClass}`}>{title}</span>
-    </h3>
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Ticket No.</th>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Issue</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      {tickets.map(tix => (
-        <tbody key={tix.id}>
+const ticketTableWithAction = (tickets, title, labelClass) => {
+  return (
+    <div className="body">
+      <h3 className="title is-6">
+        <span className={`tag ${labelClass}`}>{title}</span>
+      </h3>
+      <table className="table">
+        <thead>
           <tr>
-            <td>{tix.id}</td>
-            <td>{moment(tix.createdAt).format('MMMM Do YYYY')}</td>
-            <td>{tix.location}</td>
-            <td>{tix.issue}</td>
-            <td>{tix.status}</td>
-            <td>
-              <button
-                className="button-custom"
-                type="submit"
-                onClick={evt => {
-                  evt.preventDefault()
-                  props.approveTicket(tix.id, props.match.params.id)
-                }}
-              >
-                Approve
-              </button>
-              <button
-                className="button-custom"
-                type="submit"
-                onClick={evt => {
-                  evt.preventDefault()
-                  props.rejectTicket(tix.id, props.match.params.id)
-                }}
-              >
-                Reject
-              </button>
-            </td>
+            <th>Ticket No.</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Issue</th>
+            <th>Status</th>
           </tr>
+        </thead>
+        <tbody>
+          {tickets.map(tix => {
+            const time = moment(tix.createdAt)
+            return (
+              <tr key={tix.id}>
+                <td>{tix.id}</td>
+                <td title={time.format('MMMM Do YYYY')}>{time.fromNow()}</td>
+                <td>
+                  {tix.apartment.building.address} - {tix.apartment.unitNumber}
+                </td>
+                <td>{tix.issue}</td>
+                <td>{tix.status}</td>
+                <td>
+                  {/* <button
+                    className="button-custom"
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      props.approveTicket(tix.id, props.match.params.id)
+                    }}
+                  >
+                    Approve
+              </button>
+                  <button
+                    className="button-custom"
+                    type="submit"
+                    onClick={evt => {
+                      evt.preventDefault()
+                      props.rejectTicket(tix.id, props.match.params.id)
+                    }}
+                  >
+                    Reject
+              </button> */}
+                </td>
+              </tr>
+            )
+          })}
         </tbody>
-      ))}
-    </table>
-  </div>
-)
+      </table>
+    </div>
+  )
+}
 
 const mapStateToProps = state => ({
   tickets: state.owner.tickets
