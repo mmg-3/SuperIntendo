@@ -867,29 +867,29 @@ function makeWorker(users) {
       firstName: 'Jing',
       lastName: 'Cao',
       phoneNumber: '2729283372',
-      photoUrl:
+      imageUrl:
         'https://media.licdn.com/dms/image/C5603AQGD8pM4F3egsg/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=_LQaNLYfz2neMmq5B0hIIGvWCwfNFuyUM4RjyPgpFTE',
-      address1: '829 12th Street',
-      address2: '44B',
+      mailingAddress1: '829 12th Street',
+      mailingAddress2: '44B',
       city: 'Brooklyn',
       state: 'New York',
       zipcode: '11277',
       isVerified: true,
-      userId: adjustedUsers[22].id
+      userId: adjustedUsers[24].id
     }),
     Worker.create({
       firstName: 'David',
       lastName: 'Patlut',
       phoneNumber: '2122643077',
-      photoUrl:
+      imageUrl:
         'https://media.licdn.com/dms/image/C5603AQELDeaSxYnkAQ/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=MPzXJWRzMC6hMrk0ss5ZhutZVlnUdqdR2Eg68e1ptz4',
-      address1: '10 Hanover Square',
-      address2: '11',
+      mailingAddress1: '10 Hanover Square',
+      mailingAddress2: '11',
       city: 'New York',
       state: 'New York',
       zipcode: '10005',
       isVerified: true,
-      userId: adjustedUsers[34].id
+      userId: adjustedUsers[36].id
     })
   ])
 }
