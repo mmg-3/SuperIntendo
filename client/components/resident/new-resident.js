@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {createResident, getBuildings} from '../../store/resident'
-import {makeOnChange, TextField} from '../utils'
+import {makeOnChange} from '../utils'
 
 const NewResident = props => {
   useEffect(() => {
@@ -11,7 +11,6 @@ const NewResident = props => {
   const [firstName, setFirstName] = useState(props.firstName)
   const [lastName, setLastName] = useState(props.lastName)
   const [phoneNumber, setPhoneNumber] = useState(props.phoneNumber)
-  const [imageUrl, setImageUrl] = useState(props.imageUrl)
   const [address1, setAddress1] = useState(props.address1)
   const [address2, setAddress2] = useState(props.address2)
   const [city, setCity] = useState(props.city)
@@ -61,7 +60,7 @@ const NewResident = props => {
       firstName,
       lastName,
       phoneNumber,
-      imageUrl,
+      file,
       address1,
       address2,
       city,
@@ -92,6 +91,7 @@ const NewResident = props => {
                       type="text"
                       placeholder="First Name"
                       value={firstName}
+                      required={true}
                       onChange={makeOnChange(setFirstName)}
                     />
                   </div>
@@ -99,7 +99,8 @@ const NewResident = props => {
                     <input
                       className="input"
                       type="text"
-                      placeholder="First Name"
+                      required={true}
+                      placeholder="Last Name"
                       value={lastName}
                       onChange={makeOnChange(setLastName)}
                     />
@@ -120,7 +121,7 @@ const NewResident = props => {
                         <input
                           className="input"
                           type="tel"
-                          placeholder="Your phone number"
+                          placeholder="555-555-5555"
                           value={phoneNumber}
                           onChange={makeOnChange(setPhoneNumber)}
                         />
@@ -148,6 +149,7 @@ const NewResident = props => {
                             type="file"
                             accept="image/*"
                             multiple={false}
+                            required={true}
                             onChange={e => setFile(e.target.files[0])}
                           />
                           <span className="file-cta">
@@ -157,7 +159,7 @@ const NewResident = props => {
                             <span className="file-label">Choose a file…</span>
                           </span>
                           <span className="file-name">
-                            {(file && file.name) || 'image'}
+                            {(file && file.name) || 'Profile Picture'}
                           </span>
                         </label>
                       </div>
@@ -241,7 +243,7 @@ const NewResident = props => {
                       </p>
                       <span className="select">
                         <select onChange={selectBuilding} value={buildingIdx}>
-                          <option selected>select building</option>
+                          <option value="-1">select building</option>
                           {props.buildings.map((b, idx) => (
                             <option key={b.id} value={idx}>
                               {b.address}

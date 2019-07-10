@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {TicketItem} from './ticket-item'
+import TicketItem from './ticket-item'
 import {connect} from 'react-redux'
 import {getTickets} from '../../store/resident'
 
