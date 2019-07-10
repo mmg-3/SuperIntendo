@@ -93,7 +93,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 <Link to="/home" className="navbar-item">
                   Home
                 </Link>
-                <Link className="navbar-item" to="/home">
+                <Link to="/my-account" className="navbar-item">
                   My Account
                 </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
