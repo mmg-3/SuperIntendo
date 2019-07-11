@@ -124,7 +124,7 @@ router.put('/', async (req, res, next) => {
   }
 })
 
-//get all tickets assigned to worker
+//get all approved tickets
 router.get('/tickets', async (req, res, next) => {
   if (req.user.id) {
     try {
@@ -156,7 +156,7 @@ router.get('/tickets/my-tickets', async (req, res, next) => {
   }
 })
 //worker can update status of ticket from assigned to in-progress
-router.put('/tickets/select/:ticketId', async (req, res, next) => {
+router.put('/tickets/:ticketId/select', async (req, res, next) => {
   try {
     const assignedTicket = await Ticket.update(
       {
@@ -170,14 +170,18 @@ router.put('/tickets/select/:ticketId', async (req, res, next) => {
         }
       }
     )
-    res.status(204).json(assignedTicket)
+    if (assignedTicket) {
+      res.sendStatus(204)
+    } else {
+      res.sendStatus(418)
+    }
   } catch (err) {
     next(err)
   }
 })
 
 //worker can change status of ticket from in-progress to finished
-router.put('/tickets/my-tickets/:ticketId', async (req, res, next) => {
+router.put('/tickets/:ticketId/finish', async (req, res, next) => {
   try {
     const inProgTicket = await Ticket.update(
       {

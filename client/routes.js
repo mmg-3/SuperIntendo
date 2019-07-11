@@ -116,8 +116,8 @@ class Routes extends Component {
                   component={WorkerTicketCurrent}
                 />
                 <Route
-                  path="tickets/completed"
-                  excat
+                  path="/tickets/completed"
+                  exact
                   component={WorkerTicketCompleted}
                 />
                 <Route path="/payment" />

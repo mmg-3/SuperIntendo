@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getTickets, updateSelectedTicket} from '../../store/worker'
+import {getMyTickets} from '../../store/worker'
 
-export const TicketCompleted = props => {
+const TicketCompleted = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
@@ -17,12 +17,16 @@ export const TicketCompleted = props => {
             <th>Finished Date</th>
             <th>Issue</th>
             <th>Status</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody style={{listStyles: 'none'}}>
           {props.tickets
-            .filter(ticket => ticket.status === 'finished')
+            .filter(
+              ticket =>
+                ticket.status === 'finished' ||
+                ticket.status === 'confirmed' ||
+                ticket.status === 'closed'
+            )
             .map(ticket => {
               return (
                 <tr key={ticket.id}>
@@ -30,7 +34,6 @@ export const TicketCompleted = props => {
                   <td>{props.updatedAt}</td>
                   <td>{ticket.issue}</td>
                   <td>{ticket.status}</td>
-                  <td>archived</td>
                 </tr>
               )
             })}
@@ -42,12 +45,11 @@ export const TicketCompleted = props => {
 
 const mapStateToProps = state => ({
   user: state.user,
-  tickets: state.worker.tickets
+  tickets: state.worker.myTickets
 })
 
 const mapDispatchToProps = dispatch => ({
-  getTickets: () => dispatch(getTickets()),
-  updateSelectedTicket: ticketId => dispatch(updateSelectedTicket(ticketId))
+  getTickets: () => dispatch(getMyTickets())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCompleted)
