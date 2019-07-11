@@ -40,41 +40,38 @@ const MainHome = props => {
 
         <div className="hero-foot mb-20">
           <div className="container">
-            <div className="tabs is-centered">
-              <ul>
-                <li>
-                  <img
-                    className="partner-logo"
-                    src="/images/illustrations/icons/fullstack-academy.png"
-                  />
-                </li>
-                <li>
-                  <img
-                    className="partner-logo"
-                    src="/images/illustrations/icons/react.png"
-                  />
-                </li>
+            <div className="tabs is-centered tech-frameworks">
+              <div>
+                <img
+                  className="partner-logo"
+                  src="/images/illustrations/icons/fullstack-academy.png"
+                />
+              </div>
+              <div>
+                <img
+                  className="partner-logo"
+                  src="/images/illustrations/icons/react.png"
+                />
+              </div>
 
-                <li>
-                  <img
-                    className="partner-logo"
-                    src="/images/illustrations/icons/postgresql-logo.png"
-                  />
-                </li>
-
-                <li>
-                  <img
-                    className="partner-logo"
-                    src="/images/illustrations/icons/redux.png"
-                  />
-                </li>
-                <li>
-                  <img
-                    className="partner-logo"
-                    src="/images/illustrations/icons/bulma-logo.png"
-                  />
-                </li>
-              </ul>
+              <div>
+                <img
+                  className="partner-logo"
+                  src="/images/illustrations/icons/redux.png"
+                />
+              </div>
+              <div>
+                <img
+                  className="partner-logo"
+                  src="/images/illustrations/icons/postgresql-logo.png"
+                />
+              </div>
+              <div>
+                <img
+                  className="partner-logo"
+                  src="/images/illustrations/icons/bulma-logo.png"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -129,8 +126,8 @@ const MainHome = props => {
                   </div>
                   <div className="card-text">
                     <blockquote>
-                      For tenant to inquire maintainances, access community news
-                      board, and contact property manager
+                      For tenant to inquire about maintainance, access community
+                      news board, and contact property manager
                     </blockquote>
                   </div>
                   <div className="card-action">
@@ -183,7 +180,7 @@ const MainHome = props => {
                 You're here because you want peace of mind
               </h1>
               <h3 className="subtitle is-4 is-muted">
-                increase producitity and minimize overhead
+                increase productivity and minimize overhead
               </h3>
               <div className="divider" />
             </div>
@@ -197,14 +194,14 @@ const MainHome = props => {
                 <div className="media-content mt-50">
                   <div className="content">
                     <blockquote>
-                      <span className="icon-box-title">
-                        Seamless Integration on Cloud
-                      </span>
-                      <span className="icon-box-text">
-                        all updates are real time, and we safely store your data
-                        on the cloud. no more loosing important files. track all
+                      <p className="icon-box-title">
+                        Seamless Integration the on Cloud
+                      </p>
+                      <p className="icon-box-text">
+                        All updates are real time, and we safely store your data
+                        on the cloud. no more losing important files. View all
                         history online.
-                      </span>
+                      </p>
                     </blockquote>
                   </div>
                 </div>
@@ -218,12 +215,11 @@ const MainHome = props => {
                 <div className="media-content mt-50">
                   <div className="content">
                     <blockquote>
-                      <span className="icon-box-title">One Place for All</span>
-                      <span className="icon-box-text">
-                        manage tenants, store building info, track maintainance
-                        tasks, contact contractor, pay for tasks done ... this
-                        is the ultimate place for all your needs
-                      </span>
+                      <p className="icon-box-title">One Place for All</p>
+                      <p className="icon-box-text">
+                        Manage tenants, store building info, track maintainance
+                        requests, contact contractor, pay for completed tasks.
+                      </p>
                     </blockquote>
                   </div>
                 </div>
@@ -237,15 +233,15 @@ const MainHome = props => {
                 <div className="media-content mt-50">
                   <div className="content">
                     <blockquote>
-                      <span className="icon-box-title">
+                      <p className="icon-box-title">
                         Cross Device Synchronisation
-                      </span>
-                      <span className="icon-box-text">
-                        whether you are on desktop or on mobile, access
+                      </p>
+                      <p className="icon-box-text">
+                        Whether you are on desktop or on mobile, access
                         SuperIntendo from anywhere. you could check ticket
                         status or update tenant info from the comfort of your
                         office or on the go.
-                      </span>
+                      </p>
                     </blockquote>
                   </div>
                 </div>
@@ -304,15 +300,21 @@ const MainHome = props => {
                       alt=""
                     />
                     <h5>Constance K.</h5>
-                    <span>@republicofkang</span>
+                    <span>
+                      <a
+                        className="github"
+                        href="https://github.com/republicofkang"
+                      >
+                        @republicofkang
+                      </a>
+                    </span>
                   </div>
                 </figure>
               </div>
               <div className="column is-4">
                 <figure className="testimonial">
                   <blockquote>
-                    I love working on the big backends and enjoy thinking up
-                    complicated solutions to problems that no one has.
+                    I like big back-ends and I cannot lie.
                   </blockquote>
                   <div className="author">
                     <img
@@ -320,7 +322,14 @@ const MainHome = props => {
                       alt=""
                     />
                     <h5>Manuel B.</h5>
-                    <span>@marvinody</span>
+                    <span>
+                      <a
+                        className="github"
+                        href="https://github.com/marvinody/"
+                      >
+                        @marvinody
+                      </a>
+                    </span>
                   </div>
                 </figure>
               </div>
@@ -333,7 +342,11 @@ const MainHome = props => {
                       alt=""
                     />
                     <h5>Vivian T.</h5>
-                    <span>@vivtong</span>
+                    <span>
+                      <a className="github" href="https://github.com/vivtong">
+                        @vivtong
+                      </a>
+                    </span>
                   </div>
                 </figure>
               </div>
@@ -345,9 +358,9 @@ const MainHome = props => {
       <section className="section section-light-grey is-medium">
         <div className="container">
           <div className="title-wrapper has-text-centered">
-            <h2 className="title is-2 is-spaced">Drop us a line or two</h2>
+            <h2 className="title is-2 is-spaced">Drop us a line</h2>
             <h3 className="subtitle is-5 is-muted">
-              We'd love to hear from You
+              We'd love to hear from you
             </h3>
             <div className="divider is-centered" />
           </div>

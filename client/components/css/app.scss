@@ -5,3 +5,13 @@
 .button.is-primary {
   background-color: $primaryColor;
 }
+
+a.github {
+  text-decoration: underline;
+  color: white;
+}
+
+.tech-frameworks {
+  display: flex;
+  justify-content: space-around;
+}
