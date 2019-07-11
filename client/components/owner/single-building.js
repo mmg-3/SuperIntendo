@@ -8,6 +8,7 @@ import SingleBuildingHeader from './single-building-header'
 import SingleBuildingResidents from './single-building-residents'
 import Tickets from './single-building-tickets'
 import SingleBuildingVacancy from './single-building-vacancy'
+import SingleResident from './single-resident'
 
 export const SingleBuilding = props => {
   useEffect(() => {
@@ -36,6 +37,18 @@ export const SingleBuilding = props => {
     <div>
       <SingleBuildingHeader id={props.id} history={props.history} />
       <Switch>
+        <Route
+          path="/buildings/:id/residents/:residentId"
+          exact
+          component={() => (
+            <SingleResident
+              buildingAddress={props.address}
+              residents={residents}
+              verifyUser={props.verifyUser}
+              rejectUser={props.rejectUser}
+            />
+          )}
+        />
         <Route
           path="/buildings/:id/residents"
           component={() => (
