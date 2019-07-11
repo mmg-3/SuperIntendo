@@ -7,7 +7,7 @@ export const SingleBuildingResidents = props => {
       {props.unverifiedResidents.length > 0 && (
         <div>
           <h3 className="title is-6">
-            Unverified Residents <span className="tag is-warning">take</span>
+            Unverified Residents <span className="tag is-warning">action</span>
           </h3>
 
           <table className="table">
