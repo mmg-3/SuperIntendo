@@ -51,7 +51,6 @@ export const TicketCurrent = props => {
                       </span>
                       <span>Complete</span>
                     </a>
-                    }
                   </td>
                 </tr>
               )
