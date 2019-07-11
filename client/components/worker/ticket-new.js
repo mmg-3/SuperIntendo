@@ -7,10 +7,6 @@ export const TicketNew = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-  const updateSelected = evt => {
-    evt.preventDefault()
-    props.updateSelectedTicket(evt.target.value)
-  }
 
   const created = moment(props.createdAt)
 
@@ -44,9 +40,8 @@ export const TicketNew = props => {
                   <td>
                     <a
                       className="button is-success"
-                      type="submit"
-                      onClick={updateSelected}
-                      value={ticket.id}
+                      type="button"
+                      onClick={() => props.updateSelectedTicket(+ticket.id)}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-check" />

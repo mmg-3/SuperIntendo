@@ -1,16 +1,12 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
-import {getTickets, updateSelectedTicket} from '../../store/worker'
+import {getMyTickets, updateInProgTicket} from '../../store/worker'
 import moment from 'moment'
 
 export const TicketCurrent = props => {
   useEffect(() => {
     props.getTickets()
   }, [])
-  const updateInProg = evt => {
-    evt.preventDefault()
-    props.updateInProgTicket(evt.target.value)
-  }
 
   const updated = moment(props.updatedAt)
 
@@ -29,7 +25,10 @@ export const TicketCurrent = props => {
         </thead>
         <tbody style={{listStyles: 'none'}}>
           {props.tickets
-            .filter(ticket => ticket.status === 'in-progress')
+            .filter(
+              ticket =>
+                ticket.status === 'in-progress' || ticket.status === 'rejected'
+            )
             .map(ticket => {
               return (
                 <tr key={ticket.id}>
@@ -45,13 +44,14 @@ export const TicketCurrent = props => {
                     <a
                       className="button is-success"
                       type="submit"
-                      onClick={() => props.updateInProgTicket(ticket.id)}
+                      onClick={() => props.updateTicket(+ticket.id)}
                     >
                       <span className="icon is-small">
                         <i className="fas fa-check" />
                       </span>
-                      <span>Completed</span>
+                      <span>Complete</span>
                     </a>
+                    }
                   </td>
                 </tr>
               )
@@ -64,12 +64,12 @@ export const TicketCurrent = props => {
 
 const mapStateToProps = state => ({
   user: state.user,
-  tickets: state.worker.tickets
+  tickets: state.worker.myTickets
 })
 
 const mapDispatchToProps = dispatch => ({
-  getTickets: () => dispatch(getTickets()),
-  updateSelectedTicket: ticketId => dispatch(updateSelectedTicket(ticketId))
+  getTickets: () => dispatch(getMyTickets()),
+  updateTicket: ticketId => dispatch(updateInProgTicket(ticketId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TicketCurrent)
