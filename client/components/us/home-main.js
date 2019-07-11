@@ -256,10 +256,7 @@ const MainHome = props => {
           <div className="columns">
             <div className="column is-10 is-offset-1">
               <div className="has-text-centered">
-                <img
-                  className="pushed-image"
-                  src="https://i.imgur.com/7FMmhiq.png"
-                />
+                <img src="/images/mock_superintendo.png" />
               </div>
             </div>
           </div>
