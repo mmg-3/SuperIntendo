@@ -89,7 +89,7 @@ export const updateProfile = updatedSelf => async dispatch => {
 
 export const updateSelectedTicket = ticketId => async dispatch => {
   try {
-    await axios.put(BASE_URL + `tickets/select/${ticketId}`)
+    await axios.put(BASE_URL + `tickets/${ticketId}/select`)
     dispatch(getMyTickets())
     dispatch(getTickets())
   } catch (err) {
@@ -99,7 +99,7 @@ export const updateSelectedTicket = ticketId => async dispatch => {
 
 export const updateInProgTicket = ticketId => async dispatch => {
   try {
-    await axios.put(BASE_URL + `/tickets/my-tickets/${ticketId}`)
+    await axios.put(BASE_URL + `tickets/${ticketId}/finish`)
     dispatch(getMyTickets())
   } catch (err) {
     console.error(err)
