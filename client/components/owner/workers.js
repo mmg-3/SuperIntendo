@@ -9,8 +9,11 @@ export const Workers = props => {
   }, [])
 
   return (
-    <div>
-      <h3>New Applicants</h3>
+    <div className="body">
+      <h3 className="title is-6">
+        New Applicants {`  `}
+        <span className="tag is-warning">unverified</span>
+      </h3>
       <table className="table">
         <thead>
           <tr>
@@ -54,7 +57,10 @@ export const Workers = props => {
         </tbody>
       </table>
 
-      <h3>Approved Workers</h3>
+      <h3 className="title is-6">
+        Approved Workers {`  `}
+        <span className="tag is-success">verified</span>
+      </h3>
       <table className="table">
         <thead>
           <tr>
