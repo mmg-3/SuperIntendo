@@ -779,7 +779,7 @@ function makeResidents(users, apartments) {
       state: 'NY',
       zipcode: '11020',
       isVerified: true,
-      userId: adjustedUsers[38].id,
+      userId: adjustedUsers[39].id,
       apartmentId: adjustedApartments[25].id
     }),
     Resident.create({
@@ -794,7 +794,7 @@ function makeResidents(users, apartments) {
       state: 'NY',
       zipcode: '10045',
       isVerified: true,
-      userId: adjustedUsers[41].id,
+      userId: adjustedUsers[42].id,
       apartmentId: adjustedApartments[26].id
     }),
     Resident.create({
