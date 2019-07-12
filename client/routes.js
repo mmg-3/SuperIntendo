@@ -29,6 +29,7 @@ import WorkerProfile from './components/worker/worker-profile'
 import WorkerTicketCompleted from './components/worker/ticket-completed'
 import WorkerTicketCurrent from './components/worker/ticket-current'
 import WorkerTicketNew from './components/worker/ticket-new'
+import SingleTicket from './components/resident/single-ticket'
 
 /**
  * COMPONENT
@@ -103,6 +104,8 @@ class Routes extends Component {
                   exact
                   component={TicketNew}
                 />
+                <Route path="/my-tickets/:ticketId" />
+                <Route path="/my-tickets/:ticketId" />
               </Switch>
             )}
             {isWorkerVerified && (

@@ -9,24 +9,30 @@ const TicketCurrent = props => {
   }, [])
 
   return (
-    <div className="body">
+    <div className="body ticket-holder">
       <h4 className="subtitle is-4">Current Tickets</h4>
+      <span className="tag is-warning">current</span>
       <table className="table">
         <thead>
           <tr>
             <th>Ticket No.</th>
-            <th>Date Submitted</th>
+            <th>Submitted</th>
+            <th>Location</th>
             <th>Issue</th>
-            <th>Assigned Worker</th>
+            <th>Worker</th>
             <th>Status</th>
-            <th>Date Updated</th>
+            <th>Updated</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {props.tickets
             .filter(
-              tix => tix.status !== 'confirmed' || tix.status !== 'closed'
+              tix =>
+                tix.status === 'pending' ||
+                tix.status === 'approved' ||
+                tix.status === 'in-progress' ||
+                tix.status === 'finished'
             )
             .map(tix => <TicketItem {...tix} key={tix.id} />)}
         </tbody>

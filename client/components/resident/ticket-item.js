@@ -2,19 +2,33 @@ import React from 'react'
 import moment from 'moment'
 import {confirmTicket, rejectTicket} from '../../store/resident'
 import {connect} from 'react-redux'
+import history from '../../history'
 
 const TicketItem = props => {
   const created = moment(props.createdAt)
   const updated = moment(props.updatedAt)
   return (
     <tr>
-      <td>{props.id}</td>
-      <td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
+        {props.id}
+      </td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
         <p title={created.format('MMMM Do YYYY')}>{created.fromNow()}</p>
       </td>
-      <td>{props.issue}</td>
-      <td>Worker Name, need to include worker model</td>
-      <td>{props.status}</td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
+        {props.location}
+      </td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
+        {props.issue}
+      </td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
+        {props.worker
+          ? props.worker.firstName + ' ' + props.worker.lastName
+          : ''}
+      </td>
+      <td onClick={() => history.push(`/my-tickets/${props.id}`)}>
+        {props.status}
+      </td>
       <td>
         <p title={updated.format('MMMM Do YYYY')}>{updated.fromNow()}</p>
       </td>
@@ -42,7 +56,7 @@ const TicketItem = props => {
           </a>
         </td>
       ) : (
-        <td />
+        <td onClick={() => history.push(`/my-tickets/${props.id}`)} />
       )}
     </tr>
   )
