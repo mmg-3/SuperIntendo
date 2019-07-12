@@ -97,6 +97,8 @@ class Routes extends Component {
                   exact
                   component={TicketNew}
                 />
+                <Route path="/my-tickets/:ticketId" />
+                <Route path="/my-tickets/:ticketId" />
               </Switch>
             )}
             {isWorkerVerified && (

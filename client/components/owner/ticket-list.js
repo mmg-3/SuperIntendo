@@ -143,9 +143,7 @@ const TicketList = props => {
     <div className="body">
       {showActionsNeeded && (
         <div>
-          <h3 className="title is-6" id="actions-needed">
-            Actions Needed
-          </h3>
+          <h4 className="subtitle is-4">Actions Needed</h4>
           <div className="body">
             {pending.length > 0 &&
               ticketTableWithAction(pending, 'Pending', 'is-warning', {
@@ -170,7 +168,7 @@ const TicketList = props => {
       )}
       {showWaiting && (
         <div>
-          <h3 className="title is-6">Waiting for other user</h3>
+          <h4 className="subtitle is-4">Waiting For Other User</h4>
           <div className="body">
             {approved.length > 0 &&
               ticketTable(approved, 'Assigned', 'is-primary')}

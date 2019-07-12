@@ -8,24 +8,29 @@ export const TicketArchived = props => {
     props.getTickets()
   }, [])
   return (
-    <div className="body">
-      <h4 className="subtitle is-4">Archived Tickets</h4>
+    <div className="body ticket-holder">
+      <h4 className="subtitle is-4">Past Tickets</h4>
+      <span className="tag is-warning">archived</span>
       <table className="table">
         <thead>
           <tr>
             <th>Ticket No.</th>
-            <th>Date Submitted</th>
+            <th>Submitted</th>
+            <th>Location</th>
             <th>Issue</th>
-            <th>Assigned Worker</th>
+            <th>Worker</th>
             <th>Status</th>
-            <th>Date Updated</th>
-            <th>Action</th>
+            <th>Updated</th>
           </tr>
         </thead>
         <tbody>
           {props.tickets
             .filter(
-              tix => tix.status === 'confirmed' || tix.status === 'closed'
+              tix =>
+                tix.status === 'completed' ||
+                tix.status === 'closed' ||
+                tix.status === 'in-progress' ||
+                tix.status === 'finished'
             )
             .map(tix => <TicketItem {...tix} key={tix.id} />)}
         </tbody>
