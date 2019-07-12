@@ -2,33 +2,32 @@ import PropTypes from 'prop-types'
 import {Component, default as React} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, withRouter} from 'react-router-dom'
+import FAQ from '../client/components/us/faq'
 import {Login, Signup, UserHome} from './components'
 import AllBuildings from './components/owner/all-buildings'
+import AllResidents from './components/owner/all-residents'
+import AllUsers from './components/owner/all-users'
 import SingleBuilding from './components/owner/single-building'
 import OwnerSingleTicket from './components/owner/single-ticket'
 import OwnerTickets from './components/owner/tickets'
 import Workers from './components/owner/workers'
 import NewResident from './components/resident/new-resident'
 import ResidentNews from './components/resident/news'
+import NewsNew from './components/resident/news-new'
 import ResidentProfile from './components/resident/profile'
+import TicketArchived from './components/resident/ticket-archived'
+import TicketCurrent from './components/resident/ticket-current'
+import TicketNew from './components/resident/ticket-new'
 import ResidentTickets from './components/resident/tickets'
 import MainHome from './components/us/home-main'
 import Pricing from './components/us/pricing'
 import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
-import AllResidents from './components/owner/all-residents'
-import {me} from './store'
-import AllUsers from './components/owner/all-users'
-import SingleResident from './components/owner/single-resident'
-import FAQ from '../client/components/us/faq'
-import TicketCurrent from './components/resident/ticket-current'
-import NewsNew from './components/resident/news-new'
-import TicketNew from './components/resident/ticket-new'
-import TicketArchived from './components/resident/ticket-archived'
-import WorkerProfile from './components/worker/worker-profile'
 import WorkerTicketCompleted from './components/worker/ticket-completed'
 import WorkerTicketCurrent from './components/worker/ticket-current'
 import WorkerTicketNew from './components/worker/ticket-new'
+import WorkerProfile from './components/worker/worker-profile'
+import {me} from './store'
 
 /**
  * COMPONENT
@@ -65,11 +64,6 @@ class Routes extends Component {
               <Switch>
                 <Route path="/buildings" exact component={AllBuildings} />
                 <Route path="/workers" exact component={Workers} />
-                <Route
-                  path="/buildings/:id/residents/:residentId"
-                  exact
-                  component={SingleResident}
-                />
                 <Route path="/buildings/:id" component={SingleBuilding} />
                 <Route path="/tickets" exact component={OwnerTickets} />
                 <Route
