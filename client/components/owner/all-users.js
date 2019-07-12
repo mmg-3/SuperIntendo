@@ -10,9 +10,11 @@ const AllUsers = props => {
   }, [])
 
   return (
-    <div>
-      <h2>ALL USERS HELLO</h2>
-      <h3>Residents</h3>
+    <div className="body">
+      <h3 className="title is-5">
+        All Users: Building Residents & Workers {`  `}
+      </h3>
+      <h3 className="title is-6">Residents {`  `}</h3>
       <table className="table">
         <thead>
           <tr>
@@ -60,7 +62,7 @@ const AllUsers = props => {
         </thead>
       </table>
 
-      <h3>Workers</h3>
+      <h3 className="title is-6">Maintenance Workers {`  `}</h3>
       <table className="table">
         <thead>
           <tr>

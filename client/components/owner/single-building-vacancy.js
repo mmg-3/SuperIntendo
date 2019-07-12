@@ -2,13 +2,16 @@ import React from 'react'
 
 export const SingleBuildingVacancy = props => {
   return (
-    <div>
-      <div className="body">
+    <div className="body">
+      <div>
         {props.vacancies.length === 0 ? (
           <div>This is property is fully occupied.</div>
         ) : (
           <div>
-            <h3>Vacant Apartments</h3>
+            <h3 className="title is-6">
+              Vacant Apartments{' '}
+              <span className="tag is-warning">attention</span>
+            </h3>
             <table className="table">
               <thead>
                 <tr>

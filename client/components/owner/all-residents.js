@@ -21,8 +21,11 @@ export const AllResidents = props => {
     .flat(2)
 
   return (
-    <div>
-      <h2>All Residents</h2>
+    <div className="body">
+      <h3 className="title is-6">
+        All Residents {`  `}
+        <span className="tag is-success">verified</span>
+      </h3>
       <table className="table">
         <thead>
           <tr>

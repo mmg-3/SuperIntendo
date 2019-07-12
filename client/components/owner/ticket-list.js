@@ -181,9 +181,9 @@ const TicketList = props => {
       )}
       {showClosed && (
         <div>
-          <h2>
-            <span id="closed">Closed</span>{' '}
-          </h2>
+          <h3 className="title is-6" id="closed">
+            Closed Tickets
+          </h3>
           <div className="body">
             {closed.length > 0 && ticketTable(closed, 'Archived', 'is-light')}
           </div>
