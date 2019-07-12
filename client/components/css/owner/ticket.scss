@@ -2,7 +2,7 @@
   tbody {
     tr {
       &:hover {
-        background-color: lighten(grey, 20);
+        background-color: lighten(#80bef0, 20);
       }
     }
   }
@@ -15,4 +15,12 @@
 .single.ticket {
   max-width: 600px;
   margin: auto;
+}
+
+// h4 {
+//   margin-left: 2.8%
+// }
+
+h4#resident {
+  margin: 20px;
 }

@@ -143,7 +143,7 @@ const TicketList = props => {
     <div className="body">
       {showActionsNeeded && (
         <div>
-          <h2 id="actions-needed">Actions Needed</h2>
+          <h4 className="subtitle is-4">Actions Needed</h4>
           <div className="body">
             {pending.length > 0 &&
               ticketTableWithAction(pending, 'Pending', 'is-warning', {
@@ -168,7 +168,7 @@ const TicketList = props => {
       )}
       {showWaiting && (
         <div>
-          <h2>Waiting for other user</h2>
+          <h4 className="subtitle is-4">Waiting For Other User</h4>
           <div className="body">
             {approved.length > 0 &&
               ticketTable(approved, 'Assigned', 'is-primary')}
@@ -181,9 +181,9 @@ const TicketList = props => {
       )}
       {showClosed && (
         <div>
-          <h2>
-            <span id="closed">Closed</span>{' '}
-          </h2>
+          <h3 className="title is-6" id="closed">
+            Closed Tickets
+          </h3>
           <div className="body">
             {closed.length > 0 && ticketTable(closed, 'Archived', 'is-light')}
           </div>

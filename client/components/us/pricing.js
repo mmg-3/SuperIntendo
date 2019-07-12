@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 export const Pricing = props => {
   return (
-    <div>
+    <div className="body">
       <div className="pricing-table is-horizontal">
         <div className="pricing-plan">
           <div className="plan-header">Starter</div>
@@ -16,16 +16,14 @@ export const Pricing = props => {
           <div className="plan-footer">
             <div className="plan-price">
               <span className="plan-price-amount">
-                <span className="plan-price-currency">$</span>20
+                <span className="plan-price-currency">$</span>100
               </span>/month
             </div>
-            <button className="button is-fullwidth" disabled="disabled">
-              Current plan
-            </button>
+            <button className="button is-primary">Choose</button>
           </div>
         </div>
 
-        <div className="pricing-plan is-warning">
+        <div className="pricing-plan">
           <div className="plan-header">Startups</div>
           <div className="plan-items">
             <div className="plan-item">20GB Storage</div>
@@ -36,14 +34,14 @@ export const Pricing = props => {
           <div className="plan-footer">
             <div className="plan-price">
               <span className="plan-price-amount">
-                <span className="plan-price-currency">$</span>40
+                <span className="plan-price-currency">$</span>400
               </span>/month
             </div>
-            <button className="button is-fullwidth">Choose</button>
+            <button className="button is-primary">Choose</button>
           </div>
         </div>
 
-        <div className="pricing-plan is-active">
+        <div className="pricing-plan">
           <div className="plan-header">Growing Team</div>
           <div className="plan-items">
             <div className="plan-item">200GB Storage</div>
@@ -54,14 +52,14 @@ export const Pricing = props => {
           <div className="plan-footer">
             <div className="plan-price">
               <span className="plan-price-amount">
-                <span className="plan-price-currency">$</span>60
+                <span className="plan-price-currency">$</span>600
               </span>/month
             </div>
-            <button className="button is-fullwidth">Choose</button>
+            <button className="button is-primary">Choose</button>
           </div>
         </div>
 
-        <div className="pricing-plan is-danger">
+        <div className="pricing-plan">
           <div className="plan-header">Enterprise</div>
           <div className="plan-items">
             <div className="plan-item">2TB Storage</div>
@@ -72,10 +70,10 @@ export const Pricing = props => {
           <div className="plan-footer">
             <div className="plan-price">
               <span className="plan-price-amount">
-                <span className="plan-price-currency">$</span>100
+                <span className="plan-price-currency">$</span>1000
               </span>/month
             </div>
-            <button className="button is-fullwidth">Choose</button>
+            <button className="button is-primary">Choose</button>
           </div>
         </div>
       </div>

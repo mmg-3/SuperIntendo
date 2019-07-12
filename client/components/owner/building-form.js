@@ -20,7 +20,7 @@ export const BuildingForm = props => {
   }
 
   return (
-    <div>
+    <div className="body">
       <div className="columns is-mobile">
         <form onSubmit={onSubmit} className="add-new-building">
           <div className="field is-horizontal">
