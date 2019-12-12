@@ -61,6 +61,7 @@ Let's switch to an owner and see all our users
 
 From here, we can check out any unverified residents and see what they submitted on their form
 ![Owner reviewing a resident application](https://my.catbo.at/marv/Njk4M.png)
+
 Hmm, perhaps Mr Blobman could have used a better image, so we'll reject them for now
 
 Let's take a look at some tickets for a building (as an owner)
