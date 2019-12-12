@@ -51,18 +51,20 @@ You'll see the coverage summary at the end.
 ## Features
 
 Upon signup, you'll be asked to register as a resident or worker and be presented with a form
-| Resident | Worker |
-| ---------------------------------------------|---------------|
+
+| Resident                                                    | Worker                                                    |
+| ----------------------------------------------------------- | --------------------------------------------------------- |
 | ![Resident Application](https://my.catbo.at/marv/ZjhlM.png) | ![Worker Application](https://my.catbo.at/marv/YzkzN.png) |
+
 Let's switch to an owner and see all our users
-![All users view from the owner](https://i.heart.lolisports.com/marv/OTI0M.png)
+![All users view from the owner](https://my.catbo.at/marv/OTI0M.png)
 
 From here, we can check out any unverified residents and see what they submitted on their form
-![Owner reviewing a resident application](https://i.heart.lolisports.com/marv/Njk4M.png)
+![Owner reviewing a resident application](https://my.catbo.at/marv/Njk4M.png)
 Hmm, perhaps Mr Blobman could have used a better image, so we'll reject them for now
 
 Let's take a look at some tickets for a building (as an owner)
-![Multi ticket view for owner](https://i.heart.lolisports.com/marv/MDkyM.png)
+![Multi ticket view for owner](https://my.catbo.at/marv/MDkyM.png)
 
 We can see tickets have several different modes that they can be in.
 Any tickets requiring the user to take action will be brought to the top to bring attention to them.
@@ -83,7 +85,7 @@ Any tickets requiring the user to take action will be brought to the top to brin
 ### Ticket Info
 
 Clicking on a ticket row will give the user more information about the ticket
-![Single ticket view for any user](https://i.heart.lolisports.com/marv/ZTFmN.png)
+![Single ticket view for any user](https://my.catbo.at/marv/ZTFmN.png)
 
 Similar views can be seen in the worker and resident roles but will not be shown here.
 
