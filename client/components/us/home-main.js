@@ -87,7 +87,7 @@ const MainHome = props => {
 
           <div className="content-wrapper">
             <div className="columns">
-              <div className="column is-one-third">
+              <div className="column is-one-third" id="owner">
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-1"
                   data-animation="fadeInLeft"
@@ -117,6 +117,7 @@ const MainHome = props => {
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-2"
                   data-animation="fadeInLeft"
+                  id="resident"
                 >
                   <div className="card-title">
                     <h4>Residents</h4>
@@ -144,6 +145,7 @@ const MainHome = props => {
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-3"
                   data-animation="fadeInLeft"
+                  id="workers"
                 >
                   <div className="card-title">
                     <h4>Worker</h4>

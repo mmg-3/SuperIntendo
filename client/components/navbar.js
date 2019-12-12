@@ -212,9 +212,15 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 <Link className="navbar-link">Documentation</Link>
 
                 <div className="navbar-dropdown">
-                  <Link className="navbar-item">For Owner</Link>
-                  <Link className="navbar-item">For Resident</Link>
-                  <Link className="navbar-item">For Worker</Link>
+                  <a className="navbar-item" href="#owner">
+                    For Owner
+                  </a>
+                  <a className="navbar-item" href="#resident">
+                    For Resident
+                  </a>
+                  <a className="navbar-item" href="#workers">
+                    For Worker
+                  </a>
                 </div>
               </div>
               <div className="navbar-item has-dropdown is-hoverable">
