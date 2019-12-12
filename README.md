@@ -92,7 +92,7 @@ Similar views can be seen in the worker and resident roles but will not be shown
 
 Superintendo is the one platform to rule them all. Life is too complicated not to be orderly.
 
-Check us out on superintendo.herokuapp.com
+Check us out on [superintendo.herokuapp.com](superintendo.herokuapp.com)
 
 ## Tech stack & other info
 
