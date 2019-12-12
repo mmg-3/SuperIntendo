@@ -221,8 +221,12 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 </div>
               </div>
 
-              <Link className="navbar-item">About Us</Link>
-              <Link className="navbar-item">Contact</Link>
+              <a className="navbar-item" href="#about-us">
+                About Us
+              </a>
+              <a className="navbar-item" href="#contact">
+                Contact
+              </a>
             </div>
 
             <div className="navbar-end">
@@ -268,8 +272,12 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                   </div>
                 </div>
 
-                <Link className="navbar-item">About Us</Link>
-                <Link className="navbar-item">Contact</Link>
+                <a className="navbar-item" href="#about-us">
+                  About Us
+                </a>
+                <a className="navbar-item" href="#contact">
+                  Contact
+                </a>
               </div>
 
               <div className="navbar-end">

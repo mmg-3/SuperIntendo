@@ -279,7 +279,7 @@ const MainHome = props => {
         </div>
       </section>
 
-      <section className="section is-medium section-secondary">
+      <section className="section is-medium section-secondary" id="about-us">
         <div className="container">
           <div className="title-wrapper has-text-centered">
             <h2 className="title is-2 light-text is-spaced">Meet the Team</h2>
@@ -354,7 +354,7 @@ const MainHome = props => {
         </div>
       </section>
 
-      <section className="section section-light-grey is-medium">
+      <section className="section section-light-grey is-medium" id="contact">
         <div className="container">
           <div className="title-wrapper has-text-centered">
             <h2 className="title is-2 is-spaced">Drop us a line</h2>
