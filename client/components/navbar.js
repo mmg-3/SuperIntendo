@@ -11,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-item">
-            <img src="https://serving.photos.photobox.com/417870350dcbba6bc5b20e24b53c78ce07974175fdc30435a49d5a584bf5397931b9f0af.jpg" />
+            <img src="/images/superintendo.jpg" />
           </Link>
 
           <Link
@@ -205,26 +205,28 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                 Home
               </Link>
 
-              <Link className="navbar-item" to="/pricing">
-                Pricing
-              </Link>
               <div className="navbar-item has-dropdown is-hoverable">
                 <Link className="navbar-link">Documentation</Link>
 
                 <div className="navbar-dropdown">
-                  <Link className="navbar-item">For Owner</Link>
-                  <Link className="navbar-item">For Resident</Link>
-                  <Link className="navbar-item">For Worker</Link>
+                  <a className="navbar-item" href="#owner">
+                    For Owner
+                  </a>
+                  <a className="navbar-item" href="#resident">
+                    For Resident
+                  </a>
+                  <a className="navbar-item" href="#workers">
+                    For Worker
+                  </a>
                 </div>
               </div>
-              <div className="navbar-item has-dropdown is-hoverable">
-                <Link className="navbar-link">More</Link>
 
-                <div className="navbar-dropdown">
-                  <Link className="navbar-item">About Us</Link>
-                  <Link className="navbar-item">Contact</Link>
-                </div>
-              </div>
+              <a className="navbar-item" href="#about-us">
+                About Us
+              </a>
+              <a className="navbar-item" href="#contact">
+                Contact
+              </a>
             </div>
 
             <div className="navbar-end">
@@ -254,26 +256,28 @@ const Navbar = ({handleClick, isLoggedIn, isResident, isOwner, isWorker}) => {
                   My Account
                 </Link>
 
-                <Link className="navbar-item" to="/pricing">
-                  Pricing
-                </Link>
                 <div className="navbar-item has-dropdown is-hoverable">
                   <Link className="navbar-link">Documentation</Link>
 
                   <div className="navbar-dropdown">
-                    <Link className="navbar-item">For Owner</Link>
-                    <Link className="navbar-item">For Resident</Link>
-                    <Link className="navbar-item">For Worker</Link>
+                    <a className="navbar-item" href="#owner">
+                      For Owner
+                    </a>
+                    <a className="navbar-item" href="#resident">
+                      For Resident
+                    </a>
+                    <a className="navbar-item" href="#workers">
+                      For Worker
+                    </a>
                   </div>
                 </div>
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <Link className="navbar-link">More</Link>
 
-                  <div className="navbar-dropdown">
-                    <Link className="navbar-item">About Us</Link>
-                    <Link className="navbar-item">Contact</Link>
-                  </div>
-                </div>
+                <a className="navbar-item" href="#about-us">
+                  About Us
+                </a>
+                <a className="navbar-item" href="#contact">
+                  Contact
+                </a>
               </div>
 
               <div className="navbar-end">
