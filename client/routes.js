@@ -20,7 +20,6 @@ import TicketCurrent from './components/resident/ticket-current'
 import TicketNew from './components/resident/ticket-new'
 import ResidentTickets from './components/resident/tickets'
 import MainHome from './components/us/home-main'
-import Pricing from './components/us/pricing'
 import AllTickets from './components/worker/all-tickets'
 import NewWorker from './components/worker/new-worker'
 import WorkerTicketCompleted from './components/worker/ticket-completed'
@@ -49,7 +48,6 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
 
-        <Route path="/pricing" component={Pricing} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
 

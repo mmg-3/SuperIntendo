@@ -87,7 +87,7 @@ const MainHome = props => {
 
           <div className="content-wrapper">
             <div className="columns">
-              <div className="column is-one-third">
+              <div className="column is-one-third" id="owner">
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-1"
                   data-animation="fadeInLeft"
@@ -117,6 +117,7 @@ const MainHome = props => {
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-2"
                   data-animation="fadeInLeft"
+                  id="resident"
                 >
                   <div className="card-title">
                     <h4>Residents</h4>
@@ -144,6 +145,7 @@ const MainHome = props => {
                 <div
                   className="feature-card is-bordered has-text-centered revealOnScroll delay-3"
                   data-animation="fadeInLeft"
+                  id="workers"
                 >
                   <div className="card-title">
                     <h4>Worker</h4>
@@ -277,7 +279,7 @@ const MainHome = props => {
         </div>
       </section>
 
-      <section className="section is-medium section-secondary">
+      <section className="section is-medium section-secondary" id="about-us">
         <div className="container">
           <div className="title-wrapper has-text-centered">
             <h2 className="title is-2 light-text is-spaced">Meet the Team</h2>
@@ -292,10 +294,7 @@ const MainHome = props => {
                 <figure className="testimonial">
                   <blockquote>I constantly do style updates.</blockquote>
                   <div className="author">
-                    <img
-                      src="https://media.licdn.com/dms/image/C5603AQHmHAcBEZYuQw/profile-displayphoto-shrink_200_200/0?e=1568246400&v=beta&t=rgSo-7vj5em4TFHK-Xd5YWoDWpmLiNp18JCeOGh2zB0"
-                      alt=""
-                    />
+                    <img src="/images/devs/constance.jpg" alt="" />
                     <h5>Constance K.</h5>
                     <span>
                       <a
@@ -314,10 +313,7 @@ const MainHome = props => {
                     I like big back-ends and I cannot lie.
                   </blockquote>
                   <div className="author">
-                    <img
-                      src="https://media.licdn.com/dms/image/C4D03AQGkhD1zOz60Kw/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=JOBV_Rj3tY2jfjYFf_GMnHRN9IypkDX-9R3xFsBoE3Q"
-                      alt=""
-                    />
+                    <img src="/images/devs/manuel.jpg" alt="" />
                     <h5>Manuel B.</h5>
                     <span>
                       <a
@@ -334,10 +330,7 @@ const MainHome = props => {
                 <figure className="testimonial">
                   <blockquote>I have nothing to say.</blockquote>
                   <div className="author">
-                    <img
-                      src="https://media.licdn.com/dms/image/C4D03AQHZ9x4BpHXXKA/profile-displayphoto-shrink_800_800/0?e=1568246400&v=beta&t=gMAJOo-vUK7IdQ3LZgpB0Qu978Ph5YSuBs_D5gbAf7M"
-                      alt=""
-                    />
+                    <img src="/images/devs/vivian.jpg" alt="" />
                     <h5>Vivian T.</h5>
                     <span>
                       <a className="github" href="https://github.com/vivtong">
@@ -352,7 +345,7 @@ const MainHome = props => {
         </div>
       </section>
 
-      <section className="section section-light-grey is-medium">
+      <section className="section section-light-grey is-medium" id="contact">
         <div className="container">
           <div className="title-wrapper has-text-centered">
             <h2 className="title is-2 is-spaced">Drop us a line</h2>
